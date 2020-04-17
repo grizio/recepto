@@ -2,6 +2,7 @@
   import { onMount } from "svelte"
   import { get } from "svelte/store"
   import { navigate } from "svelte-routing"
+  import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
   import IngredientForm from "./IngredientForm.svelte"
 
@@ -26,5 +27,5 @@
 {#if ingredient}
   <IngredientForm bind:ingredient on:submit={handleOnSubmit}/>
 {:else}
-  <h1>Not found</h1>
+  <h1>{$i18n.t("common.notFound")}</h1>
 {/if}

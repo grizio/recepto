@@ -1,5 +1,6 @@
 <script>
   import { derived } from "svelte/store"
+  import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
   import { Link } from "svelte-routing"
 
@@ -16,7 +17,7 @@
   })
 
   function handleOnDelete() {
-    const confirmed = confirm("Do you really want to delete this ingredient ?")
+    const confirmed = confirm($i18n.t("pages.ingredient.page.actions.confirmDelete"))
     if (confirmed) {
       receptoStore.deleteIngredient(id)
     }
@@ -29,7 +30,7 @@
   <p>{ingredient.description}</p>
 
   {#if ingredient.preservations}
-    <h2>Preservation</h2>
+    <h2>{$i18n.t("pages.ingredient.page.preservations")}</h2>
 
     {#each ingredient.preservations as preservation}
       <h3>{preservation.name} <small>{ preservation.duration }</small></h3>
@@ -40,12 +41,12 @@
     {/each}
   {/if}
 
-  <Link to={`/ingredient/${ingredient.id}/update`}>Modify</Link>
+  <Link to={`/ingredient/${ingredient.id}/update`}>{$i18n.t("pages.ingredient.page.actions.modify")}</Link>
 
-  <button on:click={handleOnDelete}>Delete</button>
+  <button on:click={handleOnDelete}>{$i18n.t("pages.ingredient.page.actions.delete")}</button>
 
   {#if recipesToMakeIt && recipesToMakeIt.length > 0}
-    <h2>How to make it?</h2>
+    <h2>{$i18n.t("pages.ingredient.page.diy")}</h2>
 
     <ul>
       {#each recipesToMakeIt as recipe}
@@ -57,7 +58,7 @@
   {/if}
 
   {#if recipes && recipes.length > 0}
-    <h2>Recipes</h2>
+    <h2>{$i18n.t("pages.ingredient.page.recipes")}</h2>
 
     {#each recipes as recipe}
       <li>
@@ -66,5 +67,5 @@
     {/each}
   {/if}
 {:else}
-  <h1>Not found</h1>
+  <h1>{$i18n.t("common.notFound")}</h1>
 {/if}

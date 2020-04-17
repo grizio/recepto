@@ -1,0 +1,76 @@
+{
+  "translation": {
+    "common": {
+      "notFound": "Non trouvé",
+      "minutes": "{{count}} minute",
+      "minutes_plural": "{{count}} minutes"
+    },
+    "menu": {
+      "appName": "Recepto",
+      "recipes": "Recettes",
+      "newRecipe": "Nouvelle recette",
+      "ingredients": "Ingrédients",
+      "newIngredient": "Nouvel ingrédient"
+    },
+    "pages": {
+      "ingredient": {
+        "form": {
+          "name": "Nom",
+          "description": "Description",
+          "preservation": {
+            "name": "Nom",
+            "duration": "Durée de conservation",
+            "description": "Description",
+            "add": "Ajouter une conservation"
+          },
+          "recipe": {
+            "select": "Recette",
+            "add": "Ajouter une recette pour le créer"
+          },
+          "submit": "Envoyer"
+        },
+        "page": {
+          "preservations": "Conservation",
+          "diy": "Comment en faire soi-même",
+          "recipes": "Recettes",
+          "actions": {
+            "modify": "Modifier",
+            "delete": "Supprimer",
+            "confirmDelete": "Confirmez-vous la suppression de cet ingrédient ?"
+          }
+        }
+      },
+      "recipe": {
+        "form": {
+          "name": "Nom",
+          "plates": "Nombre de personnes",
+          "preparationDuration": "Durée de préparation",
+          "cookingDuration": "Durée de cuisson",
+          "ingredient": {
+            "id": "Ingrédient",
+            "quantity": "Quantité",
+            "unit": "Unité",
+            "add": "Ajouter un ingrédient"
+          },
+          "steps": "Étapes",
+          "submit": "Envoyer"
+        },
+        "page": {
+          "plates": "{{count}} personne",
+          "plates_plural": "{{count}} personnes",
+          "preparationDuration": "Préparation: $t(common.minutes, { 'count': {{count}} })",
+          "cookingDuration": "Cuisson: $t(common.minutes, { 'count': {{count}} })",
+          "totalDuration": "Durée totale: $t(common.minutes, { 'count': {{count}} })",
+          "ingredients": "Ingrédients",
+          "steps": "Étapes",
+          "makes": "Crée",
+          "actions": {
+            "modify": "Modifier",
+            "delete": "Supprimer",
+            "confirmDelete": "Confirmez-vous la suppression de cette recette ?"
+          }
+        }
+      }
+    }
+  }
+}

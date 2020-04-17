@@ -1,6 +1,7 @@
 <script>
-  import receptoStore from "./store/ReceptoStore"
   import { Link } from "svelte-routing"
+  import i18n from "./i18n"
+  import receptoStore from "./store/ReceptoStore"
   import { sortBy } from "./utils/arrays"
 
   $: sortedRecipes = sortBy($receptoStore.recipes, _ => _.name)
@@ -14,9 +15,9 @@
 </style>
 
 <nav>
-  <Link to="/">Recepto</Link>
+  <Link to="/">{$i18n.t("menu.appName")}</Link>
 
-  <h2>Recipes</h2>
+  <h2>{$i18n.t("menu.recipes")}</h2>
 
   <ul>
     {#each sortedRecipes as recipe}
@@ -28,9 +29,9 @@
     {/each}
   </ul>
 
-  <Link to="/recipe">Create new</Link>
+  <Link to="/recipe">{$i18n.t("menu.newRecipe")}</Link>
 
-  <h2>Ingredients</h2>
+  <h2>{$i18n.t("menu.ingredients")}</h2>
 
   <ul>
     {#each sortedIngredients as ingredient}
@@ -42,5 +43,5 @@
     {/each}
   </ul>
 
-  <Link to="/ingredient">Create new</Link>
+  <Link to="/ingredient">{$i18n.t("menu.newIngredient")}</Link>
 </nav>

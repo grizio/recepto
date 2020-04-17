@@ -1,7 +1,8 @@
 <script>
   import { derived } from "svelte/store"
-  import receptoStore from "../../store/ReceptoStore"
   import { Link } from "svelte-routing"
+  import receptoStore from "../../store/ReceptoStore"
+  import i18n from "../../i18n"
 
   /** @type {string} */
   export let id = undefined
@@ -19,7 +20,7 @@
   })
 
   function handleOnDelete() {
-    const confirmed = confirm("Do you really want to delete this recipe ?")
+    const confirmed = confirm($i18n.t("pages.recipe.page.actions.confirmDelete"))
     if (confirmed) {
       receptoStore.deleteRecipe(id)
     }
@@ -30,13 +31,13 @@
   <h1>{recipe.name}</h1>
 
   <ul>
-    <li>Plates: {recipe.plates}</li>
-    <li>Preparation duration: {recipe.preparationDuration}</li>
-    <li>Cooking duration: {recipe.cookingDuration}</li>
-    <li>Total duration: {recipe.preparationDuration + recipe.cookingDuration}</li>
+    <li>{$i18n.t("pages.recipe.page.plates", {count: recipe.plates})}</li>
+    <li>{$i18n.t("pages.recipe.page.preparationDuration", {count: recipe.preparationDuration})}</li>
+    <li>{$i18n.t("pages.recipe.page.cookingDuration", {count: recipe.cookingDuration})}</li>
+    <li>{$i18n.t("pages.recipe.page.totalDuration", {count: recipe.preparationDuration + recipe.cookingDuration})}</li>
   </ul>
 
-  <h2>Ingredients</h2>
+  <h2>{$i18n.t("pages.recipe.page.ingredients")}</h2>
 
   <ul>
     {#each ingredients as ingredient}
@@ -47,12 +48,12 @@
     {/each}
   </ul>
 
-  <h2>Steps</h2>
+  <h2>{$i18n.t("pages.recipe.page.steps")}</h2>
 
   <p>{recipe.steps}</p>
 
   {#if madeIngredients && madeIngredients.length > 0}
-    <h2>Makes</h2>
+    <h2>{$i18n.t("pages.recipe.page.makes")}</h2>
 
     <ul>
       {#each madeIngredients as ingredient}
@@ -65,9 +66,9 @@
     </ul>
   {/if}
 
-  <Link to={`/recipe/${recipe.id}/update`}>Modify</Link>
+  <Link to={`/recipe/${recipe.id}/update`}>{$i18n.t("pages.recipe.page.actions.modify")}</Link>
 
-  <button on:click={handleOnDelete}>Delete</button>
+  <button on:click={handleOnDelete}>{$i18n.t("pages.recipe.page.actions.delete")}</button>
 {:else}
-  <h1>Not found</h1>
+  <h1>{$i18n.t("common.notFound")}</h1>
 {/if}

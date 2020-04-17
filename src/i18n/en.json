@@ -1,0 +1,76 @@
+{
+  "translation": {
+    "common": {
+      "notFound": "Not found",
+      "minutes": "{{count}} minute",
+      "minutes_plural": "{{count}} minutes"
+    },
+    "menu": {
+      "appName": "Recepto",
+      "recipes": "Recipes",
+      "newRecipe": "New recipe",
+      "ingredients": "Ingredients",
+      "newIngredient": "New ingredient"
+    },
+    "pages": {
+      "ingredient": {
+        "form": {
+          "name": "Name",
+          "description": "Description",
+          "preservation": {
+            "name": "Preservation",
+            "duration": "Duration",
+            "description": "Description",
+            "add": "New preservation"
+          },
+          "recipe": {
+            "select": "Recipe",
+            "add": "Add a recipe to make it"
+          },
+          "submit": "Submit"
+        },
+        "page": {
+          "preservations": "Preservations",
+          "diy": "Do it yourself",
+          "recipes": "Recipes",
+          "actions": {
+            "modify": "Modify",
+            "delete": "Delete",
+            "confirmDelete": "Do you really want to delete this ingredient?"
+          }
+        }
+      },
+      "recipe": {
+        "form": {
+          "name": "Name",
+          "plates": "Number of plates",
+          "preparationDuration": "Preparation duration",
+          "cookingDuration": "Cooking duration",
+          "ingredient": {
+            "id": "Ingredient",
+            "quantity": "Quantity",
+            "unit": "Unit",
+            "add": "New ingredient"
+          },
+          "steps": "Steps",
+          "submit": "Submit"
+        },
+        "page": {
+          "plates": "{{count}} plate",
+          "plates_plural": "{{count}} plates",
+          "preparationDuration": "Preparation: $t(common.minutes, { 'count': {{count}} })",
+          "cookingDuration": "Cooking: $t(common.minutes, { 'count': {{count}} })",
+          "totalDuration": "Total duration: $t(common.minutes, { 'count': {{count}} })",
+          "ingredients": "Ingredients",
+          "steps": "Steps",
+          "makes": "Makes",
+          "actions": {
+            "modify": "Modify",
+            "delete": "Delete",
+            "confirmDelete": "Do you really want to delete this recipe?"
+          }
+        }
+      }
+    }
+  }
+}

@@ -18,14 +18,18 @@
           "name": "Name",
           "description": "Description",
           "preservation": {
+            "title": "Preservations",
             "name": "Preservation",
             "duration": "Duration",
             "description": "Description",
-            "add": "New preservation"
+            "add": "New preservation",
+            "remove": "Remove preservation"
           },
           "recipe": {
+            "title": "Do it yourself recipes",
             "select": "Recipe",
-            "add": "Add a recipe to make it"
+            "add": "New recipe",
+            "remove": "Remove recipe"
           },
           "submit": "Submit"
         },
@@ -47,6 +51,7 @@
           "preparationDuration": "Preparation duration",
           "cookingDuration": "Cooking duration",
           "ingredient": {
+            "title": "Ingredients",
             "id": "Ingredient",
             "quantity": "Quantity",
             "unit": "Unit",

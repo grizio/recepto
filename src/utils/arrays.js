@@ -34,3 +34,15 @@ export function sortBy(array, by) {
     }
   })
 }
+
+/**
+ * @template T
+ * @param {Array<T>} array
+ * @param {number} at
+ * @return Array<T>
+ */
+export function removeAt(array, at) {
+  const result = [...array]
+  result.splice(at, 1)
+  return result
+}

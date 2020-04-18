@@ -2,7 +2,9 @@
   import { derived } from "svelte/store"
   import { Link } from "svelte-routing"
   import receptoStore from "../../store/ReceptoStore"
+  import TwoColumns from "../../components/layout/TwoColumns.svelte"
   import i18n from "../../i18n"
+  import { splitParagraphs } from "../../utils/strings"
 
   /** @type {string} */
   export let id = undefined
@@ -27,44 +29,88 @@
   }
 </script>
 
+<style>
+  .duration {
+    display: grid;
+    align-items: center;
+    grid-template-areas: "total preparation" "total cooking";
+  }
+
+  .steps {
+    counter-reset: steps;
+    list-style-type: none;
+    padding-left: 50px;
+  }
+  .steps > li {
+    counter-increment: steps;
+    margin: 0 0 24px 0;
+    position: relative;
+  }
+  .steps > li:before {
+    content: counter(steps);
+    border-radius: 50%;
+    background-color: #e6eaed;
+    --size: 32px;
+    position: absolute;
+    left: calc(-1 * var(--size) - 16px);
+    width: var(--size);
+    height: var(--size);
+    line-height: var(--size);
+    text-align: center;
+  }
+</style>
+
 {#if recipe}
   <h1>{recipe.name}</h1>
 
-  <ul>
-    <li>{$i18n.t("pages.recipe.page.plates", {count: recipe.plates})}</li>
-    <li>{$i18n.t("pages.recipe.page.preparationDuration", {count: recipe.preparationDuration})}</li>
-    <li>{$i18n.t("pages.recipe.page.cookingDuration", {count: recipe.cookingDuration})}</li>
-    <li>{$i18n.t("pages.recipe.page.totalDuration", {count: recipe.preparationDuration + recipe.cookingDuration})}</li>
-  </ul>
+  <TwoColumns gap="8px" columns="250px 1fr">
+    <div class="left">
+      &#x1F465 {$i18n.t("pages.recipe.page.plates", {count: recipe.plates})}
 
-  <h2>{$i18n.t("pages.recipe.page.ingredients")}</h2>
+      <div class="duration">
+        <span
+          style="grid-area: total">&#x23F2 {$i18n.t("common.minutes", {count: recipe.preparationDuration + recipe.cookingDuration})}</span>
+        <span
+          style="grid-area: preparation">&#x1F52A {$i18n.t("common.minutes", {count: recipe.preparationDuration})}</span>
+        <span style="grid-area: cooking">&#x1F373 {$i18n.t("common.minutes", {count: recipe.cookingDuration})}</span>
+      </div>
 
-  <ul>
-    {#each ingredients as ingredient}
-      <li>
-        {ingredient.quantity} {ingredient.unit}
-        <Link to={`/ingredient/${ingredient.id}`}>{ingredient.ref.name}</Link>
-      </li>
-    {/each}
-  </ul>
+      <h2>{$i18n.t("pages.recipe.page.ingredients")}</h2>
 
-  <h2>{$i18n.t("pages.recipe.page.steps")}</h2>
+      <ul>
+        {#each ingredients as ingredient}
+          <li>
+            {ingredient.quantity} {ingredient.unit}
+            <Link to={`/ingredient/${ingredient.id}`}>{ingredient.ref.name}</Link>
+          </li>
+        {/each}
+      </ul>
+    </div>
 
-  <p>{recipe.steps}</p>
+    <div class="right">
+      <h2>{$i18n.t("pages.recipe.page.steps")}</h2>
 
-  {#if madeIngredients && madeIngredients.length > 0}
-    <h2>{$i18n.t("pages.recipe.page.makes")}</h2>
+      <ol class="steps">
+        {#each splitParagraphs(recipe.steps) as step}
+          <li>{step}</li>
+        {/each}
+      </ol>
 
-    <ul>
-      {#each madeIngredients as ingredient}
-        <li>
-          <Link to={`/ingredient/${ingredient.id}`}>
-            {ingredient.name}
-          </Link>
-        </li>
-      {/each}
-    </ul>
-  {/if}
+      {#if madeIngredients && madeIngredients.length > 0}
+        <h2>{$i18n.t("pages.recipe.page.makes")}</h2>
+
+        <ul>
+          {#each madeIngredients as ingredient}
+            <li>
+              <Link to={`/ingredient/${ingredient.id}`}>
+                {ingredient.name}
+              </Link>
+            </li>
+          {/each}
+        </ul>
+      {/if}
+    </div>
+  </TwoColumns>
 
   <Link to={`/recipe/${recipe.id}/update`}>{$i18n.t("pages.recipe.page.actions.modify")}</Link>
 

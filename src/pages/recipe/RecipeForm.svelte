@@ -3,10 +3,16 @@
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
   import { sortBy } from "../../utils/arrays"
+  import InputTextarea from "../../components/fields/InputTextarea.svelte";
+  import InputText from "../../components/fields/InputText.svelte";
+  import InputNumber from "../../components/fields/InputNumber.svelte";
+  import InputCollection from "../../components/fields/InputCollection.svelte";
+  import InputSelect from "../../components/fields/InputSelect.svelte";
 
   export let recipe
 
-  $: sortedIngredients = sortBy($receptoStore.ingredients, _ => _.name)
+  $: ingredientOptions = sortBy($receptoStore.ingredients, _ => _.name)
+    .map(ingredient => ({ value: ingredient.id, label: ingredient.name }))
 
   const dispatch = createEventDispatcher()
 
@@ -14,57 +20,82 @@
     dispatch("submit")
   }
 
-  function addIngredient() {
-    recipe = {
-      ...recipe,
-      ingredients: [
-        ...recipe.ingredients,
-        {
-          id: sortedIngredients[0].id,
-          quantity: 1,
-          unit: ""
-        }
-      ]
+  function ingredientBuilder() {
+    return {
+      id: ingredientOptions[0].id,
+      quantity: 1,
+      unit: ""
     }
   }
 </script>
 
 <form on:submit|preventDefault={handleOnSubmit}>
-  <label for="recipe-name">{$i18n.t("pages.recipe.form.name")}</label>
-  <input type="text" name="name" id="recipe-name" bind:value={recipe.name}/>
+  <InputText
+    id="recipe-name"
+    name="name"
+    label={$i18n.t("pages.recipe.form.name")}
+    bind:value={recipe.name}
+  />
 
-  <label for="recipe-plates">{$i18n.t("pages.recipe.form.plates")}</label>
-  <input type="number" name="plates" id="recipe-plates" bind:value={recipe.plates}/>
+  <InputNumber
+    id="recipe-plates"
+    name="plates"
+    label={$i18n.t("pages.recipe.form.plates")}
+    bind:value={recipe.plates}
+  />
 
-  <label for="recipe-preparationDuration">{$i18n.t("pages.recipe.form.preparationDuration")}</label>
-  <input type="number" name="plates" id="recipe-preparationDuration" bind:value={recipe.preparationDuration}/>
+  <InputNumber
+    id="recipe-preparationDuration"
+    name="preparationDuration"
+    label={$i18n.t("pages.recipe.form.preparationDuration")}
+    bind:value={recipe.preparationDuration}
+  />
 
-  <label for="recipe-cookingDuration">{$i18n.t("pages.recipe.form.cookingDuration")}</label>
-  <input type="number" name="plates" id="recipe-cookingDuration" bind:value={recipe.cookingDuration}/>
+  <InputNumber
+    id="recipe-cookingDuration"
+    name="cookingDuration"
+    label={$i18n.t("pages.recipe.form.cookingDuration")}
+    bind:value={recipe.cookingDuration}
+  />
 
-  {#each recipe.ingredients as ingredient, index}
-    <label for={`recipe-ingredients-${index}-id`}>{$i18n.t("pages.recipe.form.ingredient.id")}</label>
-    <select name={`ingredients[${index}].id`} id={`recipe-ingredients-${index}-id`} bind:value={ingredient.id}>
-      {#each sortedIngredients as ingredientInStore}
-        <option value={ingredientInStore.id}>
-          {ingredientInStore.name}
-        </option>
-      {/each}
-    </select>
+  <InputCollection
+    title={$i18n.t("pages.recipe.form.ingredient.title")}
+    addButtonLabel={$i18n.t("pages.recipe.form.ingredient.add")}
+    removeButtonLabel={$i18n.t("pages.recipe.form.ingredient.remove")}
+    rowBuilder={ingredientBuilder}
+    bind:value={recipe.ingredients}
 
-    <label for={`recipe-ingredients-${index}-quantity`}>{$i18n.t("pages.recipe.form.ingredient.quantity")}</label>
-    <input type="number" name={`ingredients[${index}].quantity`} id={`recipe-ingredients-${index}-quantity`}
-           bind:value={ingredient.quantity}/>
+    let:index={index}
+  >
+    <InputSelect
+      id={`recipe-ingredients-${index}-id`}
+      name={`ingredients[${index}].id`}
+      label={$i18n.t("pages.recipe.form.ingredient.id")}
+      options={ingredientOptions}
+      bind:value={recipe.ingredients[index].id}
+    />
 
-    <label for={`recipe-ingredients-${index}-unit`}>{$i18n.t("pages.recipe.form.ingredient.unit")}</label>
-    <input type="text" name={`ingredients[${index}].unit`} id={`recipe-ingredients-${index}-unit`}
-           bind:value={ingredient.unit}/>
-  {/each}
+    <InputNumber
+      id={`recipe-ingredients-${index}-quantity`}
+      name={`ingredients[${index}].quantity`}
+      label={$i18n.t("pages.recipe.form.ingredient.quantity")}
+      bind:value={recipe.ingredients[index].quantity}
+    />
 
-  <button on:click|preventDefault={addIngredient}>{$i18n.t("pages.recipe.form.ingredient.add")}</button>
+    <InputText
+      id={`recipe-ingredients-${index}-unit`}
+      name={`ingredients[${index}].unit`}
+      label={$i18n.t("pages.recipe.form.ingredient.unit")}
+      bind:value={recipe.ingredients[index].unit}
+    />
+  </InputCollection>
 
-  <label for="recipe-steps">{$i18n.t("pages.recipe.form.steps")}</label>
-  <textarea name="steps" id="recipe-steps" bind:value={recipe.steps}/>
+  <InputTextarea
+    id="recipe-steps"
+    name="steps"
+    label={$i18n.t("pages.recipe.form.steps")}
+    bind:value={recipe.steps}
+  />
 
   <button type="submit">
     {$i18n.t("pages.recipe.form.submit")}

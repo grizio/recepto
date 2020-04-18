@@ -3,10 +3,15 @@
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
   import { sortBy } from "../../utils/arrays"
+  import InputText from "../../components/fields/InputText.svelte"
+  import InputTextarea from "../../components/fields/InputTextarea.svelte"
+  import InputSelect from "../../components/fields/InputSelect.svelte"
+  import InputCollection from "../../components/fields/InputCollection.svelte"
 
   export let ingredient
 
-  $: sortedRecipes = sortBy($receptoStore.recipes, _ => _.name)
+  $: recipeOptions = sortBy($receptoStore.recipes, _ => _.name)
+    .map(recipe => ({ label: recipe.name, value: recipe.id }))
 
   const dispatch = createEventDispatcher()
 
@@ -14,60 +19,82 @@
     dispatch("submit")
   }
 
-  function addPreservation() {
-    ingredient = {
-      ...ingredient,
-      preservations: [...ingredient.preservations, {
-        name: "",
-        duration: "",
-        description: ""
-      }]
+  function preservationBuilder() {
+    return {
+      name: "",
+      duration: "",
+      description: ""
     }
   }
 
-  function addRecipe() {
-    ingredient = {
-      ...ingredient,
-      recipes: [...ingredient.recipes, sortedRecipes[0].id]
-    }
+  function recipeBuilder() {
+    return recipeOptions[0].value
   }
 </script>
 
 <form on:submit|preventDefault={handleOnSubmit}>
-  <label for="ingredient-name">{$i18n.t("pages.ingredient.form.name")}</label>
-  <input type="text" name="name" id="ingredient-name" bind:value={ingredient.name}/>
+  <InputText
+    id="ingredient-name"
+    name="name"
+    label={$i18n.t("pages.ingredient.form.name")}
+    bind:value={ingredient.name}
+  />
 
-  <label for="ingredient-description">{$i18n.t("pages.ingredient.form.description")}</label>
-  <textarea name="description" id="ingredient-description" bind:value={ingredient.description}></textarea>
+  <InputTextarea
+    id="ingredient-description"
+    name="description"
+    label={$i18n.t("pages.ingredient.form.description")}
+    bind:value={ingredient.description}
+  />
 
-  {#each ingredient.preservations as preservation, index}
-    <label for={`ingredient-preservation-${index}-name`}>{$i18n.t("pages.ingredient.form.preservation.name")}</label>
-    <input type="text" name={`preservation[${index}].name`} id={`ingredient-preservation-${index}-name`}
-           bind:value={preservation.name}/>
+  <InputCollection
+    title={$i18n.t("pages.ingredient.form.preservation.title")}
+    addButtonLabel={$i18n.t("pages.ingredient.form.preservation.add")}
+    removeButtonLabel={$i18n.t("pages.ingredient.form.preservation.remove")}
+    rowBuilder={preservationBuilder}
+    bind:value={ingredient.preservations}
 
-    <label for={`ingredient-preservation-${index}-duration`}>{$i18n.t("pages.ingredient.form.preservation.duration")}</label>
-    <input type="text" name={`preservation[${index}].duration`} id={`ingredient-preservation-${index}-duration`}
-           bind:value={preservation.duration}/>
+    let:index={index}
+  >
+    <InputText
+      id={`ingredient-preservation-${index}-name`}
+      name={`preservation[${index}].name`}
+      label={$i18n.t("pages.ingredient.form.preservation.name")}
+      bind:value={ingredient.preservations[index].name}
+    />
 
-    <label for={`ingredient-preservation-${index}-description`}>{$i18n.t("pages.ingredient.form.preservation.description")}</label>
-    <textarea name={`preservation[${index}].description`} id={`ingredient-preservation-${index}-description`}
-              bind:value={preservation.description}/>
-  {/each}
+    <InputText
+      id={`ingredient-preservation-${index}-duration`}
+      name={`preservation[${index}].duration`}
+      label={$i18n.t("pages.ingredient.form.preservation.duration")}
+      bind:value={ingredient.preservations[index].duration}
+    />
 
-  <button on:click|preventDefault={addPreservation}>{$i18n.t("pages.ingredient.form.preservation.add")}</button>
+    <InputTextarea
+      id={`ingredient-preservation-${index}-description`}
+      name={`preservation[${index}].description`}
+      label={$i18n.t("pages.ingredient.form.preservation.description")}
+      bind:value={ingredient.preservations[index].description}
+    />
+  </InputCollection>
 
-  {#each ingredient.recipes as recipe, index}
-    <label for={`ingredient-recipes-${index}`}>{$i18n.t("pages.ingredient.form.recipe.select")}</label>
-    <select name={`recipes[${index}]`} id={`ingredient-recipes-${index}`} bind:value={recipe}>
-      {#each sortedRecipes as recipeInStore}
-        <option value={recipeInStore.id}>
-          {recipeInStore.name}
-        </option>
-      {/each}
-    </select>
-  {/each}
+  <InputCollection
+    title={$i18n.t("pages.ingredient.form.recipe.title")}
+    addButtonLabel={$i18n.t("pages.ingredient.form.recipe.add")}
+    removeButtonLabel={$i18n.t("pages.ingredient.form.recipe.remove")}
+    rowBuilder={recipeBuilder}
+    bind:value={ingredient.recipes}
 
-  <button on:click|preventDefault={addRecipe}>{$i18n.t("pages.ingredient.form.recipe.add")}</button>
+    let:index={index}
+  >
+    <InputSelect
+      id={`ingredient-recipes-${index}`}
+      name={`recipes[${index}]`}
+      label={$i18n.t("pages.ingredient.form.recipe.select")}
+      options={recipeOptions}
+      bind:value={ingredient.recipes[index]}
+    />
+  </InputCollection>
 
   <button type="submit">
     {$i18n.t("pages.ingredient.form.submit")}

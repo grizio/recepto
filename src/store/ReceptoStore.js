@@ -75,6 +75,13 @@ class ReceptoStore {
       recipes: recepto.recipes.filter(_ => _.id !== id)
     }))
   }
+
+  /**
+   * @param { Recepto } data
+   */
+  load = (data) => {
+    this.internal.set(data)
+  }
 }
 
 const receptoStore = new ReceptoStore()

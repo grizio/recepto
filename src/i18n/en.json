@@ -88,6 +88,17 @@
         "update": {
           "title": "Update {{recipe}}"
         }
+      },
+      "home": {
+        "title": "Recepto",
+        "load": {
+          "title": "Load",
+          "inputLabel": "Load previous saved file"
+        },
+        "save": {
+          "title": "Save",
+          "inputLabel": "Save current data on disk"
+        }
       }
     }
   }

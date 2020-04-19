@@ -89,6 +89,17 @@
         "update": {
           "title": "Modifier {{recipe}}"
         }
+      },
+      "home": {
+        "title": "Recepto",
+        "load": {
+          "title": "Charger",
+          "inputLabel": "Charger un fichier précédemment enregistré"
+        },
+        "save": {
+          "title": "Sauvegarder",
+          "inputLabel": "Sauvegarder les données sur le disque  "
+        }
       }
     }
   }

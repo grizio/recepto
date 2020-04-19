@@ -1,16 +1,18 @@
 <script>
   import {derived} from "svelte/store"
+  import {navigate} from "svelte-routing"
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
   import searchStore from "../../store/SearchStore"
   import Button from "../../components/buttons/Button.svelte"
   import {nonEmpty} from "../../utils/arrays"
-  import Grid from "../../components/layout/Grid.svelte";
+  import Grid from "../../components/layout/Grid.svelte"
   import Card from "../../components/card/Card.svelte";
-  import RecipeCard from "../../components/card/RecipeCard.svelte";
-  import Page from "../../components/Page.svelte";
-  import TwoColumns from "../../components/layout/TwoColumns.svelte";
-  import Collapsable from "../../components/collapsable/Collapsable.svelte";
+  import RecipeCard from "../../components/card/RecipeCard.svelte"
+  import Page from "../../components/Page.svelte"
+  import TwoColumns from "../../components/layout/TwoColumns.svelte"
+  import Collapsable from "../../components/collapsable/Collapsable.svelte"
+  import { onDefined } from "../../utils/values"
 
   /** @type {string} */
   export let id = undefined
@@ -20,13 +22,14 @@
   $: recipes = $receptoStore.recipes.filter(recipe => {
     return recipe.ingredients.some(_ => _.id === id)
   })
-  $: recipesDIY = ingredient.recipes.map(recipe => {
+  $: recipesDIY = onDefined(ingredient, ingredient => ingredient.recipes.map(recipe => {
     return $receptoStore.recipes.find(_ => _.id === recipe)
-  })
+  }))
 
   function handleOnDelete() {
     const confirmed = confirm($i18n.t("pages.ingredient.page.actions.confirmDelete"))
     if (confirmed) {
+      navigate(`/`)
       receptoStore.deleteIngredient(id)
     }
   }

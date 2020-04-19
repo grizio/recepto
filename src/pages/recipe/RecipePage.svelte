@@ -1,6 +1,6 @@
 <script>
   import { derived } from "svelte/store"
-  import { Link } from "svelte-routing"
+  import { Link, navigate } from "svelte-routing"
   import receptoStore from "../../store/ReceptoStore"
   import searchStore from "../../store/SearchStore"
   import TwoColumns from "../../components/layout/TwoColumns.svelte"
@@ -9,18 +9,19 @@
   import Button from "../../components/buttons/Button.svelte"
   import Page from "../../components/Page.svelte"
   import Collapsable from "../../components/collapsable/Collapsable.svelte"
+  import { onDefined } from "../../utils/values"
 
   /** @type {string} */
   export let id = undefined
 
   /** @type {Ingredient} */
   $: recipe = $receptoStore.recipes.find(recipe => recipe.id === id)
-  $: ingredients = recipe.ingredients.map(recipeIngredient => {
+  $: ingredients = onDefined(recipe, recipe => recipe.ingredients.map(recipeIngredient => {
     return {
       ...recipeIngredient,
       ref: $receptoStore.ingredients.find(ingredient => ingredient.id === recipeIngredient.id)
     }
-  })
+  }))
   $: madeIngredients = $receptoStore.ingredients.filter(ingredient => {
     return ingredient.recipes.some(_ => _ === id)
   })
@@ -28,6 +29,7 @@
   function handleOnDelete() {
     const confirmed = confirm($i18n.t("pages.recipe.page.actions.confirmDelete"))
     if (confirmed) {
+      navigate(`/`)
       receptoStore.deleteRecipe(id)
     }
   }

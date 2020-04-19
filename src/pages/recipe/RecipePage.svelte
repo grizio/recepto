@@ -1,12 +1,14 @@
 <script>
-  import {derived} from "svelte/store"
-  import {Link} from "svelte-routing"
+  import { derived } from "svelte/store"
+  import { Link } from "svelte-routing"
   import receptoStore from "../../store/ReceptoStore"
+  import searchStore from "../../store/SearchStore"
   import TwoColumns from "../../components/layout/TwoColumns.svelte"
   import i18n from "../../i18n"
-  import {splitParagraphs} from "../../utils/strings"
-  import Button from "../../components/buttons/Button.svelte";
-  import Page from "../../components/Page.svelte";
+  import { splitParagraphs } from "../../utils/strings"
+  import Button from "../../components/buttons/Button.svelte"
+  import Page from "../../components/Page.svelte"
+  import Collapsable from "../../components/collapsable/Collapsable.svelte"
 
   /** @type {string} */
   export let id = undefined
@@ -129,6 +131,18 @@
         {/each}
       </ul>
     {/if}
+
+    <aside>
+      <h2>{$i18n.t("pages.recipe.page.asideTitle")}</h2>
+
+      {#each $searchStore as search}
+        <Collapsable summary={$i18n.t("pages.recipe.page.asideSearch", { sitename: search.sitename })}>
+          <iframe src={search.url(recipe.name)}
+                  width="100%"
+                  height="500px"></iframe>
+        </Collapsable>
+      {/each}
+    </aside>
   {:else}
     <h1>{$i18n.t("common.notFound")}</h1>
   {/if}

@@ -41,7 +41,8 @@
             "modify": "Modify",
             "delete": "Delete",
             "confirmDelete": "Do you really want to delete this ingredient?"
-          }
+          },
+          "asideSearch": "Search on {{ sitename }}"
         },
         "create": {
           "title": "New ingredient"
@@ -77,7 +78,9 @@
             "modify": "Modify",
             "delete": "Delete",
             "confirmDelete": "Do you really want to delete this recipe?"
-          }
+          },
+          "asideTitle": "Search alternatives",
+          "asideSearch": "Search on {{ sitename }}"
         },
         "create": {
           "title": "New recipe"

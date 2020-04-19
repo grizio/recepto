@@ -9,6 +9,6 @@
 </script>
 
 <Field>
-  <label for={id}>{label}</label>
-  <input type="text" name={name} id={id} bind:value={value}/>
+  <label for={id} class="field-label">{label}</label>
+  <input type="text" name={name} id={id} bind:value={value} class="field-input"/>
 </Field>

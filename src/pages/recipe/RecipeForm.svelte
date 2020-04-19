@@ -3,11 +3,12 @@
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
   import { sortBy } from "../../utils/arrays"
-  import InputTextarea from "../../components/fields/InputTextarea.svelte";
-  import InputText from "../../components/fields/InputText.svelte";
-  import InputNumber from "../../components/fields/InputNumber.svelte";
-  import InputCollection from "../../components/fields/InputCollection.svelte";
-  import InputSelect from "../../components/fields/InputSelect.svelte";
+  import InputTextarea from "../../components/fields/InputTextarea.svelte"
+  import InputText from "../../components/fields/InputText.svelte"
+  import InputNumber from "../../components/fields/InputNumber.svelte"
+  import InputCollection from "../../components/fields/InputCollection.svelte"
+  import InputSelect from "../../components/fields/InputSelect.svelte"
+  import Button from "../../components/buttons/Button.svelte"
 
   export let recipe
 
@@ -35,6 +36,13 @@
     name="name"
     label={$i18n.t("pages.recipe.form.name")}
     bind:value={recipe.name}
+  />
+
+  <InputText
+    id="recipe-shortDescription"
+    name="shortDescription"
+    label={$i18n.t("pages.recipe.form.shortDescription")}
+    bind:value={recipe.shortDescription}
   />
 
   <InputNumber
@@ -97,7 +105,7 @@
     bind:value={recipe.steps}
   />
 
-  <button type="submit">
+  <Button type="primary" submit>
     {$i18n.t("pages.recipe.form.submit")}
-  </button>
+  </Button>
 </form>

@@ -1,5 +1,6 @@
 export type Recipe = {
   name: string
+  shortDescription?: string
   plates: number
   preparationDuration: number
   cookingDuration: number

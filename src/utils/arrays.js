@@ -46,3 +46,12 @@ export function removeAt(array, at) {
   result.splice(at, 1)
   return result
 }
+
+/**
+ * @template T
+ * @param {Array<T>} array
+ * @return {boolean}
+ */
+export function nonEmpty(array) {
+  return array !== undefined && array.length > 0
+}

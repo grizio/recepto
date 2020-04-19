@@ -10,9 +10,11 @@
   export let id = undefined
 
   let ingredient = undefined
+  let initialName = undefined
 
   onMount(() => {
     ingredient = get(receptoStore).ingredients.find(ingredient => ingredient.id === id)
+    initialName = ingredient ? ingredient.name : undefined
   })
 
   function handleOnSubmit() {
@@ -25,6 +27,8 @@
 </script>
 
 {#if ingredient}
+  <h1>{$i18n.t("pages.ingredient.update.title", {ingredient: initialName})}</h1>
+
   <IngredientForm bind:ingredient on:submit={handleOnSubmit}/>
 {:else}
   <h1>{$i18n.t("common.notFound")}</h1>

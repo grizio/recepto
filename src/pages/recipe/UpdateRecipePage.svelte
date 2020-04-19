@@ -10,9 +10,11 @@
   export let id = undefined
 
   let recipe = undefined
+  let initialName = undefined
 
   onMount(() => {
     recipe = get(receptoStore).recipes.find(recipe => recipe.id === id)
+    initialName = recipe ? recipe.name : undefined
   })
 
   function handleOnSubmit() {
@@ -25,6 +27,8 @@
 </script>
 
 {#if recipe}
+  <h1>{$i18n.t("pages.recipe.update.title", {recipe: initialName})}</h1>
+
   <RecipeForm bind:recipe on:submit={handleOnSubmit}/>
 {:else}
   <h1>{$i18n.t("common.notFound")}</h1>

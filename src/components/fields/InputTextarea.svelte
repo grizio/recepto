@@ -9,6 +9,6 @@
 </script>
 
 <Field>
-  <label for={id}>{label}</label>
-  <textarea name={name} id={id} bind:value={value}></textarea>
+  <label for={id} class="field-label">{label}</label>
+  <textarea name={name} id={id} bind:value={value} class="field-input"></textarea>
 </Field>

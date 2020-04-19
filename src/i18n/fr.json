@@ -42,11 +42,18 @@
             "delete": "Supprimer",
             "confirmDelete": "Confirmez-vous la suppression de cet ingrédient ?"
           }
+        },
+        "create": {
+          "title": "Nouvel ingredient"
+        },
+        "update": {
+          "title": "Modifier {{ingredient}}"
         }
       },
       "recipe": {
         "form": {
           "name": "Nom",
+          "shortDescription": "Description courte",
           "plates": "Nombre de personnes",
           "preparationDuration": "Durée de préparation",
           "cookingDuration": "Durée de cuisson",
@@ -75,6 +82,12 @@
             "delete": "Supprimer",
             "confirmDelete": "Confirmez-vous la suppression de cette recette ?"
           }
+        },
+        "create": {
+          "title": "Nouvelle recette"
+        },
+        "update": {
+          "title": "Modifier {{recipe}}"
         }
       }
     }

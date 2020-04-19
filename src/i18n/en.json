@@ -42,11 +42,18 @@
             "delete": "Delete",
             "confirmDelete": "Do you really want to delete this ingredient?"
           }
+        },
+        "create": {
+          "title": "New ingredient"
+        },
+        "update": {
+          "title": "Update {{ingredient}}"
         }
       },
       "recipe": {
         "form": {
           "name": "Name",
+          "shortDescription": "Short description",
           "plates": "Number of plates",
           "preparationDuration": "Preparation duration",
           "cookingDuration": "Cooking duration",
@@ -74,6 +81,12 @@
             "delete": "Delete",
             "confirmDelete": "Do you really want to delete this recipe?"
           }
+        },
+        "create": {
+          "title": "New recipe"
+        },
+        "update": {
+          "title": "Update {{recipe}}"
         }
       }
     }

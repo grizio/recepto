@@ -5,6 +5,7 @@
   import TwoColumns from "../../components/layout/TwoColumns.svelte"
   import i18n from "../../i18n"
   import { splitParagraphs } from "../../utils/strings"
+  import Button from "../../components/buttons/Button.svelte";
 
   /** @type {string} */
   export let id = undefined
@@ -41,11 +42,13 @@
     list-style-type: none;
     padding-left: 50px;
   }
+
   .steps > li {
     counter-increment: steps;
     margin: 0 0 24px 0;
     position: relative;
   }
+
   .steps > li:before {
     content: counter(steps);
     border-radius: 50%;
@@ -62,6 +65,11 @@
 
 {#if recipe}
   <h1>{recipe.name}</h1>
+
+  <div>
+    <Button href={`/recipe/${recipe.id}/update`}>{$i18n.t("pages.recipe.page.actions.modify")}</Button>
+    <Button danger on:click={handleOnDelete}>{$i18n.t("pages.recipe.page.actions.delete")}</Button>
+  </div>
 
   <TwoColumns gap="8px" columns="250px 1fr">
     <div class="left">
@@ -111,10 +119,6 @@
       {/if}
     </div>
   </TwoColumns>
-
-  <Link to={`/recipe/${recipe.id}/update`}>{$i18n.t("pages.recipe.page.actions.modify")}</Link>
-
-  <button on:click={handleOnDelete}>{$i18n.t("pages.recipe.page.actions.delete")}</button>
 {:else}
   <h1>{$i18n.t("common.notFound")}</h1>
 {/if}

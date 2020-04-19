@@ -1,5 +1,6 @@
 <script>
   import { navigate } from "svelte-routing"
+  import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
   import { canonicalize } from "../../utils/strings"
   import IngredientForm from "./IngredientForm.svelte";
@@ -17,5 +18,7 @@
     navigate(`/ingredient/${id}`)
   }
 </script>
+
+<h1>{$i18n.t("pages.ingredient.create.title")}</h1>
 
 <IngredientForm bind:ingredient on:submit={handleOnSubmit} />

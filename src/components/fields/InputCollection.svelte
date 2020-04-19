@@ -1,5 +1,6 @@
 <script>
   import { removeAt } from "../../utils/arrays";
+  import Button from "../buttons/Button.svelte";
 
   export let title
   export let addButtonLabel
@@ -21,8 +22,7 @@
   fieldset {
     border-radius: 2px;
     margin-bottom: 8px;
-    background-color: #f1f5f7;
-    border: none;
+    border: 1px solid #f0f0f0;
   }
 
   .legend {
@@ -32,8 +32,9 @@
   }
 
   .group {
-    border-left: 4px solid #adb5bd;
-    padding-left: 4px;
+    border: 1px solid #d9d9d9;
+    background: #fbfbfb;
+    padding: 24px;
     margin-bottom: 16px;
   }
 </style>
@@ -45,9 +46,9 @@
     <div class="group">
       <slot {index}/>
 
-      <button on:click|preventDefault={() => removeRow(index)}>{removeButtonLabel}</button>
+      <Button on:click={() => removeRow(index)}>{removeButtonLabel}</Button>
     </div>
   {/each}
 
-  <button on:click|preventDefault={addRow}>{addButtonLabel}</button>
+  <Button on:click={addRow}>{addButtonLabel}</Button>
 </fieldset>

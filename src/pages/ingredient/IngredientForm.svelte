@@ -7,6 +7,7 @@
   import InputTextarea from "../../components/fields/InputTextarea.svelte"
   import InputSelect from "../../components/fields/InputSelect.svelte"
   import InputCollection from "../../components/fields/InputCollection.svelte"
+  import Button from "../../components/buttons/Button.svelte";
 
   export let ingredient
 
@@ -96,7 +97,7 @@
     />
   </InputCollection>
 
-  <button type="submit">
+  <Button type="primary" submit>
     {$i18n.t("pages.ingredient.form.submit")}
-  </button>
+  </Button>
 </form>

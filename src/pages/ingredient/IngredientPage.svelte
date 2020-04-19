@@ -1,8 +1,12 @@
 <script>
-  import { derived } from "svelte/store"
+  import {derived} from "svelte/store"
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
-  import { Link } from "svelte-routing"
+  import Button from "../../components/buttons/Button.svelte"
+  import {nonEmpty} from "../../utils/arrays"
+  import Grid from "../../components/layout/Grid.svelte";
+  import Card from "../../components/card/Card.svelte";
+  import RecipeCard from "../../components/card/RecipeCard.svelte";
 
   /** @type {string} */
   export let id = undefined
@@ -12,7 +16,7 @@
   $: recipes = $receptoStore.recipes.filter(recipe => {
     return recipe.ingredients.some(_ => _.id === id)
   })
-  $: recipesToMakeIt = ingredient.recipes.map(recipe => {
+  $: recipesDIY = ingredient.recipes.map(recipe => {
     return $receptoStore.recipes.find(_ => _.id === recipe)
   })
 
@@ -27,44 +31,43 @@
 {#if ingredient}
   <h1>{ingredient.name}</h1>
 
+  <div>
+    <Button href={`/ingredient/${ingredient.id}/update`}>{$i18n.t("pages.ingredient.page.actions.modify")}</Button>
+    <Button danger on:click={handleOnDelete}>{$i18n.t("pages.ingredient.page.actions.delete")}</Button>
+  </div>
+
   <p>{ingredient.description}</p>
 
-  {#if ingredient.preservations}
+  {#if nonEmpty(ingredient.preservations)}
     <h2>{$i18n.t("pages.ingredient.page.preservations")}</h2>
 
     {#each ingredient.preservations as preservation}
-      <h3>{preservation.name} <small>{ preservation.duration }</small></h3>
+      <h3>{preservation.name} ({ preservation.duration })</h3>
 
       <p>
-        {preservation.description}
+          {preservation.description}
       </p>
     {/each}
   {/if}
 
-  <Link to={`/ingredient/${ingredient.id}/update`}>{$i18n.t("pages.ingredient.page.actions.modify")}</Link>
-
-  <button on:click={handleOnDelete}>{$i18n.t("pages.ingredient.page.actions.delete")}</button>
-
-  {#if recipesToMakeIt && recipesToMakeIt.length > 0}
+  {#if nonEmpty(recipesDIY)}
     <h2>{$i18n.t("pages.ingredient.page.diy")}</h2>
 
-    <ul>
-      {#each recipesToMakeIt as recipe}
-        <li>
-          <Link to={`/recipe/${recipe.id}`}>{recipe.name}</Link>
-        </li>
+    <Grid>
+      {#each recipesDIY as recipe}
+        <RecipeCard recipe={recipe}/>
       {/each}
-    </ul>
+    </Grid>
   {/if}
 
-  {#if recipes && recipes.length > 0}
+  {#if nonEmpty(recipes)}
     <h2>{$i18n.t("pages.ingredient.page.recipes")}</h2>
 
-    {#each recipes as recipe}
-      <li>
-        <Link to={`/recipe/${recipe.id}`}>{recipe.name}</Link>
-      </li>
-    {/each}
+    <Grid>
+      {#each recipes as recipe}
+        <RecipeCard recipe={recipe}/>
+      {/each}
+    </Grid>
   {/if}
 {:else}
   <h1>{$i18n.t("common.notFound")}</h1>

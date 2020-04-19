@@ -155,7 +155,7 @@ input.field-input, textarea.field-input {
 textarea.field-input {
   max-width: 100%;
   height: auto;
-  min-height: 32px;
+  min-height: 200px;
   line-height: 1.5715;
   transition: all .3s, height 0s;
 }

@@ -55,8 +55,7 @@
           "name": "Nom",
           "shortDescription": "Description courte",
           "plates": "Nombre de personnes",
-          "preparationDuration": "Durée de préparation",
-          "cookingDuration": "Durée de cuisson",
+          "duration": "Durée",
           "ingredient": {
             "title": "Ingrédients",
             "id": "Ingrédient",
@@ -71,9 +70,7 @@
         "page": {
           "plates": "{{count}} personne",
           "plates_plural": "{{count}} personnes",
-          "preparationDuration": "Préparation: $t(common.minutes, { 'count': {{count}} })",
-          "cookingDuration": "Cuisson: $t(common.minutes, { 'count': {{count}} })",
-          "totalDuration": "Durée totale: $t(common.minutes, { 'count': {{count}} })",
+          "duration": "Durée : $t(common.minutes, { 'count': {{count}} })",
           "ingredients": "Ingrédients",
           "steps": "Étapes",
           "makes": "Crée",

@@ -7,6 +7,7 @@
   import Grid from "../../components/layout/Grid.svelte";
   import Card from "../../components/card/Card.svelte";
   import RecipeCard from "../../components/card/RecipeCard.svelte";
+  import Page from "../../components/Page.svelte";
 
   /** @type {string} */
   export let id = undefined
@@ -28,47 +29,49 @@
   }
 </script>
 
-{#if ingredient}
-  <h1>{ingredient.name}</h1>
+<Page>
+  {#if ingredient}
+    <h1>{ingredient.name}</h1>
 
-  <div>
-    <Button href={`/ingredient/${ingredient.id}/update`}>{$i18n.t("pages.ingredient.page.actions.modify")}</Button>
-    <Button danger on:click={handleOnDelete}>{$i18n.t("pages.ingredient.page.actions.delete")}</Button>
-  </div>
+    <div>
+      <Button href={`/ingredient/${ingredient.id}/update`}>{$i18n.t("pages.ingredient.page.actions.modify")}</Button>
+      <Button danger on:click={handleOnDelete}>{$i18n.t("pages.ingredient.page.actions.delete")}</Button>
+    </div>
 
-  <p>{ingredient.description}</p>
+    <p>{ingredient.description}</p>
 
-  {#if nonEmpty(ingredient.preservations)}
-    <h2>{$i18n.t("pages.ingredient.page.preservations")}</h2>
+    {#if nonEmpty(ingredient.preservations)}
+      <h2>{$i18n.t("pages.ingredient.page.preservations")}</h2>
 
-    {#each ingredient.preservations as preservation}
-      <h3>{preservation.name} ({ preservation.duration })</h3>
+      {#each ingredient.preservations as preservation}
+        <h3>{preservation.name} ({ preservation.duration })</h3>
 
-      <p>
+        <p>
           {preservation.description}
-      </p>
-    {/each}
-  {/if}
-
-  {#if nonEmpty(recipesDIY)}
-    <h2>{$i18n.t("pages.ingredient.page.diy")}</h2>
-
-    <Grid>
-      {#each recipesDIY as recipe}
-        <RecipeCard recipe={recipe}/>
+        </p>
       {/each}
-    </Grid>
-  {/if}
+    {/if}
 
-  {#if nonEmpty(recipes)}
-    <h2>{$i18n.t("pages.ingredient.page.recipes")}</h2>
+    {#if nonEmpty(recipesDIY)}
+      <h2>{$i18n.t("pages.ingredient.page.diy")}</h2>
 
-    <Grid>
-      {#each recipes as recipe}
-        <RecipeCard recipe={recipe}/>
-      {/each}
-    </Grid>
+      <Grid>
+        {#each recipesDIY as recipe}
+          <RecipeCard recipe={recipe}/>
+        {/each}
+      </Grid>
+    {/if}
+
+    {#if nonEmpty(recipes)}
+      <h2>{$i18n.t("pages.ingredient.page.recipes")}</h2>
+
+      <Grid>
+        {#each recipes as recipe}
+          <RecipeCard recipe={recipe}/>
+        {/each}
+      </Grid>
+    {/if}
+  {:else}
+    <h1>{$i18n.t("common.notFound")}</h1>
   {/if}
-{:else}
-  <h1>{$i18n.t("common.notFound")}</h1>
-{/if}
+</Page>

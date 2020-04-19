@@ -1,9 +1,10 @@
 <script>
-  import { navigate } from "svelte-routing"
+  import {navigate} from "svelte-routing"
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
-  import { canonicalize } from "../../utils/strings"
-  import RecipeForm from "./RecipeForm.svelte";
+  import {canonicalize} from "../../utils/strings"
+  import RecipeForm from "./RecipeForm.svelte"
+  import Page from "../../components/Page.svelte"
 
   let recipe = {
     name: "",
@@ -16,11 +17,13 @@
 
   function handleOnSubmit() {
     const id = canonicalize(recipe.name)
-    receptoStore.addRecipe({ id, ...recipe })
+    receptoStore.addRecipe({id, ...recipe})
     navigate(`/recipe/${id}`)
   }
 </script>
 
-<h1>{$i18n.t("pages.recipe.create.title")}</h1>
+<Page>
+  <h1>{$i18n.t("pages.recipe.create.title")}</h1>
 
-<RecipeForm bind:recipe on:submit={handleOnSubmit}/>
+  <RecipeForm bind:recipe on:submit={handleOnSubmit}/>
+</Page>

@@ -53,17 +53,10 @@
   />
 
   <InputNumber
-    id="recipe-preparationDuration"
-    name="preparationDuration"
-    label={$i18n.t("pages.recipe.form.preparationDuration")}
-    bind:value={recipe.preparationDuration}
-  />
-
-  <InputNumber
-    id="recipe-cookingDuration"
-    name="cookingDuration"
-    label={$i18n.t("pages.recipe.form.cookingDuration")}
-    bind:value={recipe.cookingDuration}
+    id="recipe-duration"
+    name="duration"
+    label={$i18n.t("pages.recipe.form.duration")}
+    bind:value={recipe.duration}
   />
 
   <InputCollection

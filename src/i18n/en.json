@@ -55,8 +55,7 @@
           "name": "Name",
           "shortDescription": "Short description",
           "plates": "Number of plates",
-          "preparationDuration": "Preparation duration",
-          "cookingDuration": "Cooking duration",
+          "duration": "Duration",
           "ingredient": {
             "title": "Ingredients",
             "id": "Ingredient",
@@ -70,9 +69,7 @@
         "page": {
           "plates": "{{count}} plate",
           "plates_plural": "{{count}} plates",
-          "preparationDuration": "Preparation: $t(common.minutes, { 'count': {{count}} })",
-          "cookingDuration": "Cooking: $t(common.minutes, { 'count': {{count}} })",
-          "totalDuration": "Total duration: $t(common.minutes, { 'count': {{count}} })",
+          "duration": "Duration: $t(common.minutes, { 'count': {{count}} })",
           "ingredients": "Ingredients",
           "steps": "Steps",
           "makes": "Makes",

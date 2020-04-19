@@ -2,8 +2,7 @@ export type Recipe = {
   name: string
   shortDescription?: string
   plates: number
-  preparationDuration: number
-  cookingDuration: number
+  duration: number
   ingredients: Array<RecipeIngredient>
   steps: string
 }

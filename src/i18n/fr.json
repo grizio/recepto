@@ -3,7 +3,13 @@
     "common": {
       "notFound": "Non trouvé",
       "minutes": "{{count}} minute",
-      "minutes_plural": "{{count}} minutes"
+      "minutes_plural": "{{count}} minutes",
+      "fields": {
+        "duration": {
+          "hours": "HH",
+          "minutes": "MM"
+        }
+      }
     },
     "menu": {
       "appName": "Recepto",

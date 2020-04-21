@@ -9,6 +9,7 @@
   import InputCollection from "../../components/fields/InputCollection.svelte"
   import InputSelect from "../../components/fields/InputSelect.svelte"
   import Button from "../../components/buttons/Button.svelte"
+  import InputDuration from "../../components/fields/InputDuration.svelte";
 
   export let recipe
 
@@ -52,7 +53,7 @@
     bind:value={recipe.plates}
   />
 
-  <InputNumber
+  <InputDuration
     id="recipe-duration"
     name="duration"
     label={$i18n.t("pages.recipe.form.duration")}

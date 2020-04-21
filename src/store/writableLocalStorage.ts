@@ -1,12 +1,6 @@
-import { writable } from "svelte/store"
+import { Writable, writable } from "svelte/store"
 
-/**
- * @template T
- * @param {string} key
- * @param {T} initialValue
- * @return {Writable<T>}
- */
-export default function writableLocalStorage(key, initialValue) {
+export default function writableLocalStorage<T>(key: string, initialValue: T): Writable<T> {
   const storage = writable(getInitialValue(key, initialValue))
   storage.subscribe((newValue) => {
     if (newValue === null) {
@@ -18,13 +12,7 @@ export default function writableLocalStorage(key, initialValue) {
   return storage
 }
 
-/**
- * @template T
- * @param {string} key
- * @param {T} fallback
- * @return {T}
- */
-function getInitialValue(key, fallback) {
+function getInitialValue<T>(key: string, fallback: T): T {
   const persistedValue = localStorage.getItem(key)
   if (persistedValue !== null) {
     return JSON.parse(persistedValue)

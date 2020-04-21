@@ -1,6 +1,11 @@
 import { readable } from "svelte/store"
 
-const searches = readable(
+type Search = {
+  sitename: string,
+  url: (s: string) => string
+}
+
+const searches = readable<Array<Search>>(
   [
     { sitename: "Marmiton", url: (s) => `https://www.marmiton.org/recettes/recherche.aspx?aqt=${s}` },
     { sitename: "750g", url: (s) => `https://www.750g.com/recherche.htm?search=${s}` },

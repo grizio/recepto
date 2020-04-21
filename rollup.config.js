@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import json from '@rollup/plugin-json';
+import typescript from '@rollup/plugin-typescript';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -51,7 +52,9 @@ export default {
 
 		json({
 			compact: true
-		})
+		}),
+
+		typescript()
 	],
 	watch: {
 		clearScreen: false

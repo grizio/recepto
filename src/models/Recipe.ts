@@ -1,4 +1,5 @@
 export type Recipe = {
+  id: string
   name: string
   shortDescription?: string
   plates: number

@@ -1,5 +1,5 @@
-import { readable } from "svelte/store"
 import i18next from "i18next"
+import { readable } from "svelte/store"
 import LanguageDetector from 'i18next-browser-languagedetector'
 
 import en from "./en.json"

@@ -1,10 +1,13 @@
-import writableLocalStorage from "./writableLocalStorage";
-import { replaceWhere } from "../utils/arrays";
+import { Readable, Writable } from "svelte/store"
+import writableLocalStorage from "./writableLocalStorage"
+import { replaceWhere } from "../utils/arrays"
+import { Recepto } from "../models/Recepto"
+import { Ingredient } from "../models/Ingredient"
+import { Recipe } from "../models/Recipe"
 
-/**
- * @implements Readable<Recepto>
- */
-class ReceptoStore {
+class ReceptoStore implements Readable<Recepto> {
+  private internal: Writable<Recepto>
+
   constructor() {
     this.internal = writableLocalStorage("recepto", {
       ingredients: [],
@@ -12,74 +15,53 @@ class ReceptoStore {
     })
   }
 
-  subscribe = (run, invalidate) => {
+  subscribe: Readable<Recepto>["subscribe"] = (run, invalidate) => {
     return this.internal.subscribe(run, invalidate);
   }
 
-  /**
-   * @param {Ingredient} ingredient
-   */
-  addIngredient = (ingredient) => {
+  addIngredient = (ingredient: Ingredient) => {
     this.internal.update(recepto => ({
       ...recepto,
       ingredients: [...recepto.ingredients, ingredient]
     }))
   }
 
-  /**
-   * @param {Ingredient} ingredient
-   */
-  updateIngredient = (ingredient) => {
+  updateIngredient = (ingredient: Ingredient) => {
     this.internal.update(recepto => ({
       ...recepto,
       ingredients: replaceWhere(recepto.ingredients, _ => _.id === ingredient.id, () => ingredient)
     }))
   }
 
-  /**
-   * @param {string} id
-   */
-  deleteIngredient = (id) => {
+  deleteIngredient = (id: string) => {
     this.internal.update(recepto => ({
       ...recepto,
       ingredients: recepto.ingredients.filter(_ => _.id !== id)
     }))
   }
 
-  /**
-   * @param {Recipe} recipe
-   */
-  addRecipe = (recipe) => {
+  addRecipe = (recipe: Recipe) => {
     this.internal.update(recepto => ({
       ...recepto,
       recipes: [...recepto.recipes, recipe]
     }))
   }
 
-  /**
-   * @param {Recipe} ingredient
-   */
-  updateRecipe = (recipe) => {
+  updateRecipe = (recipe: Recipe) => {
     this.internal.update(recepto => ({
       ...recepto,
       recipes: replaceWhere(recepto.recipes, _ => _.id === recipe.id, () => recipe)
     }))
   }
 
-  /**
-   * @param {Recipe} id
-   */
-  deleteRecipe = (id) => {
+  deleteRecipe = (id: string) => {
     this.internal.update(recepto => ({
       ...recepto,
       recipes: recepto.recipes.filter(_ => _.id !== id)
     }))
   }
 
-  /**
-   * @param { Recepto } data
-   */
-  load = (data) => {
+  load = (data: Recepto) => {
     this.internal.set(data)
   }
 }

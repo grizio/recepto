@@ -2,6 +2,14 @@
   "translation": {
     "common": {
       "notFound": "Non trouvé",
+      "duration": {
+        "short": {
+          "text": "{{count, shortDuration}}",
+          "hours": "{{count}}h",
+          "minutes": "{{count}} min",
+          "hoursAndMinutes": "{{hours}}h{{minutes}}"
+        }
+      },
       "minutes": "{{count}} minute",
       "minutes_plural": "{{count}} minutes",
       "fields": {

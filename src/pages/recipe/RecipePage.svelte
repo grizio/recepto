@@ -90,7 +90,7 @@
 
     <div class="infos">
       <span>&#x1F465 {$i18n.t("pages.recipe.page.plates", {count: recipe.plates})}</span>
-      <span>&#x23F2 {$i18n.t("common.minutes", {count: recipe.duration})}</span>
+      <span>&#x23F2 {$i18n.t("common.duration.short.text", {count: recipe.duration})}</span>
     </div>
 
     <section class="recipe">

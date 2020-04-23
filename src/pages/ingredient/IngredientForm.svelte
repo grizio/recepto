@@ -14,6 +14,12 @@
   $: recipeOptions = sortBy($receptoStore.recipes, _ => _.name)
     .map(recipe => ({ label: recipe.name, value: recipe.id }))
 
+  $: categoryOptions = [
+    { label: $i18n.t("pages.ingredient.form.category.none"), value: undefined },
+    ...sortBy($receptoStore.ingredientCategories, _ => _.name)
+      .map(recipe => ({ label: recipe.name, value: recipe.id }))
+  ]
+
   const dispatch = createEventDispatcher()
 
   function handleOnSubmit() {
@@ -39,6 +45,14 @@
     name="name"
     label={$i18n.t("pages.ingredient.form.name")}
     bind:value={ingredient.name}
+  />
+
+  <InputSelect
+    id="ingredient-category"
+    name="category"
+    label={$i18n.t("pages.ingredient.form.category.label")}
+    options={categoryOptions}
+    bind:value={ingredient.category}
   />
 
   <InputTextarea

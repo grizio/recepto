@@ -24,12 +24,26 @@
       "recipes": "Recipes",
       "newRecipe": "New recipe",
       "ingredients": "Ingredients",
-      "newIngredient": "New ingredient"
+      "newIngredient": "New ingredient",
+      "otherCategoryName": "Others",
+      "updateIngredientCategories": "Update categories"
     },
     "pages": {
       "ingredient": {
+        "categories": {
+          "title": "Categories",
+          "submit": "Submit",
+          "add": "New category",
+          "remove": "Remove category",
+          "groupTitle": "Category list",
+          "name": "Name"
+        },
         "form": {
           "name": "Name",
+          "category": {
+            "label": "Category",
+            "none": "None"
+          },
           "description": "Description",
           "preservation": {
             "title": "Preservations",

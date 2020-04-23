@@ -24,12 +24,26 @@
       "recipes": "Recettes",
       "newRecipe": "Nouvelle recette",
       "ingredients": "Ingrédients",
-      "newIngredient": "Nouvel ingrédient"
+      "newIngredient": "Nouvel ingrédient",
+      "otherCategoryName": "Divers",
+      "updateIngredientCategories": "Modifier les catégories"
     },
     "pages": {
       "ingredient": {
+        "categories": {
+          "title": "Catégories",
+          "submit": "Sauvegarder",
+          "add": "Nouvelle catégorie",
+          "remove": "Supprimer la catégorie",
+          "groupTitle": "Liste des catégories",
+          "name": "Nom"
+        },
         "form": {
           "name": "Nom",
+          "category": {
+            "label": "Catégorie",
+            "none": "Aucune"
+          },
           "description": "Description",
           "preservation": {
             "title": "Conservations",

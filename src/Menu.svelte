@@ -2,9 +2,10 @@
   import i18n from "./i18n"
   import receptoStore from "./store/ReceptoStore"
   import { sortBy } from "./utils/arrays"
+  import { getIngredientsByCategory } from "./models/IngredientCategory";
 
   $: sortedRecipes = sortBy($receptoStore.recipes, _ => _.name)
-  $: sortedIngredients = sortBy($receptoStore.ingredients, _ => _.name)
+  $: sortedIngredientCategories = getIngredientsByCategory($receptoStore, $i18n)
 </script>
 
 <style>
@@ -30,8 +31,7 @@
     margin-top: 20px;
   }
 
-  h2 {
-    font-weight: 500;
+  h2, h3 {
     color: #f7f7f7;
     margin: 8px 0;
   }
@@ -54,7 +54,7 @@
     color: #f9c851;
   }
 
-  .add-button {
+  .button, .add-button {
     display: block;
     margin-top: 8px;
     color: #f9c851;
@@ -88,15 +88,21 @@
   <div class="section">
     <h2>{$i18n.t("menu.ingredients")}</h2>
 
-    <ul>
-      {#each sortedIngredients as ingredient}
-        <li>
-          <a href={`/ingredient/${ingredient.id}`}>
-            {ingredient.name}
-          </a>
-        </li>
-      {/each}
-    </ul>
+    <a href="/ingredient/categories" class="button">{$i18n.t("menu.updateIngredientCategories")}</a>
+
+    {#each sortedIngredientCategories as category}
+      <h3>{category.name}</h3>
+
+      <ul>
+        {#each category.ingredients as ingredient}
+          <li>
+            <a href={`/ingredient/${ingredient.id}`}>
+              {ingredient.name}
+            </a>
+          </li>
+        {/each}
+      </ul>
+    {/each}
 
     <a href="/ingredient" class="add-button">{$i18n.t("menu.newIngredient")}</a>
   </div>

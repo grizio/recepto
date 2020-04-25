@@ -53,6 +53,13 @@
             "add": "Ajouter une conservation",
             "remove": "Supprimer la conservation"
           },
+          "preparation": {
+            "title": "Préparation",
+            "name": "Nom",
+            "description": "Description",
+            "add": "Ajouter une préparation",
+            "remove": "Supprimer la préparation"
+          },
           "recipe": {
             "title": "Recettes do it yourself",
             "select": "Recette",
@@ -63,6 +70,7 @@
         },
         "page": {
           "preservations": "Conservation",
+          "preparations": "Préparations",
           "diy": "Comment en faire soi-même",
           "recipes": "Recettes",
           "actions": {

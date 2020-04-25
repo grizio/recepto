@@ -61,6 +61,18 @@
           {/each}
         {/if}
 
+        {#if nonEmpty(ingredient.preparations)}
+          <h2>{$i18n.t("pages.ingredient.page.preparations")}</h2>
+
+          {#each ingredient.preparations as preparation}
+            <h3>{preparation.name}</h3>
+
+            <p>
+              {preparation.description}
+            </p>
+          {/each}
+        {/if}
+
         {#if nonEmpty(recipesDIY)}
           <h2>{$i18n.t("pages.ingredient.page.diy")}</h2>
 

@@ -34,6 +34,13 @@
     }
   }
 
+  function preparationBuilder() {
+    return {
+      name: "",
+      description: ""
+    }
+  }
+
   function recipeBuilder() {
     return recipeOptions[0].value
   }
@@ -90,6 +97,30 @@
       name={`preservation[${index}].description`}
       label={$i18n.t("pages.ingredient.form.preservation.description")}
       bind:value={ingredient.preservations[index].description}
+    />
+  </InputCollection>
+
+  <InputCollection
+    title={$i18n.t("pages.ingredient.form.preparation.title")}
+    addButtonLabel={$i18n.t("pages.ingredient.form.preparation.add")}
+    removeButtonLabel={$i18n.t("pages.ingredient.form.preparation.remove")}
+    rowBuilder={preparationBuilder}
+    bind:value={ingredient.preparations}
+
+    let:index={index}
+  >
+    <InputText
+      id={`ingredient-preparations-${index}-name`}
+      name={`preparation[${index}].name`}
+      label={$i18n.t("pages.ingredient.form.preparation.name")}
+      bind:value={ingredient.preparations[index].name}
+    />
+
+    <InputTextarea
+      id={`ingredient-preparation-${index}-description`}
+      name={`preparation[${index}].description`}
+      label={$i18n.t("pages.ingredient.form.preparation.description")}
+      bind:value={ingredient.preparations[index].description}
     />
   </InputCollection>
 

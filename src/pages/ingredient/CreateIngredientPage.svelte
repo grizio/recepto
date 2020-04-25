@@ -10,6 +10,7 @@
     name: "",
     description: "",
     preservations: [],
+    preparations: [],
     recipes: []
   }
 

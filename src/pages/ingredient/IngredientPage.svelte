@@ -1,11 +1,11 @@
 <script>
-  import {derived} from "svelte/store"
-  import {navigate} from "svelte-routing"
+  import { derived } from "svelte/store"
+  import { navigate } from "svelte-routing"
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
   import searchStore from "../../store/SearchStore"
   import Button from "../../components/buttons/Button.svelte"
-  import {nonEmpty} from "../../utils/arrays"
+  import { nonEmpty } from "../../utils/arrays"
   import Grid from "../../components/layout/Grid.svelte"
   import Card from "../../components/card/Card.svelte";
   import RecipeCard from "../../components/card/RecipeCard.svelte"
@@ -13,6 +13,7 @@
   import TwoColumns from "../../components/layout/TwoColumns.svelte"
   import Collapsable from "../../components/collapsable/Collapsable.svelte"
   import { onDefined } from "../../utils/values"
+  import MarkdownText from "../../components/text/MarkdownText.svelte";
 
   /** @type {string} */
   export let id = undefined
@@ -47,7 +48,7 @@
           <Button danger on:click={handleOnDelete}>{$i18n.t("pages.ingredient.page.actions.delete")}</Button>
         </div>
 
-        <p>{ingredient.description}</p>
+        <MarkdownText value={ingredient.description} />
 
         {#if nonEmpty(ingredient.preservations)}
           <h2>{$i18n.t("pages.ingredient.page.preservations")}</h2>
@@ -55,9 +56,7 @@
           {#each ingredient.preservations as preservation}
             <h3>{preservation.name} ({ preservation.duration })</h3>
 
-            <p>
-              {preservation.description}
-            </p>
+            <MarkdownText value={preservation.description} />
           {/each}
         {/if}
 
@@ -67,9 +66,7 @@
           {#each ingredient.preparations as preparation}
             <h3>{preparation.name}</h3>
 
-            <p>
-              {preparation.description}
-            </p>
+            <MarkdownText value={preparation.description} />
           {/each}
         {/if}
 

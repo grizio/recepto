@@ -2,27 +2,23 @@
   import { createEventDispatcher } from 'svelte'
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
-  import { sortBy, nonEmpty } from "../../utils/arrays"
+  import { nonEmpty } from "../../utils/arrays"
+  import {
+    getCategoryOptions, getIngredientOptions, getRecipeOptions,
+    buildPreparation, buildPreservation, buildRecipe, buildReplacement
+  } from "./ingredientForm"
+
   import InputText from "../../components/fields/InputText.svelte"
   import InputTextarea from "../../components/fields/InputTextarea.svelte"
   import InputSelect from "../../components/fields/InputSelect.svelte"
   import InputCollection from "../../components/fields/InputCollection.svelte"
-  import Button from "../../components/buttons/Button.svelte";
+  import Button from "../../components/buttons/Button.svelte"
 
   export let ingredient
 
-  $: recipeOptions = sortBy($receptoStore.recipes, _ => _.name)
-    .map(recipe => ({ label: recipe.name, value: recipe.id }))
-
-  $: ingredientOptions = sortBy($receptoStore.ingredients, _ => _.name)
-    .filter(_ => _.id !== ingredient.id)
-    .map(recipe => ({ label: recipe.name, value: recipe.id }))
-
-  $: categoryOptions = [
-    { label: $i18n.t("pages.ingredient.form.category.none"), value: undefined },
-    ...sortBy($receptoStore.ingredientCategories, _ => _.name)
-      .map(recipe => ({ label: recipe.name, value: recipe.id }))
-  ]
+  $: recipeOptions = getRecipeOptions($receptoStore)
+  $: ingredientOptions = getIngredientOptions($receptoStore, ingredient)
+  $: categoryOptions = getCategoryOptions($receptoStore, $i18n)
 
   const dispatch = createEventDispatcher()
 
@@ -30,27 +26,12 @@
     dispatch("submit")
   }
 
-  function preservationBuilder() {
-    return {
-      name: "",
-      duration: "",
-      description: ""
-    }
-  }
-
-  function preparationBuilder() {
-    return {
-      name: "",
-      description: ""
-    }
-  }
-
   function replacementBuilder() {
-    return { ingredient: ingredientOptions[0].value, description: "" }
+    return buildReplacement(ingredientOptions)
   }
 
   function recipeBuilder() {
-    return recipeOptions[0].value
+    return buildRecipe(recipeOptions)
   }
 </script>
 
@@ -81,7 +62,7 @@
     title={$i18n.t("pages.ingredient.form.preservation.title")}
     addButtonLabel={$i18n.t("pages.ingredient.form.preservation.add")}
     removeButtonLabel={$i18n.t("pages.ingredient.form.preservation.remove")}
-    rowBuilder={preservationBuilder}
+    rowBuilder={buildPreservation}
     bind:value={ingredient.preservations}
 
     let:index={index}
@@ -112,7 +93,7 @@
     title={$i18n.t("pages.ingredient.form.preparation.title")}
     addButtonLabel={$i18n.t("pages.ingredient.form.preparation.add")}
     removeButtonLabel={$i18n.t("pages.ingredient.form.preparation.remove")}
-    rowBuilder={preparationBuilder}
+    rowBuilder={buildPreparation}
     bind:value={ingredient.preparations}
 
     let:index={index}

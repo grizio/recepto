@@ -11,6 +11,7 @@
     description: "",
     preservations: [],
     preparations: [],
+    replacements: [],
     recipes: []
   }
 

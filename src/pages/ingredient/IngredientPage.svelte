@@ -20,6 +20,10 @@
 
   /** @type {Ingredient} */
   $: ingredient = $receptoStore.ingredients.find(ingredient => ingredient.id === id)
+  $: replacements = ingredient.replacements.map(r => ({
+    ...r,
+    ingredient: $receptoStore.ingredients.find(ingredient => ingredient.id === r.ingredient)
+  }))
   $: recipes = $receptoStore.recipes.filter(recipe => {
     return recipe.ingredients.some(_ => _.id === id)
   })
@@ -67,6 +71,16 @@
             <h3>{preparation.name}</h3>
 
             <MarkdownText value={preparation.description} />
+          {/each}
+        {/if}
+
+        {#if nonEmpty(replacements)}
+          <h2>{$i18n.t("pages.ingredient.page.replacements")}</h2>
+
+          {#each replacements as replacement}
+            <h3>{replacement.ingredient.name}</h3>
+
+            <MarkdownText value={replacement.description} />
           {/each}
         {/if}
 

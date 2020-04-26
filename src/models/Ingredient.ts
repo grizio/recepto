@@ -8,6 +8,7 @@ export type Ingredient = {
   preservations: Array<Preservation>
   preparations: Array<Preparation>
   recipesToMakeIt: Array<Recipe>
+  replacements: Array<Replacement>
 }
 
 export type Preservation = {
@@ -18,5 +19,10 @@ export type Preservation = {
 
 export type Preparation = {
   name: string
+  description: string
+}
+
+export type Replacement = {
+  ingredient: string
   description: string
 }

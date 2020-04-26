@@ -2,7 +2,7 @@
   import { createEventDispatcher } from 'svelte'
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
-  import { sortBy } from "../../utils/arrays"
+  import { sortBy, nonEmpty } from "../../utils/arrays"
   import InputText from "../../components/fields/InputText.svelte"
   import InputTextarea from "../../components/fields/InputTextarea.svelte"
   import InputSelect from "../../components/fields/InputSelect.svelte"
@@ -12,6 +12,10 @@
   export let ingredient
 
   $: recipeOptions = sortBy($receptoStore.recipes, _ => _.name)
+    .map(recipe => ({ label: recipe.name, value: recipe.id }))
+
+  $: ingredientOptions = sortBy($receptoStore.ingredients, _ => _.name)
+    .filter(_ => _.id !== ingredient.id)
     .map(recipe => ({ label: recipe.name, value: recipe.id }))
 
   $: categoryOptions = [
@@ -39,6 +43,10 @@
       name: "",
       description: ""
     }
+  }
+
+  function replacementBuilder() {
+    return { ingredient: ingredientOptions[0].value, description: "" }
   }
 
   function recipeBuilder() {
@@ -123,6 +131,33 @@
       bind:value={ingredient.preparations[index].description}
     />
   </InputCollection>
+
+  {#if nonEmpty(ingredientOptions)}
+    <InputCollection
+      title={$i18n.t("pages.ingredient.form.replacement.title")}
+      addButtonLabel={$i18n.t("pages.ingredient.form.replacement.add")}
+      removeButtonLabel={$i18n.t("pages.ingredient.form.replacement.remove")}
+      rowBuilder={replacementBuilder}
+      bind:value={ingredient.replacements}
+
+      let:index={index}
+    >
+      <InputSelect
+        id={`ingredient-replacements-${index}`}
+        name={`replacements[${index}]`}
+        label={$i18n.t("pages.ingredient.form.replacement.select")}
+        options={ingredientOptions}
+        bind:value={ingredient.replacements[index].ingredient}
+      />
+
+      <InputTextarea
+        id={`ingredient-replacements-${index}-description`}
+        name={`replacements[${index}].description`}
+        label={$i18n.t("pages.ingredient.form.replacement.description")}
+        bind:value={ingredient.replacements[index].description}
+      />
+    </InputCollection>
+  {/if}
 
   <InputCollection
     title={$i18n.t("pages.ingredient.form.recipe.title")}

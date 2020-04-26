@@ -60,6 +60,13 @@
             "add": "New preparation",
             "remove": "Remove preparation"
           },
+          "replacement": {
+            "title": "Replacements",
+            "select": "Ingredient",
+            "description": "Description",
+            "add": "New replacement",
+            "remove": "Remove replacement"
+          },
           "recipe": {
             "title": "Do it yourself recipes",
             "select": "Recipe",
@@ -71,6 +78,7 @@
         "page": {
           "preservations": "Preservations",
           "preparations": "Preparations",
+          "replacements": "Replacements",
           "diy": "Do it yourself",
           "recipes": "Recipes",
           "actions": {

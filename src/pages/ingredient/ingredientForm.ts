@@ -19,7 +19,7 @@ export function getCategoryOptions(recepto: Recepto, i18n: i18n): Array<Option> 
   return [
     { label: i18n.t("pages.ingredient.form.category.none"), value: undefined },
 
-    ...sortBy(recepto.ingredientCategories, _ => _.name)
+    ...sortBy(recepto.categories, _ => _.name)
       .map(recipe => ({ label: recipe.name, value: recipe.id }))
   ]
 }

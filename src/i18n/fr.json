@@ -26,18 +26,20 @@
       "ingredients": "Ingrédients",
       "newIngredient": "Nouvel ingrédient",
       "otherCategoryName": "Divers",
-      "updateIngredientCategories": "Modifier les catégories"
+      "updateCategories": "Modifier les catégories"
     },
     "pages": {
-      "ingredient": {
-        "categories": {
+      "categories": {
+        "page": {
           "title": "Catégories",
           "submit": "Sauvegarder",
           "add": "Nouvelle catégorie",
           "remove": "Supprimer la catégorie",
           "groupTitle": "Liste des catégories",
           "name": "Nom"
-        },
+        }
+      },
+      "ingredient": {
         "form": {
           "name": "Nom",
           "category": {

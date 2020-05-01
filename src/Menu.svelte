@@ -2,10 +2,10 @@
   import i18n from "./i18n"
   import receptoStore from "./store/ReceptoStore"
   import { sortBy } from "./utils/arrays"
-  import { getIngredientsByCategory } from "./models/IngredientCategory";
+  import { getIngredientsByCategory } from "./models/Category";
 
   $: sortedRecipes = sortBy($receptoStore.recipes, _ => _.name)
-  $: sortedIngredientCategories = getIngredientsByCategory($receptoStore, $i18n)
+  $: sortedCategories = getIngredientsByCategory($receptoStore, $i18n)
 </script>
 
 <style>
@@ -88,9 +88,9 @@
   <div class="section">
     <h2>{$i18n.t("menu.ingredients")}</h2>
 
-    <a href="/ingredient/categories" class="button">{$i18n.t("menu.updateIngredientCategories")}</a>
+    <a href="/categories" class="button">{$i18n.t("menu.updateCategories")}</a>
 
-    {#each sortedIngredientCategories as category}
+    {#each sortedCategories as category}
       <h3>{category.name}</h3>
 
       <ul>

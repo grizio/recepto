@@ -1,9 +1,9 @@
 import { Ingredient } from "./Ingredient"
 import { Recipe } from "./Recipe"
-import { IngredientCategory } from "./IngredientCategory"
+import { Category } from "./Category"
 
 export type Recepto = {
-  ingredientCategories: Array<IngredientCategory>
+  categories: Array<Category>
   ingredients: Array<Ingredient>
   recipes: Array<Recipe>
 }

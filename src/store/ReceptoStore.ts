@@ -4,14 +4,14 @@ import { replaceWhere } from "../utils/arrays"
 import { Recepto } from "../models/Recepto"
 import { Ingredient } from "../models/Ingredient"
 import { Recipe } from "../models/Recipe"
-import { IngredientCategory } from "../models/IngredientCategory"
+import { Category } from "../models/Category"
 
 class ReceptoStore implements Readable<Recepto> {
   private internal: Writable<Recepto>
 
   constructor() {
     this.internal = writableLocalStorage("recepto", {
-      ingredientCategories: [],
+      categories: [],
       ingredients: [],
       recipes: []
     })
@@ -63,11 +63,11 @@ class ReceptoStore implements Readable<Recepto> {
     }))
   }
 
-  updateCategories = (categories: Array<IngredientCategory>) => {
+  updateCategories = (categories: Array<Category>) => {
     const categoryIds = categories.map(_ => _.id)
     this.internal.update(recepto => ({
       ...recepto,
-      ingredientCategories: categories,
+      categories: categories,
       ingredients: recepto.ingredients.map(ingredient => {
         if (ingredient.category === undefined || categoryIds.includes(ingredient.category)) {
           return ingredient

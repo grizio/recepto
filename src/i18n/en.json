@@ -26,18 +26,20 @@
       "ingredients": "Ingredients",
       "newIngredient": "New ingredient",
       "otherCategoryName": "Others",
-      "updateIngredientCategories": "Update categories"
+      "updateCategories": "Update categories"
     },
     "pages": {
-      "ingredient": {
-        "categories": {
+      "categories": {
+        "page": {
           "title": "Categories",
           "submit": "Submit",
           "add": "New category",
           "remove": "Remove category",
           "groupTitle": "Category list",
           "name": "Name"
-        },
+        }
+      },
+      "ingredient": {
         "form": {
           "name": "Name",
           "category": {

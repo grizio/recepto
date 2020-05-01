@@ -3,17 +3,17 @@ import { Ingredient } from "./Ingredient"
 import { Recepto } from "./Recepto"
 import { nonEmpty, sortBy } from "../utils/arrays"
 
-export type IngredientCategory = {
+export type Category = {
   id: string
   name: string
 }
 
-export type FullIngredientCategory = IngredientCategory & {
+export type FullCategory = Category & {
   ingredients: Array<Ingredient>
 }
 
-export function getIngredientsByCategory(recepto: Recepto, i18n: i18n): Array<FullIngredientCategory> {
-  const fullCategories = sortBy(recepto.ingredientCategories, _ => _.name)
+export function getIngredientsByCategory(recepto: Recepto, i18n: i18n): Array<FullCategory> {
+  const fullCategories = sortBy(recepto.categories, _ => _.name)
     .map(category => ({
       ...category,
       ingredients: sortBy(

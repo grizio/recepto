@@ -6,7 +6,8 @@
   import CreateRecipePage from "./pages/recipe/CreateRecipePage.svelte"
   import UpdateRecipePage from "./pages/recipe/UpdateRecipePage.svelte"
 
-  import CategoriesPage from "./pages/ingredient/CategoriesPage.svelte"
+  import CategoriesPage from "./pages/categories/CategoriesPage.svelte"
+
   import IngredientPage from "./pages/ingredient/IngredientPage.svelte"
   import CreateIngredientPage from "./pages/ingredient/CreateIngredientPage.svelte"
   import UpdateIngredientPage from "./pages/ingredient/UpdateIngredientPage.svelte"
@@ -39,7 +40,8 @@
         <Route path="/recipe/:id" component={RecipePage}/>
         <Route path="/recipe" component={CreateRecipePage}/>
 
-        <Route path="/ingredient/categories" component={CategoriesPage}/>
+        <Route path="/categories" component={CategoriesPage}/>
+
         <Route path="/ingredient/:id/update" component={UpdateIngredientPage}/>
         <Route path="/ingredient/:id" component={IngredientPage}/>
         <Route path="/ingredient" component={CreateIngredientPage}/>

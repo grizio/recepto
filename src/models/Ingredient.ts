@@ -1,13 +1,15 @@
-import { Recipe } from "./Recipe"
+import { RecipeId } from "./Recipe"
+
+export type IngredientId = string
 
 export type Ingredient = {
-  id: string
+  id: IngredientId
   name: string
   category?: string
   description: string
   preservations: Array<Preservation>
   preparations: Array<Preparation>
-  recipesToMakeIt: Array<Recipe>
+  recipes: Array<RecipeId>
   replacements: Array<Replacement>
 }
 
@@ -23,6 +25,6 @@ export type Preparation = {
 }
 
 export type Replacement = {
-  ingredient: string
+  ingredient: IngredientId
   description: string
 }

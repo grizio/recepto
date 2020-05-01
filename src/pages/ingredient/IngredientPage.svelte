@@ -1,43 +1,25 @@
 <script>
-  import { derived } from "svelte/store"
-  import { navigate } from "svelte-routing"
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
   import searchStore from "../../store/SearchStore"
-  import Button from "../../components/buttons/Button.svelte"
   import { nonEmpty } from "../../utils/arrays"
+  import { buildFullIngredient, deleteIngredient } from "./IngredientPage"
+
+  import Button from "../../components/buttons/Button.svelte"
   import Grid from "../../components/layout/Grid.svelte"
   import Card from "../../components/card/Card.svelte";
   import RecipeCard from "../../components/card/RecipeCard.svelte"
   import Page from "../../components/Page.svelte"
   import TwoColumns from "../../components/layout/TwoColumns.svelte"
   import Collapsable from "../../components/collapsable/Collapsable.svelte"
-  import { onDefined } from "../../utils/values"
-  import MarkdownText from "../../components/text/MarkdownText.svelte";
+  import MarkdownText from "../../components/text/MarkdownText.svelte"
 
   /** @type {string} */
   export let id = undefined
 
   /** @type {Ingredient} */
-  $: ingredient = $receptoStore.ingredients.find(ingredient => ingredient.id === id)
-  $: replacements = ingredient.replacements.map(r => ({
-    ...r,
-    ingredient: $receptoStore.ingredients.find(ingredient => ingredient.id === r.ingredient)
-  }))
-  $: recipes = $receptoStore.recipes.filter(recipe => {
-    return recipe.ingredients.some(_ => _.id === id)
-  })
-  $: recipesDIY = onDefined(ingredient, ingredient => ingredient.recipes.map(recipe => {
-    return $receptoStore.recipes.find(_ => _.id === recipe)
-  }))
-
-  function handleOnDelete() {
-    const confirmed = confirm($i18n.t("pages.ingredient.page.actions.confirmDelete"))
-    if (confirmed) {
-      navigate(`/`)
-      receptoStore.deleteIngredient(id)
-    }
-  }
+  let ingredient
+  $: ingredient = buildFullIngredient($receptoStore, id)
 </script>
 
 <Page>
@@ -49,7 +31,7 @@
         <div>
           <Button
             href={`/ingredient/${ingredient.id}/update`}>{$i18n.t("pages.ingredient.page.actions.modify")}</Button>
-          <Button danger on:click={handleOnDelete}>{$i18n.t("pages.ingredient.page.actions.delete")}</Button>
+          <Button danger on:click={() => deleteIngredient(id, $i18n)}>{$i18n.t("pages.ingredient.page.actions.delete")}</Button>
         </div>
 
         <MarkdownText value={ingredient.description} />
@@ -74,31 +56,31 @@
           {/each}
         {/if}
 
-        {#if nonEmpty(replacements)}
+        {#if nonEmpty(ingredient.replacements)}
           <h2>{$i18n.t("pages.ingredient.page.replacements")}</h2>
 
-          {#each replacements as replacement}
+          {#each ingredient.replacements as replacement}
             <h3>{replacement.ingredient.name}</h3>
 
             <MarkdownText value={replacement.description} />
           {/each}
         {/if}
 
-        {#if nonEmpty(recipesDIY)}
+        {#if nonEmpty(ingredient.recipesDIY)}
           <h2>{$i18n.t("pages.ingredient.page.diy")}</h2>
 
           <Grid>
-            {#each recipesDIY as recipe}
+            {#each ingredient.recipesDIY as recipe}
               <RecipeCard recipe={recipe}/>
             {/each}
           </Grid>
         {/if}
 
-        {#if nonEmpty(recipes)}
+        {#if nonEmpty(ingredient.recipes)}
           <h2>{$i18n.t("pages.ingredient.page.recipes")}</h2>
 
           <Grid>
-            {#each recipes as recipe}
+            {#each ingredient.recipes as recipe}
               <RecipeCard recipe={recipe}/>
             {/each}
           </Grid>

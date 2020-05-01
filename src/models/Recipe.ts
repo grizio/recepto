@@ -1,5 +1,9 @@
+import { IngredientId } from "./Ingredient"
+
+export type RecipeId = string
+
 export type Recipe = {
-  id: string
+  id: RecipeId
   name: string
   shortDescription?: string
   plates: number
@@ -9,7 +13,7 @@ export type Recipe = {
 }
 
 export type RecipeIngredient = {
-  id: string
+  id: IngredientId
   quantity: number
   unit: string
 }

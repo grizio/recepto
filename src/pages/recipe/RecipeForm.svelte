@@ -2,32 +2,27 @@
   import { createEventDispatcher } from 'svelte'
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
-  import { sortBy } from "../../utils/arrays"
+  import { buildIngredientOptions, buildRecipeIngredient } from "./RecipeForm"
+
   import InputTextarea from "../../components/fields/InputTextarea.svelte"
   import InputText from "../../components/fields/InputText.svelte"
   import InputNumber from "../../components/fields/InputNumber.svelte"
   import InputCollection from "../../components/fields/InputCollection.svelte"
   import InputSelect from "../../components/fields/InputSelect.svelte"
   import Button from "../../components/buttons/Button.svelte"
-  import InputDuration from "../../components/fields/InputDuration.svelte";
+  import InputDuration from "../../components/fields/InputDuration.svelte"
 
+  /** @type {RecipeForm} */
   export let recipe
 
-  $: ingredientOptions = sortBy($receptoStore.ingredients, _ => _.name)
-    .map(ingredient => ({ value: ingredient.id, label: ingredient.name }))
+  /** @type {Array<Option>} */
+  let ingredientOptions
+  $: ingredientOptions = buildIngredientOptions($receptoStore)
 
   const dispatch = createEventDispatcher()
 
   function handleOnSubmit() {
     dispatch("submit")
-  }
-
-  function ingredientBuilder() {
-    return {
-      id: ingredientOptions[0].id,
-      quantity: 1,
-      unit: ""
-    }
   }
 </script>
 
@@ -64,10 +59,10 @@
     title={$i18n.t("pages.recipe.form.ingredient.title")}
     addButtonLabel={$i18n.t("pages.recipe.form.ingredient.add")}
     removeButtonLabel={$i18n.t("pages.recipe.form.ingredient.remove")}
-    rowBuilder={ingredientBuilder}
+    rowBuilder={() => buildRecipeIngredient(ingredientOptions)}
     bind:value={recipe.ingredients}
 
-    let:index={index}
+      let:index={index}
   >
     <InputSelect
       id={`recipe-ingredients-${index}-id`}

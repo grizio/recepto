@@ -1,8 +1,11 @@
 import { i18n } from "i18next"
 import { Recepto } from "../../models/Recepto"
-import { Option } from "../../models/common"
+import { NullableOption, Option } from "../../models/common"
 import { sortBy } from "../../utils/arrays"
 import { Ingredient, Preparation, Preservation, Replacement } from "../../models/Ingredient"
+
+export type NewIngredient = Omit<Ingredient, "id">
+export type IngredientForm = NewIngredient | Ingredient
 
 export function getRecipeOptions(recepto: Recepto): Array<Option> {
   return sortBy(recepto.recipes, _ => _.name)
@@ -15,7 +18,7 @@ export function getIngredientOptions(recepto: Recepto, excludedIngredient: Ingre
     .map(recipe => ({ label: recipe.name, value: recipe.id }))
 }
 
-export function getCategoryOptions(recepto: Recepto, i18n: i18n): Array<Option> {
+export function getCategoryOptions(recepto: Recepto, i18n: i18n): Array<NullableOption> {
   return [
     { label: i18n.t("pages.ingredient.form.category.none"), value: undefined },
 

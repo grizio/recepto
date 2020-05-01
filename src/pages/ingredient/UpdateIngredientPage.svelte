@@ -1,37 +1,31 @@
 <script>
-  import {onMount} from "svelte"
-  import {get} from "svelte/store"
-  import {navigate} from "svelte-routing"
+  import { onMount } from "svelte"
   import i18n from "../../i18n"
   import receptoStore from "../../store/ReceptoStore"
+  import { getIngredient, updateIngredient } from "./UpdateIngredientPage"
+
   import IngredientForm from "./IngredientForm.svelte"
   import Page from "../../components/Page.svelte"
 
   /** @type {string} */
   export let id = undefined
 
-  let ingredient = undefined
-  let initialName = undefined
+  /** @type {Ingredient} */
+  let ingredient
+  /** @type {string} */
+  let initialName
 
   onMount(() => {
-    ingredient = get(receptoStore).ingredients.find(ingredient => ingredient.id === id)
+    ingredient = getIngredient($receptoStore, id)
     initialName = ingredient ? ingredient.name : undefined
   })
-
-  function handleOnSubmit() {
-    receptoStore.updateIngredient({
-      ...ingredient,
-      id
-    })
-    navigate(`/ingredient/${id}`)
-  }
 </script>
 
 <Page>
   {#if ingredient}
     <h1>{$i18n.t("pages.ingredient.update.title", {ingredient: initialName})}</h1>
 
-    <IngredientForm bind:ingredient on:submit={handleOnSubmit}/>
+    <IngredientForm bind:ingredient on:submit={() => updateIngredient(ingredient)}/>
   {:else}
     <h1>{$i18n.t("common.notFound")}</h1>
   {/if}

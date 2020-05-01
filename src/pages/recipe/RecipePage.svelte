@@ -1,38 +1,22 @@
 <script>
-  import { derived } from "svelte/store"
-  import { Link, navigate } from "svelte-routing"
   import receptoStore from "../../store/ReceptoStore"
   import searchStore from "../../store/SearchStore"
-  import TwoColumns from "../../components/layout/TwoColumns.svelte"
   import i18n from "../../i18n"
+  import { nonEmpty } from "../../utils/arrays"
   import { splitParagraphs } from "../../utils/strings"
+  import { findFullRecipe, deleteRecipe } from "./RecipePage"
+
+  import TwoColumns from "../../components/layout/TwoColumns.svelte"
   import Button from "../../components/buttons/Button.svelte"
   import Page from "../../components/Page.svelte"
   import Collapsable from "../../components/collapsable/Collapsable.svelte"
-  import { onDefined } from "../../utils/values"
 
   /** @type {string} */
   export let id = undefined
 
-  /** @type {Ingredient} */
-  $: recipe = $receptoStore.recipes.find(recipe => recipe.id === id)
-  $: ingredients = onDefined(recipe, recipe => recipe.ingredients.map(recipeIngredient => {
-    return {
-      ...recipeIngredient,
-      ref: $receptoStore.ingredients.find(ingredient => ingredient.id === recipeIngredient.id)
-    }
-  }))
-  $: madeIngredients = $receptoStore.ingredients.filter(ingredient => {
-    return ingredient.recipes.some(_ => _ === id)
-  })
-
-  function handleOnDelete() {
-    const confirmed = confirm($i18n.t("pages.recipe.page.actions.confirmDelete"))
-    if (confirmed) {
-      navigate(`/`)
-      receptoStore.deleteRecipe(id)
-    }
-  }
+  /** @type {FullRecipe} */
+  let recipe
+  $: recipe = findFullRecipe($receptoStore, id)
 </script>
 
 <style>
@@ -85,7 +69,7 @@
 
     <div>
       <Button href={`/recipe/${recipe.id}/update`}>{$i18n.t("pages.recipe.page.actions.modify")}</Button>
-      <Button danger on:click={handleOnDelete}>{$i18n.t("pages.recipe.page.actions.delete")}</Button>
+      <Button danger on:click={() => deleteRecipe(id, $i18n)}>{$i18n.t("pages.recipe.page.actions.delete")}</Button>
     </div>
 
     <div class="infos">
@@ -99,10 +83,10 @@
           <h2>{$i18n.t("pages.recipe.page.ingredients")}</h2>
 
           <ul>
-            {#each ingredients as ingredient}
+            {#each recipe.ingredients as ingredient}
               <li>
                 {ingredient.quantity} {ingredient.unit}
-                <Link to={`/ingredient/${ingredient.id}`}>{ingredient.ref.name}</Link>
+                <a href={`/ingredient/${ingredient.id}`}>{ingredient.ref.name}</a>
               </li>
             {/each}
           </ul>
@@ -120,15 +104,15 @@
       </TwoColumns>
     </section>
 
-    {#if madeIngredients && madeIngredients.length > 0}
+    {#if nonEmpty(recipe.madeIngredients)}
       <h2>{$i18n.t("pages.recipe.page.makes")}</h2>
 
       <ul>
-        {#each madeIngredients as ingredient}
+        {#each recipe.madeIngredients as ingredient}
           <li>
-            <Link to={`/ingredient/${ingredient.id}`}>
+            <a href={`/ingredient/${ingredient.id}`}>
               {ingredient.name}
-            </Link>
+            </a>
           </li>
         {/each}
       </ul>

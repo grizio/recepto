@@ -5,3 +5,7 @@ export function onDefined<T, U>(value: T | undefined, op: (value: T) => U): U | 
     return undefined
   }
 }
+
+export function isDefined<T>(value: T | undefined): value is T {
+  return value !== undefined
+}

@@ -16,6 +16,7 @@
 
   export let ingredient
 
+  let recipeOptions, ingredientOptions, categoryOptions
   $: recipeOptions = getRecipeOptions($receptoStore)
   $: ingredientOptions = getIngredientOptions($receptoStore, ingredient)
   $: categoryOptions = getCategoryOptions($receptoStore, $i18n)
@@ -24,14 +25,6 @@
 
   function handleOnSubmit() {
     dispatch("submit")
-  }
-
-  function replacementBuilder() {
-    return buildReplacement(ingredientOptions)
-  }
-
-  function recipeBuilder() {
-    return buildRecipe(recipeOptions)
   }
 </script>
 
@@ -118,7 +111,7 @@
       title={$i18n.t("pages.ingredient.form.replacement.title")}
       addButtonLabel={$i18n.t("pages.ingredient.form.replacement.add")}
       removeButtonLabel={$i18n.t("pages.ingredient.form.replacement.remove")}
-      rowBuilder={replacementBuilder}
+      rowBuilder={() => buildReplacement(ingredientOptions)}
       bind:value={ingredient.replacements}
 
       let:index={index}
@@ -144,7 +137,7 @@
     title={$i18n.t("pages.ingredient.form.recipe.title")}
     addButtonLabel={$i18n.t("pages.ingredient.form.recipe.add")}
     removeButtonLabel={$i18n.t("pages.ingredient.form.recipe.remove")}
-    rowBuilder={recipeBuilder}
+    rowBuilder={() => buildRecipe(recipeOptions)}
     bind:value={ingredient.recipes}
 
     let:index={index}

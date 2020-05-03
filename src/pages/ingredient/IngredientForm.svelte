@@ -4,7 +4,7 @@
   import receptoStore from "../../store/ReceptoStore"
   import { nonEmpty } from "../../utils/arrays"
   import {
-    getCategoryOptions, getIngredientOptions, getRecipeOptions,
+    getCategoryOptions, getIngredientOptions,
     buildPreparation, buildPreservation, buildRecipe, buildReplacement, buildRecipeIngredient
   } from "./ingredientForm"
 
@@ -18,8 +18,7 @@
 
   export let ingredient
 
-  let recipeOptions, ingredientOptions, categoryOptions
-  $: recipeOptions = getRecipeOptions($receptoStore)
+  let ingredientOptions, categoryOptions
   $: ingredientOptions = getIngredientOptions($receptoStore, ingredient)
   $: categoryOptions = getCategoryOptions($receptoStore, $i18n)
 

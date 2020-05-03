@@ -3,7 +3,6 @@ import writableLocalStorage from "./writableLocalStorage"
 import { replaceWhere } from "../utils/arrays"
 import { Recepto } from "../models/Recepto"
 import { Ingredient } from "../models/Ingredient"
-import { Recipe } from "../models/Recipe"
 import { Category } from "../models/Category"
 
 class ReceptoStore implements Readable<Recepto> {
@@ -39,27 +38,6 @@ class ReceptoStore implements Readable<Recepto> {
     this.internal.update(recepto => ({
       ...recepto,
       ingredients: recepto.ingredients.filter(_ => _.id !== id)
-    }))
-  }
-
-  addRecipe = (recipe: Recipe) => {
-    this.internal.update(recepto => ({
-      ...recepto,
-      recipes: [...recepto.recipes, recipe]
-    }))
-  }
-
-  updateRecipe = (recipe: Recipe) => {
-    this.internal.update(recepto => ({
-      ...recepto,
-      recipes: replaceWhere(recepto.recipes, _ => _.id === recipe.id, () => recipe)
-    }))
-  }
-
-  deleteRecipe = (id: string) => {
-    this.internal.update(recepto => ({
-      ...recepto,
-      recipes: recepto.recipes.filter(_ => _.id !== id)
     }))
   }
 

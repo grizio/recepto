@@ -7,11 +7,6 @@ import { Ingredient, Preparation, Preservation, Recipe, RecipeIngredient, Replac
 export type NewIngredient = Omit<Ingredient, "id">
 export type IngredientForm = NewIngredient | Ingredient
 
-export function getRecipeOptions(recepto: Recepto): Array<Option> {
-  return sortBy(recepto.recipes, _ => _.name)
-    .map(recipe => ({ label: recipe.name, value: recipe.id }))
-}
-
 export function getIngredientOptions(recepto: Recepto, excludedIngredient: Ingredient | undefined): Array<Option> {
   return sortBy(recepto.ingredients, _ => _.name)
     .filter(_ => excludedIngredient === undefined || _.id !== excludedIngredient.id)

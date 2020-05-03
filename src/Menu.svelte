@@ -1,10 +1,9 @@
 <script>
   import i18n from "./i18n"
   import receptoStore from "./store/ReceptoStore"
-  import { sortBy } from "./utils/arrays"
   import { getIngredientsByCategory } from "./models/Category";
 
-  $: sortedRecipes = sortBy($receptoStore.recipes, _ => _.name)
+  let sortedCategories
   $: sortedCategories = getIngredientsByCategory($receptoStore, $i18n)
 </script>
 
@@ -68,22 +67,6 @@
 
 <nav>
   <a href="/" class="sitename">{$i18n.t("menu.appName")}</a>
-
-  <div class="section">
-    <h2>{$i18n.t("menu.recipes")}</h2>
-
-    <ul>
-      {#each sortedRecipes as recipe}
-        <li>
-          <a href={`/recipe/${recipe.id}`}>
-            {recipe.name}
-          </a>
-        </li>
-      {/each}
-    </ul>
-
-    <a href="/recipe" class="add-button">{$i18n.t("menu.newRecipe")}</a>
-  </div>
 
   <div class="section">
     <h2>{$i18n.t("menu.ingredients")}</h2>

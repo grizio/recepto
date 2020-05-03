@@ -2,7 +2,7 @@ import { i18n } from "i18next"
 import { Recepto } from "~/models/Recepto"
 import { NullableOption, Option } from "~/models/common"
 import { sortBy } from "~/utils/arrays"
-import { Food, Preparation, Preservation, Recipe, Ingredient, Replacement } from "~/models/Food"
+import { Food, Preparation, Preservation, Recipe, Replacement } from "~/models/Food"
 
 export type NewFood = Omit<Food, "id">
 export type FoodForm = NewFood | Food
@@ -51,13 +51,5 @@ export function buildRecipe(): Recipe {
     duration: 0,
     ingredients: [],
     steps: ""
-  }
-}
-
-export function buildIngredient(ingredientOptions: Array<Option>): Ingredient {
-  return {
-    id: ingredientOptions[0].value,
-    quantity: 1,
-    unit: ""
   }
 }

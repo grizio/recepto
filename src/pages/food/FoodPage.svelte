@@ -12,12 +12,15 @@
   import TwoColumns from "~/components/layout/TwoColumns.svelte"
   import Collapsable from "~/components/collapsable/Collapsable.svelte"
   import MarkdownText from "~/components/text/MarkdownText.svelte"
-  import RecipeSection from "./RecipeSection.svelte"
+  import RecipeSection from "./recipe/RecipeSection.svelte"
+  import PreservationSection from "./preservation/PreservationSection.svelte"
+  import PreparationSection from "./preparation/PreparationSection.svelte"
+  import ReplacementSection from "./replacement/ReplacementSection.svelte"
 
   /** @type {string} */
   export let id = undefined
 
-  /** @type {Food} */
+  /** @type {FullFood} */
   let food
   $: food = buildFullFood($receptoStore, id)
 </script>
@@ -34,15 +37,13 @@
           <Button danger on:click={() => deleteFood(id, $i18n)}>{$i18n.t("pages.food.page.actions.delete")}</Button>
         </div>
 
-        <MarkdownText value={food.description} />
+        <MarkdownText value={food.description}/>
 
         {#if nonEmpty(food.preservations)}
           <h2>{$i18n.t("pages.food.page.preservations")}</h2>
 
           {#each food.preservations as preservation}
-            <h3>{preservation.name} ({ preservation.duration })</h3>
-
-            <MarkdownText value={preservation.description} />
+            <PreservationSection preservation={preservation}/>
           {/each}
         {/if}
 
@@ -50,9 +51,7 @@
           <h2>{$i18n.t("pages.food.page.preparations")}</h2>
 
           {#each food.preparations as preparation}
-            <h3>{preparation.name}</h3>
-
-            <MarkdownText value={preparation.description} />
+            <PreparationSection preparation={preparation}/>
           {/each}
         {/if}
 
@@ -60,9 +59,7 @@
           <h2>{$i18n.t("pages.food.page.replacements")}</h2>
 
           {#each food.replacements as replacement}
-            <h3>{replacement.food.name}</h3>
-
-            <MarkdownText value={replacement.description} />
+            <ReplacementSection replacement={replacement} />
           {/each}
         {/if}
 

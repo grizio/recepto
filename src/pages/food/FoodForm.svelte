@@ -1,20 +1,20 @@
 <script>
   import { createEventDispatcher } from 'svelte'
-  import i18n from "../../i18n"
-  import receptoStore from "../../store/ReceptoStore"
-  import { nonEmpty } from "../../utils/arrays"
+  import i18n from "~/i18n"
+  import receptoStore from "~/store/ReceptoStore"
+  import { nonEmpty } from "~/utils/arrays"
   import {
     getCategoryOptions, getFoodOptions,
     buildPreparation, buildPreservation, buildRecipe, buildReplacement, buildIngredient
   } from "./FoodForm"
 
-  import InputText from "../../components/fields/InputText.svelte"
-  import InputTextarea from "../../components/fields/InputTextarea.svelte"
-  import InputSelect from "../../components/fields/InputSelect.svelte"
-  import InputCollection from "../../components/fields/InputCollection.svelte"
-  import Button from "../../components/buttons/Button.svelte"
-  import InputNumber from "../../components/fields/InputNumber.svelte"
-  import InputDuration from "../../components/fields/InputDuration.svelte"
+  import InputText from "~/components/fields/InputText.svelte"
+  import InputTextarea from "~/components/fields/InputTextarea.svelte"
+  import InputSelect from "~/components/fields/InputSelect.svelte"
+  import InputCollection from "~/components/fields/InputCollection.svelte"
+  import Button from "~/components/buttons/Button.svelte"
+  import InputNumber from "~/components/fields/InputNumber.svelte"
+  import InputDuration from "~/components/fields/InputDuration.svelte"
 
   export let food
 

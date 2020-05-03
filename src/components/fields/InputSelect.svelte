@@ -1,5 +1,5 @@
 <script>
-  import Field from "./Field.svelte";
+  import Field from "./Field.svelte"
 
   export let id
   export let name

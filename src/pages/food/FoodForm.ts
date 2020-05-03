@@ -1,8 +1,8 @@
 import { i18n } from "i18next"
-import { Recepto } from "../../models/Recepto"
-import { NullableOption, Option } from "../../models/common"
-import { sortBy } from "../../utils/arrays"
-import { Food, Preparation, Preservation, Recipe, Ingredient, Replacement } from "../../models/Food"
+import { Recepto } from "~/models/Recepto"
+import { NullableOption, Option } from "~/models/common"
+import { sortBy } from "~/utils/arrays"
+import { Food, Preparation, Preservation, Recipe, Ingredient, Replacement } from "~/models/Food"
 
 export type NewFood = Omit<Food, "id">
 export type FoodForm = NewFood | Food

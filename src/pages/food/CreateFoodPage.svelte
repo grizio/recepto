@@ -1,10 +1,10 @@
 <script>
-  import i18n from "../../i18n"
-  import receptoStore from "../../store/ReceptoStore"
-  import { buildNewFood, addFood } from "./CreateFoodPage";
+  import i18n from "~/i18n"
+  import receptoStore from "~/store/ReceptoStore"
+  import { buildNewFood, addFood } from "./CreateFoodPage"
 
   import FoodForm from "./FoodForm.svelte"
-  import Page from "../../components/Page.svelte"
+  import Page from "~/components/Page.svelte"
 
   let food = buildNewFood()
 </script>

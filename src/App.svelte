@@ -1,17 +1,17 @@
 <script>
-  import Menu from "./Menu.svelte"
+  import Menu from "~/Menu.svelte"
   import { Router, Route, links } from "svelte-routing"
 
-  import CategoriesPage from "./pages/categories/CategoriesPage.svelte"
+  import CategoriesPage from "~/pages/categories/CategoriesPage.svelte"
 
-  import FoodPage from "./pages/food/FoodPage.svelte"
-  import CreateFoodPage from "./pages/food/CreateFoodPage.svelte"
-  import UpdateFoodPage from "./pages/food/UpdateFoodPage.svelte"
+  import FoodPage from "~/pages/food/FoodPage.svelte"
+  import CreateFoodPage from "~/pages/food/CreateFoodPage.svelte"
+  import UpdateFoodPage from "~/pages/food/UpdateFoodPage.svelte"
 
-  import HomePage from "./pages/home/HomePage.svelte"
-  import TwoColumns from "./components/layout/TwoColumns.svelte"
+  import HomePage from "~/pages/home/HomePage.svelte"
+  import TwoColumns from "~/components/layout/TwoColumns.svelte"
 
-  export let url = "";
+  export let url = ""
 </script>
 
 <style>

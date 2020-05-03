@@ -1,18 +1,17 @@
 <script>
-  import i18n from "../../i18n"
-  import receptoStore from "../../store/ReceptoStore"
-  import searchStore from "../../store/SearchStore"
-  import { nonEmpty } from "../../utils/arrays"
+  import i18n from "~/i18n"
+  import receptoStore from "~/store/ReceptoStore"
+  import searchStore from "~/store/SearchStore"
+  import { nonEmpty } from "~/utils/arrays"
   import { buildFullFood, deleteFood } from "./FoodPage"
 
-  import Button from "../../components/buttons/Button.svelte"
-  import Grid from "../../components/layout/Grid.svelte"
-  import Card from "../../components/card/Card.svelte";
-  import RecipeCard from "../../components/card/RecipeCard.svelte"
-  import Page from "../../components/Page.svelte"
-  import TwoColumns from "../../components/layout/TwoColumns.svelte"
-  import Collapsable from "../../components/collapsable/Collapsable.svelte"
-  import MarkdownText from "../../components/text/MarkdownText.svelte"
+  import Button from "~/components/buttons/Button.svelte"
+  import Grid from "~/components/layout/Grid.svelte"
+  import RecipeCard from "~/components/card/RecipeCard.svelte"
+  import Page from "~/components/Page.svelte"
+  import TwoColumns from "~/components/layout/TwoColumns.svelte"
+  import Collapsable from "~/components/collapsable/Collapsable.svelte"
+  import MarkdownText from "~/components/text/MarkdownText.svelte"
   import RecipeSection from "./RecipeSection.svelte"
 
   /** @type {string} */

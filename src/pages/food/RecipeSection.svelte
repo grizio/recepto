@@ -1,9 +1,9 @@
 <script>
-  import receptoStore from "../../store/ReceptoStore"
-  import i18n from "../../i18n"
-  import { splitParagraphs } from "../../utils/strings"
+  import receptoStore from "~/store/ReceptoStore"
+  import i18n from "~/i18n"
+  import { splitParagraphs } from "~/utils/strings"
 
-  import TwoColumns from "../../components/layout/TwoColumns.svelte"
+  import TwoColumns from "~/components/layout/TwoColumns.svelte"
 
   /** @type {FullRecipe} */
   export let recipe

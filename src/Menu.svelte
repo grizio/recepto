@@ -1,7 +1,7 @@
 <script>
-  import i18n from "./i18n"
-  import receptoStore from "./store/ReceptoStore"
-  import { getIngredientsByCategory } from "./models/Category";
+  import i18n from "~/i18n"
+  import receptoStore from "~/store/ReceptoStore"
+  import { getIngredientsByCategory } from "~/models/Category"
 
   let sortedCategories
   $: sortedCategories = getIngredientsByCategory($receptoStore, $i18n)

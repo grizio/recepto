@@ -1,14 +1,14 @@
 <script>
   import { onMount } from "svelte"
-  import i18n from "../../i18n"
-  import receptoStore from "../../store/ReceptoStore"
+  import i18n from "~/i18n"
+  import receptoStore from "~/store/ReceptoStore"
 
-  import Button from "../../components/buttons/Button.svelte"
-  import Page from "../../components/Page.svelte"
-  import InputCollection from "../../components/fields/InputCollection.svelte"
-  import InputText from "../../components/fields/InputText.svelte"
+  import Button from "~/components/buttons/Button.svelte"
+  import Page from "~/components/Page.svelte"
+  import InputCollection from "~/components/fields/InputCollection.svelte"
+  import InputText from "~/components/fields/InputText.svelte"
 
-  import { buildNewCategory, initializeCategories, updateCategories } from "./CategoriesPage";
+  import { buildNewCategory, initializeCategories, updateCategories } from "./CategoriesPage"
 
   let categories = []
 

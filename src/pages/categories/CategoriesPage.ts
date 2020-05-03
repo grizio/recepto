@@ -1,7 +1,7 @@
-import { Category } from "../../models/Category"
-import { canonicalize } from "../../utils/strings"
-import receptoStore from "../../store/ReceptoStore"
-import { Recepto } from "../../models/Recepto"
+import { Category } from "~/models/Category"
+import { canonicalize } from "~/utils/strings"
+import receptoStore from "~/store/ReceptoStore"
+import { Recepto } from "~/models/Recepto"
 
 type NewCategory = Omit<Category, "id">
 type CategoryItem = NewCategory | Category

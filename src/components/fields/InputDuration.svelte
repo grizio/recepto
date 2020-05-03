@@ -1,6 +1,6 @@
 <script>
   import Field from "./Field.svelte"
-  import i18n from "../../i18n"
+  import i18n from "~/i18n"
 
   /** @type {string} */
   export let id

@@ -1,7 +1,7 @@
 import { i18n } from "i18next"
 import { Food } from "./Food"
 import { Recepto } from "./Recepto"
-import { nonEmpty, sortBy } from "../utils/arrays"
+import { nonEmpty, sortBy } from "~/utils/arrays"
 
 export type Category = {
   id: string

@@ -1,10 +1,10 @@
 import { i18n } from "i18next"
 import { navigate } from "svelte-routing"
-import receptoStore from "../../store/ReceptoStore"
+import receptoStore from "~/store/ReceptoStore"
 
-import { Food, FoodId, Replacement, Recipe, Ingredient } from "../../models/Food"
-import { Recepto } from "../../models/Recepto"
-import { isDefined, onDefined } from "../../utils/values"
+import { Food, FoodId, Replacement, Recipe, Ingredient } from "~/models/Food"
+import { Recepto } from "~/models/Recepto"
+import { isDefined, onDefined } from "~/utils/values"
 
 export type FullFood = Omit<Food, "replacements" | "recipes"> & {
   replacements: Array<FullReplacement>

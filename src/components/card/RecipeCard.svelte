@@ -1,7 +1,7 @@
 <script>
-  import i18n from "../../i18n"
-  import receptoStore from "../../store/ReceptoStore"
-  import { nonEmpty } from "../../utils/arrays"
+  import i18n from "~/i18n"
+  import receptoStore from "~/store/ReceptoStore"
+  import { nonEmpty } from "~/utils/arrays"
   import { normalizeRecipe } from "./RecipeCard"
 
   import Card from "./Card.svelte"

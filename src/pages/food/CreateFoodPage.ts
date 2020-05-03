@@ -1,6 +1,6 @@
 import { navigate } from "svelte-routing"
-import receptoStore from "../../store/ReceptoStore"
-import { canonicalize } from "../../utils/strings"
+import receptoStore from "~/store/ReceptoStore"
+import { canonicalize } from "~/utils/strings"
 import { NewFood } from "./FoodForm"
 
 export function buildNewFood(): NewFood {

@@ -1,9 +1,9 @@
 import { Readable, Writable } from "svelte/store"
 import writableLocalStorage from "./writableLocalStorage"
-import { replaceWhere } from "../utils/arrays"
-import { Recepto } from "../models/Recepto"
-import { Food } from "../models/Food"
-import { Category } from "../models/Category"
+import { replaceWhere } from "~/utils/arrays"
+import { Recepto } from "~/models/Recepto"
+import { Food } from "~/models/Food"
+import { Category } from "~/models/Category"
 
 class ReceptoStore implements Readable<Recepto> {
   private internal: Writable<Recepto>
@@ -16,7 +16,7 @@ class ReceptoStore implements Readable<Recepto> {
   }
 
   subscribe: Readable<Recepto>["subscribe"] = (run, invalidate) => {
-    return this.internal.subscribe(run, invalidate);
+    return this.internal.subscribe(run, invalidate)
   }
 
   addFood = (food: Food) => {

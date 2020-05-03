@@ -1,6 +1,6 @@
 <script>
   function pageFade(node, {delay = 0, duration = 400, easing}) {
-    const o = +getComputedStyle(node).opacity;
+    const o = +getComputedStyle(node).opacity
     return {
       delay,
       duration,

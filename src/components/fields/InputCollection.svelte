@@ -1,6 +1,6 @@
 <script>
-  import { removeAt } from "../../utils/arrays";
-  import Button from "../buttons/Button.svelte";
+  import { removeAt } from "~/utils/arrays"
+  import Button from "~/components/buttons/Button.svelte"
 
   export let title
   export let addButtonLabel

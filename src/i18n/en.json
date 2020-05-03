@@ -32,7 +32,8 @@
       "foods": "Foods",
       "newFood": "New food",
       "otherCategoryName": "Others",
-      "updateCategories": "Update categories"
+      "categories": "Categories",
+      "searches": "External website searches"
     },
     "pages": {
       "categories": {
@@ -43,6 +44,17 @@
           "remove": "Remove category",
           "groupTitle": "Category list",
           "name": "Name"
+        }
+      },
+      "searches": {
+        "page": {
+          "title": "External website searches",
+          "submit": "Submit",
+          "add": "New website",
+          "remove": "Remove website",
+          "groupTitle": "Website searches",
+          "sitename": "Site name",
+          "url": "URL ({s} will be replaced by the concrete search, ex: my.website.com?search={s})"
         }
       },
       "food": {

@@ -1,7 +1,6 @@
 <script>
   import i18n from "~/i18n"
   import receptoStore from "~/store/ReceptoStore"
-  import searchStore from "~/store/SearchStore"
   import { nonEmpty } from "~/utils/arrays"
   import { buildFullFood, deleteFood } from "./FoodPage"
 
@@ -83,9 +82,9 @@
       </div>
 
       <aside>
-        {#each $searchStore as search}
+        {#each $receptoStore.searches as search}
           <Collapsable summary={$i18n.t("pages.food.page.asideSearch", { sitename: search.sitename })}>
-            <iframe src={search.url(food.name)}
+            <iframe src={search.url.replace("{s}", food.name)}
                     width="100%"
                     height="500px"></iframe>
           </Collapsable>

@@ -32,7 +32,8 @@
       "foods": "Ingrédients",
       "newFood": "Nouvel ingrédient",
       "otherCategoryName": "Divers",
-      "updateCategories": "Modifier les catégories"
+      "categories": "Catégories",
+      "searches": "Recherches sur des sites externes"
     },
     "pages": {
       "categories": {
@@ -43,6 +44,17 @@
           "remove": "Supprimer la catégorie",
           "groupTitle": "Liste des catégories",
           "name": "Nom"
+        }
+      },
+      "searches": {
+        "page": {
+          "title": "Recherches sur des sites externes",
+          "submit": "Mettre à jour",
+          "add": "Nouveau site",
+          "remove": "Supprimer le site",
+          "groupTitle": "Sites externes",
+          "sitename": "Nom du site",
+          "url": "URL ({s} sera remplacé par la recherche concrète, ex: my.website.com?search={s})"
         }
       },
       "food": {

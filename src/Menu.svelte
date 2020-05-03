@@ -69,9 +69,12 @@
   <a href="/" class="sitename">{$i18n.t("menu.appName")}</a>
 
   <div class="section">
-    <h2>{$i18n.t("menu.foods")}</h2>
+    <a href="/categories" class="button">{$i18n.t("menu.categories")}</a>
+    <a href="/searches" class="button">{$i18n.t("menu.searches")}</a>
+  </div>
 
-    <a href="/categories" class="button">{$i18n.t("menu.updateCategories")}</a>
+  <div class="section">
+    <h2>{$i18n.t("menu.foods")}</h2>
 
     {#each sortedCategories as category}
       <h3>{category.name}</h3>

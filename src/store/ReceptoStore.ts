@@ -1,18 +1,16 @@
 import { Readable, Writable } from "svelte/store"
 import writableLocalStorage from "./writableLocalStorage"
 import { replaceWhere } from "~/utils/arrays"
-import { Recepto } from "~/models/Recepto"
+import { buildInitialReceptoValue, Recepto } from "~/models/Recepto"
 import { Food } from "~/models/Food"
 import { Category } from "~/models/Category"
+import { Search } from "~/models/Search"
 
 class ReceptoStore implements Readable<Recepto> {
   private internal: Writable<Recepto>
 
   constructor() {
-    this.internal = writableLocalStorage("recepto", {
-      categories: [],
-      foods: [],
-    })
+    this.internal = writableLocalStorage("recepto", buildInitialReceptoValue())
   }
 
   subscribe: Readable<Recepto>["subscribe"] = (run, invalidate) => {
@@ -52,6 +50,13 @@ class ReceptoStore implements Readable<Recepto> {
           return { ...food, category: undefined }
         }
       })
+    }))
+  }
+
+  updateSearches = (searches: Array<Search>) => {
+    this.internal.update(recepto => ({
+      ...recepto,
+      searches,
     }))
   }
 

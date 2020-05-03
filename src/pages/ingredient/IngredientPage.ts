@@ -1,16 +1,15 @@
 import { i18n } from "i18next"
 import { navigate } from "svelte-routing"
+import receptoStore from "../../store/ReceptoStore"
 
 import { Ingredient, IngredientId, Replacement, Recipe, RecipeIngredient } from "../../models/Ingredient"
 import { Recepto } from "../../models/Recepto"
-import { Recipe as RecipeOld } from "../../models/Recipe"
 import { isDefined, onDefined } from "../../utils/values"
-import receptoStore from "../../store/ReceptoStore"
 
 export type FullIngredient = Omit<Ingredient, "replacements" | "recipes"> & {
   replacements: Array<FullReplacement>
   recipes: Array<FullRecipe>
-  usedFor: Array<RecipeOld>
+  usedFor: Array<RecipeIngredientInfo>
 }
 
 type FullReplacement = Omit<Replacement, "ingredient"> & {
@@ -25,6 +24,11 @@ export type FullRecipeIngredient = Omit<RecipeIngredient, "id"> & {
   ref: Ingredient
 }
 
+export type RecipeIngredientInfo = {
+  recipe: Recipe
+  ingredient: Ingredient
+}
+
 export function buildFullIngredient(recepto: Recepto, id: IngredientId | undefined): FullIngredient | undefined {
   const ingredient = onDefined(id, id => recepto.ingredients.find(_ => _.id === id))
   if (ingredient !== undefined) {
@@ -34,7 +38,12 @@ export function buildFullIngredient(recepto: Recepto, id: IngredientId | undefin
         .map(r => buildReplacement(recepto, r))
         .filter(isDefined),
       recipes: ingredient.recipes.map(recipe => buildFullRecipe(recepto, recipe)),
-      usedFor: recepto.recipes.filter(recipe => recipe.ingredients.some(_ => _.id === id))
+      usedFor: recepto.ingredients
+        .flatMap(ingredient => {
+          return ingredient.recipes
+            .filter(recipe => recipe.ingredients.some(_ => _.id === id))
+            .map(recipe => ({ recipe, ingredient }))
+        })
     }
   } else {
     return undefined

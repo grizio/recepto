@@ -79,8 +79,8 @@
           <h2>{$i18n.t("pages.ingredient.page.usedFor")}</h2>
 
           <Grid>
-            {#each ingredient.recipes as recipe}
-              <RecipeCard recipe={recipe}/>
+            {#each ingredient.usedFor as info}
+              <RecipeCard recipe={info.recipe} ingredient={info.ingredient}/>
             {/each}
           </Grid>
         {/if}

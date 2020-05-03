@@ -6,8 +6,8 @@
 
   import Card from "./Card.svelte"
 
-  /** @type {Ingredient} */
-  export let ingredient
+  /** @type {Food} */
+  export let food
 
   /** @type {Recipe} */
   export let recipe
@@ -17,12 +17,12 @@
   $: normalizedRecipe = normalizeRecipe($receptoStore, recipe)
 </script>
 
-<Card title={`${ingredient.name} (${normalizedRecipe.name})`} href={`/ingredient/${ingredient.id}`}>
-  <p>&#x1F465 {$i18n.t("pages.recipe.page.plates", {count: recipe.plates})}</p>
+<Card title={`${food.name} (${normalizedRecipe.name})`} href={`/food/${food.id}`}>
+  <p>&#x1F465 {$i18n.t("components.card.recipe.plates", {count: recipe.plates})}</p>
   <p>&#x23F2 {$i18n.t("common.duration.short.text", {count: normalizedRecipe.duration})}</p>
-  {#if ingredient.description}
+  {#if food.description}
     <p class="ellipsis">
-      &#x1F4DD {ingredient.description}
+      &#x1F4DD {food.description}
     </p>
   {/if}
   {#if nonEmpty(normalizedRecipe.ingredients)}

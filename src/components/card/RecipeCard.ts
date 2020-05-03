@@ -1,4 +1,4 @@
-import { Recipe } from "../../models/Ingredient"
+import { Recipe } from "../../models/Food"
 import { Recepto } from "../../models/Recepto"
 import { isDefined } from "../../utils/values"
 
@@ -10,7 +10,7 @@ export function normalizeRecipe(recepto: Recepto, recipe: Recipe): NormalizedRec
   return {
     ...recipe,
     ingredients: recipe.ingredients
-      .map(ingredient => recepto.ingredients.find(_ => _.id === ingredient.id))
+      .map(ingredient => recepto.foods.find(_ => _.id === ingredient.id))
       .filter(isDefined)
       .map(_ => _.name)
   }

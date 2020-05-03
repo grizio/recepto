@@ -19,12 +19,18 @@
         }
       }
     },
+    "components": {
+      "card": {
+        "recipe": {
+          "plates": "{{count}} plate",
+          "plates_plural": "{{count}} plates"
+        }
+      }
+    },
     "menu": {
       "appName": "Recepto",
-      "recipes": "Recipes",
-      "newRecipe": "New recipe",
-      "ingredients": "Ingredients",
-      "newIngredient": "New ingredient",
+      "foods": "Foods",
+      "newFood": "New food",
       "otherCategoryName": "Others",
       "updateCategories": "Update categories"
     },
@@ -39,7 +45,7 @@
           "name": "Name"
         }
       },
-      "ingredient": {
+      "food": {
         "form": {
           "name": "Name",
           "category": {
@@ -113,44 +119,6 @@
         },
         "update": {
           "title": "Update {{ingredient}}"
-        }
-      },
-      "recipe": {
-        "form": {
-          "name": "Name",
-          "shortDescription": "Short description",
-          "plates": "Number of plates",
-          "duration": "Duration",
-          "ingredient": {
-            "title": "Ingredients",
-            "id": "Ingredient",
-            "quantity": "Quantity",
-            "unit": "Unit",
-            "add": "New ingredient"
-          },
-          "steps": "Steps",
-          "submit": "Submit"
-        },
-        "page": {
-          "plates": "{{count}} plate",
-          "plates_plural": "{{count}} plates",
-          "duration": "Duration: $t(common.minutes, { 'count': {{count}} })",
-          "ingredients": "Ingredients",
-          "steps": "Steps",
-          "makes": "Makes",
-          "actions": {
-            "modify": "Modify",
-            "delete": "Delete",
-            "confirmDelete": "Do you really want to delete this recipe?"
-          },
-          "asideTitle": "Search alternatives",
-          "asideSearch": "Search on {{ sitename }}"
-        },
-        "create": {
-          "title": "New recipe"
-        },
-        "update": {
-          "title": "Update {{recipe}}"
         }
       },
       "home": {

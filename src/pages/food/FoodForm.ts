@@ -2,20 +2,20 @@ import { i18n } from "i18next"
 import { Recepto } from "../../models/Recepto"
 import { NullableOption, Option } from "../../models/common"
 import { sortBy } from "../../utils/arrays"
-import { Ingredient, Preparation, Preservation, Recipe, RecipeIngredient, Replacement } from "../../models/Ingredient"
+import { Food, Preparation, Preservation, Recipe, Ingredient, Replacement } from "../../models/Food"
 
-export type NewIngredient = Omit<Ingredient, "id">
-export type IngredientForm = NewIngredient | Ingredient
+export type NewFood = Omit<Food, "id">
+export type FoodForm = NewFood | Food
 
-export function getIngredientOptions(recepto: Recepto, excludedIngredient: Ingredient | undefined): Array<Option> {
-  return sortBy(recepto.ingredients, _ => _.name)
-    .filter(_ => excludedIngredient === undefined || _.id !== excludedIngredient.id)
+export function getFoodOptions(recepto: Recepto, excludedFood: Food | undefined): Array<Option> {
+  return sortBy(recepto.foods, _ => _.name)
+    .filter(_ => excludedFood === undefined || _.id !== excludedFood.id)
     .map(recipe => ({ label: recipe.name, value: recipe.id }))
 }
 
 export function getCategoryOptions(recepto: Recepto, i18n: i18n): Array<NullableOption> {
   return [
-    { label: i18n.t("pages.ingredient.form.category.none"), value: undefined },
+    { label: i18n.t("pages.food.form.category.none"), value: undefined },
 
     ...sortBy(recepto.categories, _ => _.name)
       .map(recipe => ({ label: recipe.name, value: recipe.id }))
@@ -37,11 +37,9 @@ export function buildPreparation(): Preparation {
   }
 }
 
-export function buildReplacement(ingredientOptions: Array<Option>): Replacement {
-  const firstIngredient = ingredientOptions.find(_ => _.value !== undefined)
+export function buildReplacement(foodOptions: Array<Option>): Replacement {
   return {
-    // How to make it more robust?
-    ingredient: firstIngredient?.value ?? "",
+    food: foodOptions[0].value,
     description: ""
   }
 }
@@ -56,7 +54,7 @@ export function buildRecipe(): Recipe {
   }
 }
 
-export function buildRecipeIngredient(ingredientOptions: Array<Option>): RecipeIngredient {
+export function buildIngredient(ingredientOptions: Array<Option>): Ingredient {
   return {
     id: ingredientOptions[0].value,
     quantity: 1,

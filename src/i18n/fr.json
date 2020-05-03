@@ -19,12 +19,18 @@
         }
       }
     },
+    "components": {
+      "card": {
+        "recipe": {
+          "plates": "{{count}} personne",
+          "plates_plural": "{{count}} personnes"
+        }
+      }
+    },
     "menu": {
       "appName": "Recepto",
-      "recipes": "Recettes",
-      "newRecipe": "Nouvelle recette",
-      "ingredients": "Ingrédients",
-      "newIngredient": "Nouvel ingrédient",
+      "foods": "Ingrédients",
+      "newFood": "Nouvel ingrédient",
       "otherCategoryName": "Divers",
       "updateCategories": "Modifier les catégories"
     },
@@ -39,7 +45,7 @@
           "name": "Nom"
         }
       },
-      "ingredient": {
+      "food": {
         "form": {
           "name": "Nom",
           "category": {
@@ -110,49 +116,10 @@
           "asideSearch": "Chercher sur {{ sitename }}"
         },
         "create": {
-          "title": "Nouvel ingredient"
+          "title": "Nouvel ingrédient"
         },
         "update": {
           "title": "Modifier {{ingredient}}"
-        }
-      },
-      "recipe": {
-        "form": {
-          "name": "Nom",
-          "shortDescription": "Description courte",
-          "plates": "Nombre de personnes",
-          "duration": "Durée",
-          "ingredient": {
-            "title": "Ingrédients",
-            "id": "Ingrédient",
-            "quantity": "Quantité",
-            "unit": "Unité",
-            "add": "Ajouter un ingrédient",
-            "remove": "Supprimer l'ingrédient"
-          },
-          "steps": "Étapes",
-          "submit": "Envoyer"
-        },
-        "page": {
-          "plates": "{{count}} personne",
-          "plates_plural": "{{count}} personnes",
-          "duration": "Durée : $t(common.minutes, { 'count': {{count}} })",
-          "ingredients": "Ingrédients",
-          "steps": "Étapes",
-          "makes": "Crée",
-          "actions": {
-            "modify": "Modifier",
-            "delete": "Supprimer",
-            "confirmDelete": "Confirmez-vous la suppression de cette recette ?"
-          },
-          "asideTitle": "Chercher des alternatives",
-          "asideSearch": "Chercher sur {{ sitename }}"
-        },
-        "create": {
-          "title": "Nouvelle recette"
-        },
-        "update": {
-          "title": "Modifier {{recipe}}"
         }
       },
       "home": {

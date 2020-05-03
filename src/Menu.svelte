@@ -69,7 +69,7 @@
   <a href="/" class="sitename">{$i18n.t("menu.appName")}</a>
 
   <div class="section">
-    <h2>{$i18n.t("menu.ingredients")}</h2>
+    <h2>{$i18n.t("menu.foods")}</h2>
 
     <a href="/categories" class="button">{$i18n.t("menu.updateCategories")}</a>
 
@@ -77,16 +77,16 @@
       <h3>{category.name}</h3>
 
       <ul>
-        {#each category.ingredients as ingredient}
+        {#each category.foods as food}
           <li>
-            <a href={`/ingredient/${ingredient.id}`}>
-              {ingredient.name}
+            <a href={`/food/${food.id}`}>
+              {food.name}
             </a>
           </li>
         {/each}
       </ul>
     {/each}
 
-    <a href="/ingredient" class="add-button">{$i18n.t("menu.newIngredient")}</a>
+    <a href="/food" class="add-button">{$i18n.t("menu.newFood")}</a>
   </div>
 </nav>

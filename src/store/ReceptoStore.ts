@@ -2,7 +2,7 @@ import { Readable, Writable } from "svelte/store"
 import writableLocalStorage from "./writableLocalStorage"
 import { replaceWhere } from "../utils/arrays"
 import { Recepto } from "../models/Recepto"
-import { Ingredient } from "../models/Ingredient"
+import { Food } from "../models/Food"
 import { Category } from "../models/Category"
 
 class ReceptoStore implements Readable<Recepto> {
@@ -11,8 +11,7 @@ class ReceptoStore implements Readable<Recepto> {
   constructor() {
     this.internal = writableLocalStorage("recepto", {
       categories: [],
-      ingredients: [],
-      recipes: []
+      foods: [],
     })
   }
 
@@ -20,24 +19,24 @@ class ReceptoStore implements Readable<Recepto> {
     return this.internal.subscribe(run, invalidate);
   }
 
-  addIngredient = (ingredient: Ingredient) => {
+  addFood = (food: Food) => {
     this.internal.update(recepto => ({
       ...recepto,
-      ingredients: [...recepto.ingredients, ingredient]
+      foods: [...recepto.foods, food]
     }))
   }
 
-  updateIngredient = (ingredient: Ingredient) => {
+  updateFood = (food: Food) => {
     this.internal.update(recepto => ({
       ...recepto,
-      ingredients: replaceWhere(recepto.ingredients, _ => _.id === ingredient.id, () => ingredient)
+      foods: replaceWhere(recepto.foods, _ => _.id === food.id, () => food)
     }))
   }
 
-  deleteIngredient = (id: string) => {
+  deleteFood = (id: string) => {
     this.internal.update(recepto => ({
       ...recepto,
-      ingredients: recepto.ingredients.filter(_ => _.id !== id)
+      foods: recepto.foods.filter(_ => _.id !== id)
     }))
   }
 
@@ -46,11 +45,11 @@ class ReceptoStore implements Readable<Recepto> {
     this.internal.update(recepto => ({
       ...recepto,
       categories: categories,
-      ingredients: recepto.ingredients.map(ingredient => {
-        if (ingredient.category === undefined || categoryIds.includes(ingredient.category)) {
-          return ingredient
+      ingredients: recepto.foods.map(food => {
+        if (food.category === undefined || categoryIds.includes(food.category)) {
+          return food
         } else {
-          return { ...ingredient, category: undefined }
+          return { ...food, category: undefined }
         }
       })
     }))

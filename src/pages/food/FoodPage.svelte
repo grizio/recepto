@@ -3,7 +3,7 @@
   import receptoStore from "../../store/ReceptoStore"
   import searchStore from "../../store/SearchStore"
   import { nonEmpty } from "../../utils/arrays"
-  import { buildFullIngredient, deleteIngredient } from "./IngredientPage"
+  import { buildFullFood, deleteFood } from "./FoodPage"
 
   import Button from "../../components/buttons/Button.svelte"
   import Grid from "../../components/layout/Grid.svelte"
@@ -18,69 +18,69 @@
   /** @type {string} */
   export let id = undefined
 
-  /** @type {Ingredient} */
-  let ingredient
-  $: ingredient = buildFullIngredient($receptoStore, id)
+  /** @type {Food} */
+  let food
+  $: food = buildFullFood($receptoStore, id)
 </script>
 
 <Page>
-  {#if ingredient}
+  {#if food}
     <TwoColumns>
       <div>
-        <h1>{ingredient.name}</h1>
+        <h1>{food.name}</h1>
 
         <div>
           <Button
-            href={`/ingredient/${ingredient.id}/update`}>{$i18n.t("pages.ingredient.page.actions.modify")}</Button>
-          <Button danger on:click={() => deleteIngredient(id, $i18n)}>{$i18n.t("pages.ingredient.page.actions.delete")}</Button>
+            href={`/food/${food.id}/update`}>{$i18n.t("pages.food.page.actions.modify")}</Button>
+          <Button danger on:click={() => deleteFood(id, $i18n)}>{$i18n.t("pages.food.page.actions.delete")}</Button>
         </div>
 
-        <MarkdownText value={ingredient.description} />
+        <MarkdownText value={food.description} />
 
-        {#if nonEmpty(ingredient.preservations)}
-          <h2>{$i18n.t("pages.ingredient.page.preservations")}</h2>
+        {#if nonEmpty(food.preservations)}
+          <h2>{$i18n.t("pages.food.page.preservations")}</h2>
 
-          {#each ingredient.preservations as preservation}
+          {#each food.preservations as preservation}
             <h3>{preservation.name} ({ preservation.duration })</h3>
 
             <MarkdownText value={preservation.description} />
           {/each}
         {/if}
 
-        {#if nonEmpty(ingredient.preparations)}
-          <h2>{$i18n.t("pages.ingredient.page.preparations")}</h2>
+        {#if nonEmpty(food.preparations)}
+          <h2>{$i18n.t("pages.food.page.preparations")}</h2>
 
-          {#each ingredient.preparations as preparation}
+          {#each food.preparations as preparation}
             <h3>{preparation.name}</h3>
 
             <MarkdownText value={preparation.description} />
           {/each}
         {/if}
 
-        {#if nonEmpty(ingredient.replacements)}
-          <h2>{$i18n.t("pages.ingredient.page.replacements")}</h2>
+        {#if nonEmpty(food.replacements)}
+          <h2>{$i18n.t("pages.food.page.replacements")}</h2>
 
-          {#each ingredient.replacements as replacement}
-            <h3>{replacement.ingredient.name}</h3>
+          {#each food.replacements as replacement}
+            <h3>{replacement.food.name}</h3>
 
             <MarkdownText value={replacement.description} />
           {/each}
         {/if}
 
-        {#if nonEmpty(ingredient.recipes)}
-          <h2>{$i18n.t("pages.ingredient.page.recipes.title")}</h2>
+        {#if nonEmpty(food.recipes)}
+          <h2>{$i18n.t("pages.food.page.recipes.title")}</h2>
 
-          {#each ingredient.recipes as recipe}
+          {#each food.recipes as recipe}
             <RecipeSection recipe={recipe}/>
           {/each}
         {/if}
 
-        {#if nonEmpty(ingredient.usedFor)}
-          <h2>{$i18n.t("pages.ingredient.page.usedFor")}</h2>
+        {#if nonEmpty(food.usedFor)}
+          <h2>{$i18n.t("pages.food.page.usedFor")}</h2>
 
           <Grid>
-            {#each ingredient.usedFor as info}
-              <RecipeCard recipe={info.recipe} ingredient={info.ingredient}/>
+            {#each food.usedFor as info}
+              <RecipeCard recipe={info.recipe} food={info.food}/>
             {/each}
           </Grid>
         {/if}
@@ -88,8 +88,8 @@
 
       <aside>
         {#each $searchStore as search}
-          <Collapsable summary={$i18n.t("pages.ingredient.page.asideSearch", { sitename: search.sitename })}>
-            <iframe src={search.url(ingredient.name)}
+          <Collapsable summary={$i18n.t("pages.food.page.asideSearch", { sitename: search.sitename })}>
+            <iframe src={search.url(food.name)}
                     width="100%"
                     height="500px"></iframe>
           </Collapsable>

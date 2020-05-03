@@ -56,27 +56,27 @@
 <h3>{recipe.name}</h3>
 
 <div class="infos">
-  <span>&#x1F465 {$i18n.t("pages.ingredient.page.recipes.plates", {count: recipe.plates})}</span>
+  <span>&#x1F465 {$i18n.t("pages.food.page.recipes.plates", {count: recipe.plates})}</span>
   <span>&#x23F2 {$i18n.t("common.duration.short.text", {count: recipe.duration})}</span>
 </div>
 
 <section class="recipe">
   <TwoColumns className="" gap="8px" columns="300px 1fr">
     <div class="left">
-      <h4>{$i18n.t("pages.ingredient.page.recipes.ingredients")}</h4>
+      <h4>{$i18n.t("pages.food.page.recipes.ingredients")}</h4>
 
       <ul>
         {#each recipe.ingredients as ingredient}
           <li>
             {ingredient.quantity} {ingredient.unit}
-            <a href={`/ingredient/${ingredient.id}`}>{ingredient.ref.name}</a>
+            <a href={`/food/${ingredient.id}`}>{ingredient.ref.name}</a>
           </li>
         {/each}
       </ul>
     </div>
 
     <div class="right">
-      <h4>{$i18n.t("pages.ingredient.page.recipes.steps")}</h4>
+      <h4>{$i18n.t("pages.food.page.recipes.steps")}</h4>
 
       <ol class="steps">
         {#each splitParagraphs(recipe.steps) as step}

@@ -4,9 +4,9 @@
 
   import CategoriesPage from "./pages/categories/CategoriesPage.svelte"
 
-  import IngredientPage from "./pages/ingredient/IngredientPage.svelte"
-  import CreateIngredientPage from "./pages/ingredient/CreateIngredientPage.svelte"
-  import UpdateIngredientPage from "./pages/ingredient/UpdateIngredientPage.svelte"
+  import FoodPage from "./pages/food/FoodPage.svelte"
+  import CreateFoodPage from "./pages/food/CreateFoodPage.svelte"
+  import UpdateFoodPage from "./pages/food/UpdateFoodPage.svelte"
 
   import HomePage from "./pages/home/HomePage.svelte"
   import TwoColumns from "./components/layout/TwoColumns.svelte"
@@ -34,9 +34,9 @@
       <main>
         <Route path="/categories" component={CategoriesPage}/>
 
-        <Route path="/ingredient/:id/update" component={UpdateIngredientPage}/>
-        <Route path="/ingredient/:id" component={IngredientPage}/>
-        <Route path="/ingredient" component={CreateIngredientPage}/>
+        <Route path="/food/:id/update" component={UpdateFoodPage}/>
+        <Route path="/food/:id" component={FoodPage}/>
+        <Route path="/food" component={CreateFoodPage}/>
 
         <Route path="/" component={HomePage}/>
 

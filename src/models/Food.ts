@@ -1,7 +1,7 @@
-export type IngredientId = string
+export type FoodId = string
 
-export type Ingredient = {
-  id: IngredientId
+export type Food = {
+  id: FoodId
   name: string
   category?: string
   description: string
@@ -23,7 +23,7 @@ export type Preparation = {
 }
 
 export type Replacement = {
-  ingredient: IngredientId
+  food: FoodId
   description: string
 }
 
@@ -31,12 +31,12 @@ export type Recipe = {
   name: string
   plates: number
   duration: number
-  ingredients: Array<RecipeIngredient>
+  ingredients: Array<Ingredient>
   steps: string
 }
 
-export type RecipeIngredient = {
-  id: IngredientId
+export type Ingredient = {
+  id: FoodId
   quantity: number
   unit: string
 }

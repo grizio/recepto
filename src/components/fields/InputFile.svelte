@@ -4,7 +4,6 @@
   export let id
   export let name
   export let label
-  export let resetOnChange
 
   export let value
 </script>

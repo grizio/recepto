@@ -85,6 +85,7 @@
         {#each $receptoStore.searches as search}
           <Collapsable summary={$i18n.t("pages.food.page.asideSearch", { sitename: search.sitename })}>
             <iframe src={search.url.replace("{s}", food.name)}
+                    title={$i18n.t("pages.food.page.asideSearch", { sitename: search.sitename })}
                     width="100%"
                     height="500px"></iframe>
           </Collapsable>

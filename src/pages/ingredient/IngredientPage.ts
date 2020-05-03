@@ -1,20 +1,28 @@
 import { i18n } from "i18next"
 import { navigate } from "svelte-routing"
 
-import { Ingredient, IngredientId, Replacement } from "../../models/Ingredient"
+import { Ingredient, IngredientId, Replacement, Recipe, RecipeIngredient } from "../../models/Ingredient"
 import { Recepto } from "../../models/Recepto"
-import { Recipe } from "../../models/Recipe"
+import { Recipe as RecipeOld } from "../../models/Recipe"
 import { isDefined, onDefined } from "../../utils/values"
 import receptoStore from "../../store/ReceptoStore"
 
 export type FullIngredient = Omit<Ingredient, "replacements" | "recipes"> & {
   replacements: Array<FullReplacement>
-  recipes: Array<Recipe>
-  recipesDIY: Array<Recipe>
+  recipes: Array<FullRecipe>
+  usedFor: Array<RecipeOld>
 }
 
 type FullReplacement = Omit<Replacement, "ingredient"> & {
   ingredient: Ingredient
+}
+
+export type FullRecipe = Omit<Recipe, "ingredients"> & {
+  ingredients: Array<FullRecipeIngredient>
+}
+
+export type FullRecipeIngredient = Omit<RecipeIngredient, "id"> & {
+  ref: Ingredient
 }
 
 export function buildFullIngredient(recepto: Recepto, id: IngredientId | undefined): FullIngredient | undefined {
@@ -25,10 +33,8 @@ export function buildFullIngredient(recepto: Recepto, id: IngredientId | undefin
       replacements: ingredient.replacements
         .map(r => buildReplacement(recepto, r))
         .filter(isDefined),
-      recipes: recepto.recipes.filter(recipe => recipe.ingredients.some(_ => _.id === id)),
-      recipesDIY: ingredient.recipes
-        .map(recipe => recepto.recipes.find(_ => _.id === recipe))
-        .filter(isDefined)
+      recipes: ingredient.recipes.map(recipe => buildFullRecipe(recepto, recipe)),
+      usedFor: recepto.recipes.filter(recipe => recipe.ingredients.some(_ => _.id === id))
     }
   } else {
     return undefined
@@ -55,4 +61,20 @@ export function deleteIngredient(id: string | undefined, i18n: i18n): void {
       receptoStore.deleteIngredient(id)
     }
   })
+}
+
+export function buildFullRecipe(recepto: Recepto, recipe: Recipe): FullRecipe {
+  return {
+    ...recipe,
+    ingredients: buildFullRecipeIngredients(recepto, recipe)
+  }
+}
+
+function buildFullRecipeIngredients(recepto: Recepto, recipe: Recipe): Array<FullRecipeIngredient> {
+  return recipe.ingredients
+    .map(recipeIngredient => onDefined(
+      recepto.ingredients.find(ingredient => ingredient.id === recipeIngredient.id),
+      ref => ({ ...recipeIngredient, ref })
+    ))
+    .filter(isDefined)
 }

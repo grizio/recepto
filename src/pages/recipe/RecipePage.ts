@@ -8,7 +8,6 @@ import receptoStore from "../../store/ReceptoStore"
 
 export type FullRecipe = Omit<Recipe, "ingredients"> & {
   ingredients: Array<FullRecipeIngredient>
-  madeIngredients: Array<Ingredient>
 }
 
 export type FullRecipeIngredient = Omit<RecipeIngredient, "id"> & {
@@ -20,8 +19,7 @@ export function findFullRecipe(recepto: Recepto, id: RecipeId | undefined): Full
   if (recipe !== undefined) {
     return {
       ...recipe,
-      ingredients: buildFullRecipeIngredients(recepto, recipe),
-      madeIngredients: recepto.ingredients.filter(ingredient => ingredient.recipes.some(_ => _ === id))
+      ingredients: buildFullRecipeIngredients(recepto, recipe)
     }
   } else {
     return undefined

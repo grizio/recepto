@@ -104,20 +104,6 @@
       </TwoColumns>
     </section>
 
-    {#if nonEmpty(recipe.madeIngredients)}
-      <h2>{$i18n.t("pages.recipe.page.makes")}</h2>
-
-      <ul>
-        {#each recipe.madeIngredients as ingredient}
-          <li>
-            <a href={`/ingredient/${ingredient.id}`}>
-              {ingredient.name}
-            </a>
-          </li>
-        {/each}
-      </ul>
-    {/if}
-
     <aside>
       <h2>{$i18n.t("pages.recipe.page.asideTitle")}</h2>
 

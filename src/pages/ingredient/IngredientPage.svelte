@@ -13,6 +13,7 @@
   import TwoColumns from "../../components/layout/TwoColumns.svelte"
   import Collapsable from "../../components/collapsable/Collapsable.svelte"
   import MarkdownText from "../../components/text/MarkdownText.svelte"
+  import RecipeSection from "./RecipeSection.svelte"
 
   /** @type {string} */
   export let id = undefined
@@ -66,18 +67,16 @@
           {/each}
         {/if}
 
-        {#if nonEmpty(ingredient.recipesDIY)}
-          <h2>{$i18n.t("pages.ingredient.page.diy")}</h2>
+        {#if nonEmpty(ingredient.recipes)}
+          <h2>{$i18n.t("pages.ingredient.page.recipes.title")}</h2>
 
-          <Grid>
-            {#each ingredient.recipesDIY as recipe}
-              <RecipeCard recipe={recipe}/>
-            {/each}
-          </Grid>
+          {#each ingredient.recipes as recipe}
+            <RecipeSection recipe={recipe}/>
+          {/each}
         {/if}
 
-        {#if nonEmpty(ingredient.recipes)}
-          <h2>{$i18n.t("pages.ingredient.page.recipes")}</h2>
+        {#if nonEmpty(ingredient.usedFor)}
+          <h2>{$i18n.t("pages.ingredient.page.usedFor")}</h2>
 
           <Grid>
             {#each ingredient.recipes as recipe}

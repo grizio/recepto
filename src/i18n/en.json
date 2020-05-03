@@ -71,7 +71,18 @@
           },
           "recipe": {
             "title": "Do it yourself recipes",
-            "select": "Recipe",
+            "name": "Name",
+            "plates": "Number of plates",
+            "duration": "Duration",
+            "ingredient": {
+              "title": "Ingredients",
+              "id": "Ingredient",
+              "quantity": "Quantity",
+              "unit": "Unit",
+              "add": "New ingredient",
+              "remove": "Remove ingredient"
+            },
+            "steps": "Steps",
             "add": "New recipe",
             "remove": "Remove recipe"
           },
@@ -81,8 +92,15 @@
           "preservations": "Preservations",
           "preparations": "Preparations",
           "replacements": "Replacements",
-          "diy": "Do it yourself",
-          "recipes": "Recipes",
+          "recipes": {
+            "title": "Recipes",
+            "plates": "{{count}} plate",
+            "plates_plural": "{{count}} plates",
+            "duration": "Duration: $t(common.minutes, { 'count': {{count}} })",
+            "ingredients": "Ingredients",
+            "steps": "Steps"
+          },
+          "usedFor": "Used for",
           "actions": {
             "modify": "Modify",
             "delete": "Delete",

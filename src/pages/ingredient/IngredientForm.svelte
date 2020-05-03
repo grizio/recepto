@@ -5,7 +5,7 @@
   import { nonEmpty } from "../../utils/arrays"
   import {
     getCategoryOptions, getIngredientOptions, getRecipeOptions,
-    buildPreparation, buildPreservation, buildRecipe, buildReplacement
+    buildPreparation, buildPreservation, buildRecipe, buildReplacement, buildRecipeIngredient
   } from "./ingredientForm"
 
   import InputText from "../../components/fields/InputText.svelte"
@@ -13,6 +13,8 @@
   import InputSelect from "../../components/fields/InputSelect.svelte"
   import InputCollection from "../../components/fields/InputCollection.svelte"
   import Button from "../../components/buttons/Button.svelte"
+  import InputNumber from "../../components/fields/InputNumber.svelte"
+  import InputDuration from "../../components/fields/InputDuration.svelte"
 
   export let ingredient
 
@@ -137,17 +139,69 @@
     title={$i18n.t("pages.ingredient.form.recipe.title")}
     addButtonLabel={$i18n.t("pages.ingredient.form.recipe.add")}
     removeButtonLabel={$i18n.t("pages.ingredient.form.recipe.remove")}
-    rowBuilder={() => buildRecipe(recipeOptions)}
+    rowBuilder={buildRecipe}
     bind:value={ingredient.recipes}
 
     let:index={index}
   >
-    <InputSelect
-      id={`ingredient-recipes-${index}`}
-      name={`recipes[${index}]`}
-      label={$i18n.t("pages.ingredient.form.recipe.select")}
-      options={recipeOptions}
-      bind:value={ingredient.recipes[index]}
+    <InputText
+      id={`recipe-${index}-name`}
+      name={`recipe[${index}].name`}
+      label={$i18n.t("pages.ingredient.form.recipe.name")}
+      bind:value={ingredient.recipes[index].name}
+    />
+
+    <InputNumber
+      id={`recipe-${index}-plates`}
+      name={`recipe[${index}].plates`}
+      label={$i18n.t("pages.ingredient.form.recipe.plates")}
+      bind:value={ingredient.recipes[index].plates}
+    />
+
+    <InputDuration
+      id={`recipe-${index}-duration`}
+      name={`recipe[${index}].duration`}
+      label={$i18n.t("pages.ingredient.form.recipe.duration")}
+      bind:value={ingredient.recipes[index].duration}
+    />
+
+    <InputCollection
+      title={$i18n.t("pages.ingredient.form.recipe.ingredient.title")}
+      addButtonLabel={$i18n.t("pages.ingredient.form.recipe.ingredient.add")}
+      removeButtonLabel={$i18n.t("pages.ingredient.form.recipe.ingredient.remove")}
+      rowBuilder={() => buildRecipeIngredient(ingredientOptions)}
+      bind:value={ingredient.recipes[index].ingredients}
+
+      let:index={indexIngredient}
+    >
+      <InputSelect
+        id={`recipe-${index}-ingredients-${indexIngredient}-id`}
+        name={`recipe[${index}].ingredients[${indexIngredient}].id`}
+        label={$i18n.t("pages.ingredient.form.recipe.ingredient.id")}
+        options={ingredientOptions}
+        bind:value={ingredient.recipes[index].ingredients[indexIngredient].id}
+      />
+
+      <InputNumber
+        id={`recipe-${index}-ingredients-${indexIngredient}-quantity`}
+        name={`recipe[${index}].ingredients[${indexIngredient}].quantity`}
+        label={$i18n.t("pages.ingredient.form.recipe.ingredient.quantity")}
+        bind:value={ingredient.recipes[index].ingredients[indexIngredient].quantity}
+      />
+
+      <InputText
+        id={`recipe-${index}-ingredients-${indexIngredient}-unit`}
+        name={`recipe[${index}].ingredients[${indexIngredient}].unit`}
+        label={$i18n.t("pages.ingredient.form.recipe.ingredient.unit")}
+        bind:value={ingredient.recipes[index].ingredients[indexIngredient].unit}
+      />
+    </InputCollection>
+
+    <InputTextarea
+      id={`recipe-${index}-steps`}
+      name={`recipe[${index}].steps`}
+      label={$i18n.t("pages.ingredient.form.recipe.steps")}
+      bind:value={ingredient.recipes[index].steps}
     />
   </InputCollection>
 

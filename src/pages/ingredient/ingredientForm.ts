@@ -2,7 +2,7 @@ import { i18n } from "i18next"
 import { Recepto } from "../../models/Recepto"
 import { NullableOption, Option } from "../../models/common"
 import { sortBy } from "../../utils/arrays"
-import { Ingredient, Preparation, Preservation, Replacement } from "../../models/Ingredient"
+import { Ingredient, Preparation, Preservation, Recipe, RecipeIngredient, Replacement } from "../../models/Ingredient"
 
 export type NewIngredient = Omit<Ingredient, "id">
 export type IngredientForm = NewIngredient | Ingredient
@@ -51,7 +51,20 @@ export function buildReplacement(ingredientOptions: Array<Option>): Replacement 
   }
 }
 
-export function buildRecipe(recipeOptions: Array<Option>): string {
-  const firstRecipe = recipeOptions.find(_ => _.value !== undefined)
-  return firstRecipe?.value ?? ""
+export function buildRecipe(): Recipe {
+  return {
+    name: "",
+    plates: 1,
+    duration: 0,
+    ingredients: [],
+    steps: ""
+  }
+}
+
+export function buildRecipeIngredient(ingredientOptions: Array<Option>): RecipeIngredient {
+  return {
+    id: ingredientOptions[0].value,
+    quantity: 1,
+    unit: ""
+  }
 }

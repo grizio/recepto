@@ -71,7 +71,18 @@
           },
           "recipe": {
             "title": "Recettes do it yourself",
-            "select": "Recette",
+            "name": "Nom",
+            "plates": "Nombre de personnes",
+            "duration": "Durée",
+            "ingredient": {
+              "title": "Ingrédients",
+              "id": "Ingrédient",
+              "quantity": "Quantité",
+              "unit": "Unité",
+              "add": "Ajouter un ingrédient",
+              "remove": "Supprimer l'ingrédient"
+            },
+            "steps": "Étapes",
             "add": "Ajouter une recette",
             "remove": "Supprimer la recette"
           },
@@ -81,8 +92,16 @@
           "preservations": "Conservation",
           "preparations": "Préparations",
           "replacements": "Remplaçants",
-          "diy": "Comment en faire soi-même",
-          "recipes": "Recettes",
+          "recipes": {
+            "title": "Recettes",
+            "plates": "{{count}} personne",
+            "plates_plural": "{{count}} personnes",
+            "duration": "Durée : $t(common.minutes, { 'count': {{count}} })",
+            "ingredients": "Ingrédients",
+            "steps": "Étapes",
+            "makes": "Crée"
+          },
+          "usedFor": "Utilisé pour",
           "actions": {
             "modify": "Modifier",
             "delete": "Supprimer",

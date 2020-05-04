@@ -1,5 +1,4 @@
 <script>
-  import i18n from "~/i18n"
   import InputTextarea from "~/components/fields/InputTextarea.svelte"
 
   /** @type {Description} */
@@ -17,6 +16,6 @@
 <InputTextarea
   id={`${idPrefix}content`}
   name={`${namePrefix}content`}
-  label={$i18n.t("pages.food.form.preparation.description")}
+  label="pages.food.form.preparation.description"
   bind:value={description.content}
 />

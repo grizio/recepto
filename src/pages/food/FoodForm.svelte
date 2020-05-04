@@ -28,22 +28,22 @@
   <InputText
     id="food-name"
     name="name"
-    label={$i18n.t("pages.food.form.name")}
+    label="pages.food.form.name"
     bind:value={food.name}
   />
 
   <InputSelect
     id="food-category"
     name="category"
-    label={$i18n.t("pages.food.form.category.label")}
+    label="pages.food.form.category.label"
     options={categoryOptions}
     bind:value={food.category}
   />
 
   <InputCollection
-    title={$i18n.t("pages.food.form.section.title")}
-    addButtonLabel={$i18n.t("pages.food.form.section.add")}
-    removeButtonLabel={$i18n.t("pages.food.form.section.remove")}
+    title="pages.food.form.section.title"
+    addButtonLabel="pages.food.form.section.add"
+    removeButtonLabel="pages.food.form.section.remove"
     rowBuilder={() => undefined}
     bind:value={food.sections}
 

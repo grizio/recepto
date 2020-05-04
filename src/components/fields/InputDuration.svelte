@@ -1,6 +1,6 @@
 <script>
-  import Field from "./Field.svelte"
   import i18n from "~/i18n"
+  import Field from "./Field.svelte"
 
   /** @type {string} */
   export let id
@@ -51,7 +51,7 @@
 </style>
 
 <Field>
-  <label for={id} class="field-label">{label}</label>
+  <label for={id} class="field-label">{$i18n.t(label)}</label>
   <div class="inputs">
     <input
       type="number" name={name} id={id} class="field-input"

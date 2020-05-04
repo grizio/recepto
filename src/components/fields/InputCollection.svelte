@@ -1,4 +1,5 @@
 <script>
+  import i18n from "~/i18n"
   import { removeAt } from "~/utils/arrays"
   import Button from "~/components/buttons/Button.svelte"
 
@@ -40,15 +41,15 @@
 </style>
 
 <fieldset>
-  <div class="legend">{title}</div>
+  <div class="legend">{$i18n.t(title)}</div>
 
   {#each value as row, index}
     <div class="group">
       <slot {index}/>
 
-      <Button on:click={() => removeRow(index)}>{removeButtonLabel}</Button>
+      <Button on:click={() => removeRow(index)}>{$i18n.t(removeButtonLabel)}</Button>
     </div>
   {/each}
 
-  <Button on:click={addRow}>{addButtonLabel}</Button>
+  <Button on:click={addRow}>{$i18n.t(addButtonLabel)}</Button>
 </fieldset>

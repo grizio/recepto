@@ -1,5 +1,4 @@
 <script>
-  import i18n from "~/i18n"
   import InputText from "~/components/fields/InputText.svelte"
   import InputTextarea from "~/components/fields/InputTextarea.svelte"
 
@@ -18,20 +17,20 @@
 <InputText
   id={`${idPrefix}name`}
   name={`${namePrefix}name`}
-  label={$i18n.t("pages.food.form.preservation.name")}
+  label="pages.food.form.preservation.name"
   bind:value={preservation.name}
 />
 
 <InputText
   id={`${idPrefix}duration`}
   name={`${namePrefix}duration`}
-  label={$i18n.t("pages.food.form.preservation.duration")}
+  label="pages.food.form.preservation.duration"
   bind:value={preservation.duration}
 />
 
 <InputTextarea
   id={`${idPrefix}description`}
   name={`${namePrefix}description`}
-  label={$i18n.t("pages.food.form.preservation.description")}
+  label="pages.food.form.preservation.description"
   bind:value={preservation.description}
 />

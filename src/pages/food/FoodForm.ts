@@ -2,7 +2,7 @@ import { i18n } from "i18next"
 import { Recepto } from "~/models/Recepto"
 import { NullableOption, Option } from "~/models/common"
 import { sortBy } from "~/utils/arrays"
-import { Food, Preparation, Preservation, Recipe, Replacement } from "~/models/Food"
+import { Food } from "~/models/Food"
 
 export type NewFood = Omit<Food, "id">
 export type FoodForm = NewFood | Food
@@ -20,36 +20,4 @@ export function getCategoryOptions(recepto: Recepto, i18n: i18n): Array<Nullable
     ...sortBy(recepto.categories, _ => _.name)
       .map(recipe => ({ label: recipe.name, value: recipe.id }))
   ]
-}
-
-export function buildPreservation(): Preservation {
-  return {
-    name: "",
-    duration: "",
-    description: ""
-  }
-}
-
-export function buildPreparation(): Preparation {
-  return {
-    name: "",
-    description: ""
-  }
-}
-
-export function buildReplacement(foodOptions: Array<Option>): Replacement {
-  return {
-    food: foodOptions[0].value,
-    description: ""
-  }
-}
-
-export function buildRecipe(): Recipe {
-  return {
-    name: "",
-    plates: 1,
-    duration: 0,
-    ingredients: [],
-    steps: ""
-  }
 }

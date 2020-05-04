@@ -64,6 +64,18 @@
             "label": "Category",
             "none": "None"
           },
+          "section": {
+            "title": "Sections",
+            "add": "New section",
+            "remove": "Remove section",
+            "choose": {
+              "preservation": "Preservation",
+              "preparation": "Preparation",
+              "recipe": "Recipe",
+              "replacement": "Replacement",
+              "description": "Description"
+            }
+          },
           "description": "Description",
           "preservation": {
             "title": "Preservations",

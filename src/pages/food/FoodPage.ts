@@ -2,19 +2,31 @@ import { i18n } from "i18next"
 import { navigate } from "svelte-routing"
 import receptoStore from "~/store/ReceptoStore"
 
-import { Food, FoodId, Replacement, Recipe, Ingredient } from "~/models/Food"
+import {
+  Food,
+  FoodId,
+  Replacement,
+  Recipe,
+  Ingredient,
+  Preservation,
+  Preparation,
+  Description,
+  Section, isRecipe
+} from "~/models/Food"
 import { Recepto } from "~/models/Recepto"
 import { isDefined, onDefined } from "~/utils/values"
 
-export type FullFood = Omit<Food, "replacements" | "recipes"> & {
-  replacements: Array<FullReplacement>
-  recipes: Array<FullRecipe>
+export type FullFood = Omit<Food, "sections"> & {
+  sections: Array<FullSection>
   usedFor: Array<RecipeIngredientInfo>
 }
 
-type FullReplacement = Omit<Replacement, "food"> & {
-  food: Food
-}
+type FullSection =
+  | Preservation
+  | Preparation
+  | FullRecipe
+  | FullReplacement
+  | Description
 
 export type FullRecipe = Omit<Recipe, "ingredients"> & {
   ingredients: Array<FullIngredient>
@@ -29,18 +41,22 @@ export type RecipeIngredientInfo = {
   food: Food
 }
 
+type FullReplacement = Omit<Replacement, "food"> & {
+  food: Food
+}
+
 export function buildFullFood(recepto: Recepto, id: FoodId | undefined): FullFood | undefined {
-  const ingredient = onDefined(id, id => recepto.foods.find(_ => _.id === id))
-  if (ingredient !== undefined) {
+  const food = onDefined(id, id => recepto.foods.find(_ => _.id === id))
+  if (food !== undefined) {
     return {
-      ...ingredient,
-      replacements: ingredient.replacements
-        .map(r => buildReplacement(recepto, r))
+      ...food,
+      sections: food.sections
+        .map(section => buildFullSection(recepto, section))
         .filter(isDefined),
-      recipes: ingredient.recipes.map(recipe => buildFullRecipe(recepto, recipe)),
       usedFor: recepto.foods
         .flatMap(food => {
-          return food.recipes
+          return food.sections
+            .filter(isRecipe)
             .filter(recipe => recipe.ingredients.some(_ => _.id === id))
             .map(recipe => ({ recipe, food }))
         })
@@ -48,6 +64,33 @@ export function buildFullFood(recepto: Recepto, id: FoodId | undefined): FullFoo
   } else {
     return undefined
   }
+}
+
+function buildFullSection(recepto: Recepto, section: Section): FullSection | undefined {
+  switch (section.type) {
+    case "recipe":
+      return buildFullRecipe(recepto, section)
+    case "replacement":
+      return buildReplacement(recepto, section)
+    default:
+      return section
+  }
+}
+
+export function buildFullRecipe(recepto: Recepto, recipe: Recipe): FullRecipe {
+  return {
+    ...recipe,
+    ingredients: buildFullIngredients(recepto, recipe)
+  }
+}
+
+function buildFullIngredients(recepto: Recepto, recipe: Recipe): Array<FullIngredient> {
+  return recipe.ingredients
+    .map(ingredient => onDefined(
+      recepto.foods.find(food => food.id === ingredient.id),
+      ref => ({ ...ingredient, ref })
+    ))
+    .filter(isDefined)
 }
 
 function buildReplacement(recepto: Recepto, replacement: Replacement): FullReplacement | undefined {
@@ -70,20 +113,4 @@ export function deleteFood(id: string | undefined, i18n: i18n): void {
       receptoStore.deleteFood(id)
     }
   })
-}
-
-export function buildFullRecipe(recepto: Recepto, recipe: Recipe): FullRecipe {
-  return {
-    ...recipe,
-    ingredients: buildFullIngredients(recepto, recipe)
-  }
-}
-
-function buildFullIngredients(recepto: Recepto, recipe: Recipe): Array<FullIngredient> {
-  return recipe.ingredients
-    .map(ingredient => onDefined(
-      recepto.foods.find(food => food.id === ingredient.id),
-      ref => ({ ...ingredient, ref })
-    ))
-    .filter(isDefined)
 }

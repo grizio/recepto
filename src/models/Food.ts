@@ -4,30 +4,39 @@ export type Food = {
   id: FoodId
   name: string
   category?: string
-  description: string
-  preservations: Array<Preservation>
-  preparations: Array<Preparation>
-  recipes: Array<Recipe>
-  replacements: Array<Replacement>
+  sections: Array<Section>
 }
 
+export type Section =
+  | Preservation
+  | Preparation
+  | Recipe
+  | Replacement
+  | Description
+
+export type SectionType = Section["type"]
+
 export type Preservation = {
+  type: "preservation"
   name: string
   duration: string
   description: string
 }
 
 export type Preparation = {
+  type: "preparation"
   name: string
   description: string
 }
 
 export type Replacement = {
+  type: "replacement"
   food: FoodId
   description: string
 }
 
 export type Recipe = {
+  type: "recipe"
   name: string
   plates: number
   duration: number
@@ -39,4 +48,13 @@ export type Ingredient = {
   id: FoodId
   quantity: number
   unit: string
+}
+
+export type Description = {
+  type: "description"
+  content: string
+}
+
+export function isRecipe(section: Section): section is Recipe {
+  return section.type === "recipe"
 }

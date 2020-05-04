@@ -15,6 +15,7 @@
   import PreservationSection from "./preservation/PreservationSection.svelte"
   import PreparationSection from "./preparation/PreparationSection.svelte"
   import ReplacementSection from "./replacement/ReplacementSection.svelte"
+  import SectionView from "./section/SectionView.svelte"
 
   /** @type {string} */
   export let id = undefined
@@ -36,39 +37,9 @@
           <Button danger on:click={() => deleteFood(id, $i18n)}>{$i18n.t("pages.food.page.actions.delete")}</Button>
         </div>
 
-        <MarkdownText value={food.description}/>
-
-        {#if nonEmpty(food.preservations)}
-          <h2>{$i18n.t("pages.food.page.preservations")}</h2>
-
-          {#each food.preservations as preservation}
-            <PreservationSection preservation={preservation}/>
-          {/each}
-        {/if}
-
-        {#if nonEmpty(food.preparations)}
-          <h2>{$i18n.t("pages.food.page.preparations")}</h2>
-
-          {#each food.preparations as preparation}
-            <PreparationSection preparation={preparation}/>
-          {/each}
-        {/if}
-
-        {#if nonEmpty(food.replacements)}
-          <h2>{$i18n.t("pages.food.page.replacements")}</h2>
-
-          {#each food.replacements as replacement}
-            <ReplacementSection replacement={replacement} />
-          {/each}
-        {/if}
-
-        {#if nonEmpty(food.recipes)}
-          <h2>{$i18n.t("pages.food.page.recipes.title")}</h2>
-
-          {#each food.recipes as recipe}
-            <RecipeSection recipe={recipe}/>
-          {/each}
-        {/if}
+        {#each food.sections as section}
+          <SectionView section={section} />
+        {/each}
 
         {#if nonEmpty(food.usedFor)}
           <h2>{$i18n.t("pages.food.page.usedFor")}</h2>

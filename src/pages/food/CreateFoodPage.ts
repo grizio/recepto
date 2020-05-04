@@ -6,11 +6,7 @@ import { NewFood } from "./FoodForm"
 export function buildNewFood(): NewFood {
   return {
     name: "",
-    description: "",
-    preservations: [],
-    preparations: [],
-    replacements: [],
-    recipes: []
+    sections: []
   }
 }
 

@@ -1,6 +1,13 @@
 import { i18n } from "i18next"
 import { Description, Preparation, Preservation, Recipe, Replacement, Section, SectionType } from "~/models/Food"
 import { Option } from "~/models/common"
+import { Recepto } from "~/models/Recepto"
+import { sortBy } from "~/utils/arrays"
+
+export function getFoodOptions(recepto: Recepto): Array<Option> {
+  return sortBy(recepto.foods, _ => _.name)
+    .map(recipe => ({ label: recipe.name, value: recipe.id }))
+}
 
 export type SectionTypeOption = {
   value: SectionType

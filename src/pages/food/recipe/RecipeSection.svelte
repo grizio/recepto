@@ -4,9 +4,14 @@
   import { splitParagraphs } from "~/utils/strings"
 
   import TwoColumns from "~/components/layout/TwoColumns.svelte"
+  import { buildFullIngredients } from "./RecipeSection"
 
-  /** @type {FullRecipe} */
+  /** @type {Recipe} */
   export let recipe
+
+  /** @type {Array<FullIngredient>} */
+  let ingredients
+  $: ingredients = buildFullIngredients($receptoStore, recipe)
 </script>
 
 <style>
@@ -66,7 +71,7 @@
       <h4>{$i18n.t("pages.food.page.recipes.ingredients")}</h4>
 
       <ul>
-        {#each recipe.ingredients as ingredient}
+        {#each ingredients as ingredient}
           <li>
             {ingredient.quantity} {ingredient.unit}
             <a href={`/food/${ingredient.id}`}>{ingredient.ref.name}</a>

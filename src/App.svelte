@@ -8,7 +8,6 @@
 
   import FoodPage from "~/pages/food/FoodPage.svelte"
   import CreateFoodPage from "~/pages/food/CreateFoodPage.svelte"
-  import UpdateFoodPage from "~/pages/food/UpdateFoodPage.svelte"
 
   import HomePage from "~/pages/home/HomePage.svelte"
   import TwoColumns from "~/components/layout/TwoColumns.svelte"
@@ -38,7 +37,6 @@
 
         <Route path="/searches" component={SearchesPage}/>
 
-        <Route path="/food/:id/update" component={UpdateFoodPage}/>
         <Route path="/food/:id" component={FoodPage}/>
         <Route path="/food" component={CreateFoodPage}/>
 

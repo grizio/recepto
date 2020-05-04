@@ -1,6 +1,6 @@
 <script>
   export let columns = "repeat(2, 1fr)"
-  export let gap = 0
+  export let gap = "0"
 </script>
 
 <style>

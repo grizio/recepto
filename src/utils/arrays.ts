@@ -28,6 +28,16 @@ export function removeAt<T>(array: Array<T>, at: number): Array<T> {
   return result
 }
 
+export function replaceAt<T>(array: Array<T>, at: number, by: (value: T) => T): Array<T> {
+  if (at < array.length) {
+    const result = [...array]
+    result.splice(at, 1, by(result[at]))
+    return result
+  } else {
+    return array
+  }
+}
+
 export function nonEmpty<T>(array: Array<T> | undefined): boolean {
   return array !== undefined && array !== null && array.length > 0
 }

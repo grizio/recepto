@@ -1,23 +1,25 @@
 <script>
+  import receptoStore from "~/store/ReceptoStore"
   import i18n from "~/i18n"
-  import { buildSectionTypeOptions, buildSection } from "./SectionForm"
+  import { buildSectionTypeOptions, buildSection, getFoodOptions } from "./SectionForm"
   import PreservationForm from "../preservation/PreservationForm.svelte"
   import PreparationForm from "../preparation/PreparationForm.svelte"
   import RecipeForm from "../recipe/RecipeForm.svelte"
   import ReplacementForm from "../replacement/ReplacementForm.svelte"
   import DescriptionForm from "../description/DescriptionForm.svelte"
-  import Button from "../../../components/buttons/Button.svelte"
+  import Button from "~/components/buttons/Button.svelte"
 
   /** @type {Section | undefined} */
   export let section = undefined
-  /** @type Array<Option> */
-  export let foodOptions
   /** @type {string} */
   export let id
   /** @type {string} */
   export let name
 
   let sectionTypeOptions = buildSectionTypeOptions($i18n)
+
+  let foodOptions
+  $: foodOptions = getFoodOptions($receptoStore)
 
   /**
    * @param {SectionType} sectionType

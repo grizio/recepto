@@ -1,8 +1,10 @@
 <script>
   import i18n from "~/i18n"
+  import { beforeUpdate, onMount } from "svelte"
+  import cloneDeep from "lodash/cloneDeep"
   import receptoStore from "~/store/ReceptoStore"
-  import { nonEmpty } from "~/utils/arrays"
-  import { buildFullFood, deleteFood } from "./FoodPage"
+  import { nonEmpty, replaceAt } from "~/utils/arrays"
+  import { deleteFood, getUsedFor, getFood } from "./FoodPage"
 
   import Button from "~/components/buttons/Button.svelte"
   import Grid from "~/components/layout/Grid.svelte"
@@ -10,46 +12,107 @@
   import Page from "~/components/Page.svelte"
   import TwoColumns from "~/components/layout/TwoColumns.svelte"
   import Collapsable from "~/components/collapsable/Collapsable.svelte"
-  import MarkdownText from "~/components/text/MarkdownText.svelte"
-  import RecipeSection from "./recipe/RecipeSection.svelte"
-  import PreservationSection from "./preservation/PreservationSection.svelte"
-  import PreparationSection from "./preparation/PreparationSection.svelte"
-  import ReplacementSection from "./replacement/ReplacementSection.svelte"
   import SectionView from "./section/SectionView.svelte"
+  import UpdatableSection from "~/components/updatable/UpdatableSection.svelte"
+  import PrimaryInformationSection from "./primaryInformation/PrimaryInformationSection.svelte"
+  import PrimaryInformationForm from "./primaryInformation/PrimaryInformationForm.svelte"
+  import SectionForm from "./section/SectionForm.svelte"
 
   /** @type {string} */
   export let id = undefined
 
-  /** @type {FullFood} */
+  /** @type {Food} */
+  let foodForm
+
   let food
-  $: food = buildFullFood($receptoStore, id)
+  $: food = getFood($receptoStore, id)
+  let usedFor
+  $: usedFor = getUsedFor($receptoStore, id)
+
+  onMount(() => resetForm())
+  beforeUpdate(() => {
+    if (food !== undefined && food.id !== id) {
+      resetForm()
+    }
+  })
+
+  function resetForm() {
+    foodForm = cloneDeep(food)
+  }
+
+  function savePrimaryInformation() {
+    receptoStore.updateFood(foodForm)
+  }
+
+  function cancelPrimaryInformation() {
+    foodForm = {
+      ...foodForm,
+      name: food.name,
+      category: food.category,
+    }
+  }
+
+  function saveSection(index) {
+    receptoStore.updateFoodSection(id, index, cloneDeep(foodForm.sections[index]))
+  }
+
+  function cancelSection(index) {
+    foodForm = {
+      ...foodForm,
+      sections: replaceAt(foodForm.sections, index, () => cloneDeep(food.sections[index]))
+    }
+  }
 </script>
+
+<style>
+  .delete-button {
+    margin-top: 16px;
+  }
+</style>
 
 <Page>
   {#if food}
-    <TwoColumns>
+    <TwoColumns gap="16px">
       <div>
-        <h1>{food.name}</h1>
+        <UpdatableSection on:save={savePrimaryInformation} on:cancel={cancelPrimaryInformation}>
+          <div slot="view">
+            <PrimaryInformationSection food={food}/>
+          </div>
 
-        <div>
-          <Button
-            href={`/food/${food.id}/update`}>{$i18n.t("pages.food.page.actions.modify")}</Button>
-          <Button danger on:click={() => deleteFood(id, $i18n)}>{$i18n.t("pages.food.page.actions.delete")}</Button>
-        </div>
+          <div slot="edit">
+            <PrimaryInformationForm bind:food={foodForm}/>
+          </div>
+        </UpdatableSection>
 
-        {#each food.sections as section}
-          <SectionView section={section} />
+        {#each food.sections as section, index}
+          <UpdatableSection on:save={() => saveSection(index)} on:cancel={() => cancelSection(index)}>
+            <div slot="view">
+              <SectionView section={section}/>
+            </div>
+
+            <div slot="edit">
+              <SectionForm
+                bind:section={foodForm.sections[index]}
+                id={`food-section-${index}`}
+                name={`section[${index}]`}
+              />
+            </div>
+          </UpdatableSection>
         {/each}
 
-        {#if nonEmpty(food.usedFor)}
+        {#if nonEmpty(usedFor)}
           <h2>{$i18n.t("pages.food.page.usedFor")}</h2>
 
           <Grid>
-            {#each food.usedFor as info}
+            {#each usedFor as info}
               <RecipeCard recipe={info.recipe} food={info.food}/>
             {/each}
           </Grid>
         {/if}
+
+        <div class="delete-button">
+          <Button danger on:click={() => deleteFood(id, $i18n)}>{$i18n.t("pages.food.page.actions.delete")}</Button>
+        </div>
       </div>
 
       <aside>

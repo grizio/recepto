@@ -133,7 +133,7 @@
           },
           "usedFor": "Utilisé pour",
           "actions": {
-            "modify": "Modifier",
+            "addSection": "Ajouter une section",
             "delete": "Supprimer",
             "confirmDelete": "Confirmez-vous la suppression de cet ingrédient ?"
           },

@@ -1,9 +1,16 @@
 <script>
-  import { createEventDispatcher } from "svelte"
+  import { createEventDispatcher, onMount } from "svelte"
 
   import Button from "~/components/buttons/Button.svelte"
 
+  /** @type {"view" | "edit"} */
+  export let initialState
+
   let editing = false
+
+  onMount(() => {
+    editing = initialState === "edit"
+  })
 
   const dispatch = createEventDispatcher()
 

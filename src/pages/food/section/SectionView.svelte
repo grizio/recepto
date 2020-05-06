@@ -9,14 +9,16 @@
   export let section
 </script>
 
-{#if section.type === "preservation"}
-  <PreservationSection preservation={section}/>
-{:else if section.type === "preparation"}
-  <PreparationSection preparation={section}/>
-{:else if section.type === "recipe"}
-  <RecipeSection recipe={section}/>
-{:else if section.type === "replacement"}
-  <ReplacementSection replacement={section}/>
-{:else if section.type === "description"}
-  <DescriptionSection description={section}/>
+{#if section}
+  {#if section.type === "preservation"}
+    <PreservationSection preservation={section}/>
+  {:else if section.type === "preparation"}
+    <PreparationSection preparation={section}/>
+  {:else if section.type === "recipe"}
+    <RecipeSection recipe={section}/>
+  {:else if section.type === "replacement"}
+    <ReplacementSection replacement={section}/>
+  {:else if section.type === "description"}
+    <DescriptionSection description={section}/>
+  {/if}
 {/if}

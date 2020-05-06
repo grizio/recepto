@@ -4,7 +4,15 @@
   import cloneDeep from "lodash/cloneDeep"
   import receptoStore from "~/store/ReceptoStore"
   import { nonEmpty, replaceAt } from "~/utils/arrays"
-  import { deleteFood, getUsedFor, getFood } from "./FoodPage"
+  import {
+    deleteFood,
+    getUsedFor,
+    getFood,
+    getSectionInfos,
+    addSectionInfo,
+    persistSection,
+    resetSection
+  } from "./FoodPage"
 
   import Button from "~/components/buttons/Button.svelte"
   import Grid from "~/components/layout/Grid.svelte"
@@ -24,10 +32,15 @@
   /** @type {Food} */
   let foodForm
 
+  /** @type {Array<SectionInfo>} */
+  let sections = []
+
   let food
   $: food = getFood($receptoStore, id)
   let usedFor
   $: usedFor = getUsedFor($receptoStore, id)
+  let hasUnsavedAddedSection
+  $: hasUnsavedAddedSection = sections.some(_ => _.initial === undefined)
 
   onMount(() => resetForm())
   beforeUpdate(() => {
@@ -37,11 +50,15 @@
   })
 
   function resetForm() {
-    foodForm = cloneDeep(food)
+    sections = getSectionInfos(food)
   }
 
   function savePrimaryInformation() {
-    receptoStore.updateFood(foodForm)
+    receptoStore.updateFood({
+      ...food,
+      name: foodForm.name,
+      category: foodForm.category,
+    })
   }
 
   function cancelPrimaryInformation() {
@@ -52,21 +69,22 @@
     }
   }
 
+  function addSection() {
+    sections = addSectionInfo(sections)
+  }
+
   function saveSection(index) {
-    receptoStore.updateFoodSection(id, index, cloneDeep(foodForm.sections[index]))
+    sections = persistSection(id, sections, index)
   }
 
   function cancelSection(index) {
-    foodForm = {
-      ...foodForm,
-      sections: replaceAt(foodForm.sections, index, () => cloneDeep(food.sections[index]))
-    }
+    sections = resetSection(sections, index)
   }
 </script>
 
 <style>
-  .delete-button {
-    margin-top: 16px;
+  section, .actions {
+    margin-bottom: 16px;
   }
 </style>
 
@@ -84,33 +102,47 @@
           </div>
         </UpdatableSection>
 
-        {#each food.sections as section, index}
-          <UpdatableSection on:save={() => saveSection(index)} on:cancel={() => cancelSection(index)}>
-            <div slot="view">
-              <SectionView section={section}/>
-            </div>
+        {#each sections as section, index}
+          <section>
+            <UpdatableSection
+              initialState={section.initial === undefined ? "edit" : "view"}
+              on:save={() => saveSection(index)}
+              on:cancel={() => cancelSection(index)}
+            >
+              <div slot="view">
+                <SectionView section={section.initial}/>
+              </div>
 
-            <div slot="edit">
-              <SectionForm
-                bind:section={foodForm.sections[index]}
-                id={`food-section-${index}`}
-                name={`section[${index}]`}
-              />
-            </div>
-          </UpdatableSection>
+              <div slot="edit">
+                <SectionForm
+                  bind:section={sections[index].editing}
+                  id={`food-section-${index}`}
+                  name={`section[${index}]`}
+                />
+              </div>
+            </UpdatableSection>
+          </section>
         {/each}
 
-        {#if nonEmpty(usedFor)}
-          <h2>{$i18n.t("pages.food.page.usedFor")}</h2>
-
-          <Grid>
-            {#each usedFor as info}
-              <RecipeCard recipe={info.recipe} food={info.food}/>
-            {/each}
-          </Grid>
+        {#if !hasUnsavedAddedSection}
+          <div class="actions">
+            <Button type="primary" on:click={addSection}>{$i18n.t("pages.food.page.actions.addSection")}</Button>
+          </div>
         {/if}
 
-        <div class="delete-button">
+        {#if nonEmpty(usedFor)}
+          <section>
+            <h2>{$i18n.t("pages.food.page.usedFor")}</h2>
+
+            <Grid>
+              {#each usedFor as info}
+                <RecipeCard recipe={info.recipe} food={info.food}/>
+              {/each}
+            </Grid>
+          </section>
+        {/if}
+
+        <div class="actions">
           <Button danger on:click={() => deleteFood(id, $i18n)}>{$i18n.t("pages.food.page.actions.delete")}</Button>
         </div>
       </div>

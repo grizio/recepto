@@ -31,6 +31,20 @@ class ReceptoStore implements Readable<Recepto> {
     }))
   }
 
+  addFoodSection = (id: FoodId, section: Section) => {
+    this.internal.update(recepto => ({
+      ...recepto,
+      foods: replaceWhere(
+        recepto.foods,
+        food => food.id === id,
+        food => ({
+          ...food,
+          sections: [...food.sections, section]
+        })
+      )
+    }))
+  }
+
   updateFoodSection = (id: FoodId, index: number, section: Section) => {
     this.internal.update(recepto => ({
       ...recepto,

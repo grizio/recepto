@@ -132,7 +132,7 @@
           },
           "usedFor": "Used for",
           "actions": {
-            "modify": "Modify",
+            "addSection": "Add section",
             "delete": "Delete",
             "confirmDelete": "Do you really want to delete this ingredient?"
           },

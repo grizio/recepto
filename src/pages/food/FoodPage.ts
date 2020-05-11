@@ -6,6 +6,7 @@ import { Recepto } from "~/models/Recepto"
 import { onDefined } from "~/utils/values"
 import receptoStore from "~/store/ReceptoStore"
 import { removeAt, replaceAt } from "~/utils/arrays"
+import { PrimaryInformation } from "~/pages/food/primaryInformation/PrimaryInformationForm"
 
 export type SectionInfo = {
   initial: Section | undefined
@@ -19,6 +20,13 @@ export type RecipeIngredientInfo = {
 
 export function getFood(recepto: Recepto, id: FoodId): Food | undefined {
   return recepto.foods.find(food => food.id === id)
+}
+
+export function getPrimaryInformation(food: Food): PrimaryInformation {
+  return {
+    name: food.name,
+    category: food.category
+  }
 }
 
 export function getSectionInfos(food: Food): Array<SectionInfo> {

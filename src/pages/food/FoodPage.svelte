@@ -12,7 +12,7 @@
     addSectionInfo,
     persistSection,
     resetSection,
-    deleteSection
+    deleteSection, getPrimaryInformation
   } from "./FoodPage"
 
   import Button from "~/components/buttons/Button.svelte"
@@ -30,8 +30,8 @@
   /** @type {string} */
   export let id = undefined
 
-  /** @type {Food} */
-  let foodForm
+  /** @type {PrimaryInformation} */
+  let primaryInformation
 
   /** @type {Array<SectionInfo>} */
   let sections = []
@@ -51,20 +51,20 @@
   })
 
   function resetForm() {
+    primaryInformation = getPrimaryInformation(food)
     sections = getSectionInfos(food)
   }
 
   function savePrimaryInformation() {
     receptoStore.updateFood({
       ...food,
-      name: foodForm.name,
-      category: foodForm.category,
+      name: primaryInformation.name,
+      category: primaryInformation.category,
     })
   }
 
   function cancelPrimaryInformation() {
-    foodForm = {
-      ...foodForm,
+    primaryInformation = {
       name: food.name,
       category: food.category,
     }
@@ -101,7 +101,7 @@
       </div>
 
       <div slot="edit">
-        <PrimaryInformationForm bind:food={foodForm}/>
+        <PrimaryInformationForm bind:primaryInformation={primaryInformation}/>
       </div>
     </UpdatableSection>
 

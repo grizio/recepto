@@ -1,17 +1,22 @@
 import { navigate } from "svelte-routing"
 import receptoStore from "~/store/ReceptoStore"
 import { canonicalize } from "~/utils/strings"
-import { NewFood } from "./FoodForm"
+import { PrimaryInformation } from "~/pages/food/primaryInformation/PrimaryInformationForm"
 
-export function buildNewFood(): NewFood {
+export function buildPrimaryInformation(): PrimaryInformation {
   return {
     name: "",
-    sections: []
+    category: undefined
   }
 }
 
-export function addFood(food: NewFood): void {
-  const id = canonicalize(food.name)
-  receptoStore.addFood({ ...food, id })
+export function addFood(primaryInformation: PrimaryInformation): void {
+  const id = canonicalize(primaryInformation.name)
+  receptoStore.addFood({
+    id,
+    name: primaryInformation.name,
+    category: primaryInformation.category,
+    sections: []
+  })
   navigate(`/food/${id}`)
 }

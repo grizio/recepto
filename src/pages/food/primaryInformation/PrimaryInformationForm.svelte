@@ -6,8 +6,8 @@
 
   import { getCategoryOptions } from "./PrimaryInformationForm"
 
-  /** @type {FoodForm} */
-  export let food
+  /** @type {PrimaryInformation} */
+  export let primaryInformation
 
   /** @type {Array<NullableOption>} */
   let categoryOptions
@@ -18,7 +18,7 @@
   id="food-name"
   name="name"
   label="pages.food.form.name"
-  bind:value={food.name}
+  bind:value={primaryInformation.name}
 />
 
 <InputSelect
@@ -26,5 +26,5 @@
   name="category"
   label="pages.food.form.category.label"
   options={categoryOptions}
-  bind:value={food.category}
+  bind:value={primaryInformation.category}
 />

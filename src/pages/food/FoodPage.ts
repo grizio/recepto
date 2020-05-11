@@ -69,6 +69,16 @@ export function resetSection(sections: Array<SectionInfo>, index: number): Array
   }
 }
 
+export function deleteSection(id: FoodId, sections: Array<SectionInfo>, index: number, i18n: i18n): Array<SectionInfo> {
+  const confirmed = confirm(i18n.t("pages.food.page.actions.confirmRemoveSection"))
+  if (confirmed) {
+    receptoStore.deleteFoodSection(id, index)
+    return removeAt(sections, index)
+  } else {
+    return sections
+  }
+}
+
 export function getUsedFor(recepto: Recepto, id: FoodId): Array<RecipeIngredientInfo> {
   return recepto.foods
     .flatMap(food => {

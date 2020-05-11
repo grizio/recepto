@@ -134,6 +134,8 @@
           "usedFor": "Utilisé pour",
           "actions": {
             "addSection": "Ajouter une section",
+            "removeSection": "Supprimer la section",
+            "confirmRemoveSection": "Confirmez-vous la suppression de cette section ?",
             "delete": "Supprimer",
             "confirmDelete": "Confirmez-vous la suppression de cet ingrédient ?"
           },

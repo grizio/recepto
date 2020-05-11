@@ -1,6 +1,6 @@
 import { Readable, Writable } from "svelte/store"
 import writableLocalStorage from "./writableLocalStorage"
-import { replaceAt, replaceWhere } from "~/utils/arrays"
+import { removeAt, replaceAt, replaceWhere } from "~/utils/arrays"
 import { buildInitialReceptoValue, Recepto } from "~/models/Recepto"
 import { Food, FoodId, Section } from "~/models/Food"
 import { Category } from "~/models/Category"
@@ -54,6 +54,20 @@ class ReceptoStore implements Readable<Recepto> {
         food => ({
           ...food,
           sections: replaceAt(food.sections, index, () => section)
+        })
+      )
+    }))
+  }
+
+  deleteFoodSection = (id: FoodId, index: number) => {
+    this.internal.update(recepto => ({
+      ...recepto,
+      foods: replaceWhere(
+        recepto.foods,
+        food => food.id === id,
+        food => ({
+          ...food,
+          sections: removeAt(food.sections, index)
         })
       )
     }))

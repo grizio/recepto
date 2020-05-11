@@ -64,6 +64,7 @@
 
     <Button on:click={onSave}>&#x2714</Button>
     <Button on:click={onCancel}>&#x274C</Button>
+    <slot name="actions" />
   {:else}
     <slot name="view"/>
 

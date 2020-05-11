@@ -133,6 +133,8 @@
           "usedFor": "Used for",
           "actions": {
             "addSection": "Add section",
+            "removeSection": "Remove section",
+            "confirmRemoveSection": "Do you really want to remove this section?",
             "delete": "Delete",
             "confirmDelete": "Do you really want to delete this ingredient?"
           },

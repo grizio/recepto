@@ -11,7 +11,8 @@
     getSectionInfos,
     addSectionInfo,
     persistSection,
-    resetSection
+    resetSection,
+    deleteSection
   } from "./FoodPage"
 
   import Button from "~/components/buttons/Button.svelte"
@@ -80,6 +81,10 @@
   function cancelSection(index) {
     sections = resetSection(sections, index)
   }
+
+  function removeSection(index) {
+    sections = deleteSection(id, sections, index, $i18n)
+  }
 </script>
 
 <style>
@@ -120,6 +125,12 @@
                   name={`section[${index}]`}
                 />
               </div>
+
+              <span slot="actions">
+                <Button danger on:click={() => removeSection(index)}>
+                  &#x1F5D1 {$i18n.t("pages.food.page.actions.removeSection")}
+                </Button>
+              </span>
             </UpdatableSection>
           </section>
         {/each}

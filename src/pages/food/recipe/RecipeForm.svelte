@@ -1,5 +1,6 @@
 <script>
-  import { buildIngredient } from "./RecipeForm"
+  import receptoStore from "~/store/ReceptoStore"
+  import { buildIngredient, getUnitOptions } from "./RecipeForm"
   import InputTextarea from "~/components/fields/InputTextarea.svelte"
   import InputSelect from "~/components/fields/InputSelect.svelte"
   import InputText from "~/components/fields/InputText.svelte"
@@ -16,9 +17,10 @@
   /** @type {string} */
   export let name
 
-  let idPrefix, namePrefix
+  let idPrefix, namePrefix, unitOptions
   $: idPrefix = id !== undefined ? `${id}-` : ""
   $: namePrefix = name !== undefined ? `${name}.` : ""
+  $: unitOptions = getUnitOptions($receptoStore)
 </script>
 
 <InputText
@@ -46,7 +48,7 @@
   title="pages.food.form.recipe.ingredient.title"
   addButtonLabel="pages.food.form.recipe.ingredient.add"
   removeButtonLabel="pages.food.form.recipe.ingredient.remove"
-  rowBuilder={() => buildIngredient(foodOptions)}
+  rowBuilder={() => buildIngredient(foodOptions, unitOptions)}
   bind:value={recipe.ingredients}
 
   let:index={index}
@@ -66,10 +68,11 @@
     bind:value={recipe.ingredients[index].quantity}
   />
 
-  <InputText
+  <InputSelect
     id={`${idPrefix}ingredients-${index}-unit`}
     name={`${namePrefix}ingredients[${index}].unit`}
     label="pages.food.form.recipe.ingredient.unit"
+    options={unitOptions}
     bind:value={recipe.ingredients[index].unit}
   />
 </InputCollection>

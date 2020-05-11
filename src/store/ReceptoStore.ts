@@ -5,6 +5,7 @@ import { buildInitialReceptoValue, Recepto } from "~/models/Recepto"
 import { Food, FoodId, Section } from "~/models/Food"
 import { Category } from "~/models/Category"
 import { Search } from "~/models/Search"
+import { Unit } from "~/models/Unit"
 
 class ReceptoStore implements Readable<Recepto> {
   private internal: Writable<Recepto>
@@ -99,6 +100,13 @@ class ReceptoStore implements Readable<Recepto> {
     this.internal.update(recepto => ({
       ...recepto,
       searches,
+    }))
+  }
+
+  updateUnits = (units: Array<Unit>) => {
+    this.internal.update(recepto => ({
+      ...recepto,
+      units
     }))
   }
 

@@ -4,6 +4,8 @@
 
   import CategoriesPage from "~/pages/categories/CategoriesPage.svelte"
 
+  import UnitsPage from "~/pages/units/UnitsPage.svelte"
+
   import SearchesPage from "~/pages/searches/SearchesPage.svelte"
 
   import FoodPage from "~/pages/food/FoodPage.svelte"
@@ -34,6 +36,8 @@
 
       <main>
         <Route path="/categories" component={CategoriesPage}/>
+
+        <Route path="/units" component={UnitsPage}/>
 
         <Route path="/searches" component={SearchesPage}/>
 

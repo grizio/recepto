@@ -33,6 +33,7 @@
       "newFood": "Nouvel ingrédient",
       "otherCategoryName": "Divers",
       "categories": "Catégories",
+      "units": "Unités",
       "searches": "Recherches sur des sites externes"
     },
     "pages": {
@@ -44,6 +45,17 @@
           "remove": "Supprimer la catégorie",
           "groupTitle": "Liste des catégories",
           "name": "Nom"
+        }
+      },
+      "units": {
+        "page": {
+          "title": "Unités",
+          "submit": "Sauvegarder",
+          "add": "Nouvelle unité",
+          "remove": "Supprimer l'unité",
+          "groupTitle": "Liste des unités",
+          "code": "Code (ex : cl)",
+          "label": "Libellé (ex: centilitre)"
         }
       },
       "searches": {
@@ -71,7 +83,7 @@
             "choose": {
               "preservation": "Préservation",
               "preparation": "Préparation",
-              "recipe": "Recettes do it yourself",
+              "recipe": "Recettes",
               "replacement": "Remplaçant",
               "description": "Description"
             }
@@ -100,7 +112,7 @@
             "remove": "Supprimer le remplaçant"
           },
           "recipe": {
-            "title": "Recettes do it yourself",
+            "title": "Recettes",
             "name": "Nom",
             "plates": "Nombre de personnes",
             "duration": "Durée",

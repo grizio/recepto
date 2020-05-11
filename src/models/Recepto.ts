@@ -1,11 +1,13 @@
 import { Category } from "./Category"
 import { Food } from "./Food"
 import { Search } from "./Search"
+import { Unit } from "./Unit"
 
 export type Recepto = {
   categories: Array<Category>
   foods: Array<Food>
   searches: Array<Search>
+  units: Array<Unit>
 }
 
 export function buildInitialReceptoValue(): Recepto {
@@ -20,6 +22,7 @@ export function buildInitialReceptoValue(): Recepto {
       { sitename: "Cuisine AZ", url: "https://www.cuisineaz.com/recettes/recherche_terme.aspx?recherche={s}" },
       { sitename: "Journal des femmes", url: "https://cuisine.journaldesfemmes.fr/s/?f_libelle={s}" },
       { sitename: "Recette.de", url: "https://recettes.de/{s}" },
-    ]
+    ],
+    units: []
   }
 }

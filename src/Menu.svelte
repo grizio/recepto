@@ -70,6 +70,7 @@
 
   <div class="section">
     <a href="/categories" class="button">{$i18n.t("menu.categories")}</a>
+    <a href="/units" class="button">{$i18n.t("menu.units")}</a>
     <a href="/searches" class="button">{$i18n.t("menu.searches")}</a>
   </div>
 

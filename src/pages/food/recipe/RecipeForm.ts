@@ -1,6 +1,13 @@
 import { Option } from "~/models/common"
 import { Ingredient } from "~/models/Food"
 import { Recepto } from "~/models/Recepto"
+import { fillBy } from "~/utils/arrays"
+
+export const durations: Array<string> = fillBy(6 * 60 / 5 + 1, durationMinutes => {
+  const hours = Math.floor(durationMinutes * 5 / 60)
+  const minutes = durationMinutes * 5 % 60
+  return `PT${hours}H${minutes}M`
+})
 
 export function buildIngredient(ingredientOptions: Array<Option>, unitOptions: Array<Option>): Ingredient {
   return {

@@ -1,6 +1,6 @@
 <script>
   import receptoStore from "~/store/ReceptoStore"
-  import { buildIngredient, getUnitOptions } from "./RecipeForm"
+  import { durations, buildIngredient, getUnitOptions } from "./RecipeForm"
   import InputTextarea from "~/components/fields/InputTextarea.svelte"
   import InputSelect from "~/components/fields/InputSelect.svelte"
   import InputText from "~/components/fields/InputText.svelte"
@@ -41,6 +41,7 @@
   id={`${idPrefix}duration`}
   name={`${namePrefix}duration`}
   label="pages.food.form.recipe.duration"
+  durations={durations}
   bind:value={recipe.duration}
 />
 

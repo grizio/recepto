@@ -41,3 +41,11 @@ export function replaceAt<T>(array: Array<T>, at: number, by: (value: T) => T): 
 export function nonEmpty<T>(array: Array<T> | undefined): boolean {
   return array !== undefined && array !== null && array.length > 0
 }
+
+export function fillBy<T>(length: number, fill: (index: number) => T): Array<T> {
+  const array = new Array(length)
+  for (let i = 0; i < length; i++) {
+    array[i] = fill(i)
+  }
+  return array
+}

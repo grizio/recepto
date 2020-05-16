@@ -8,6 +8,23 @@
           "hours": "{{count}}h",
           "minutes": "{{count}} min",
           "hoursAndMinutes": "{{hours}}h{{minutes}}"
+        },
+        "long": {
+          "text": "{{duration, longDuration}}",
+          "years": "{{count}} an",
+          "years_plural": "{{count}} ans",
+          "months": "{{count}} mois",
+          "months_plural": "{{count}} mois",
+          "weeks": "{{count}} semaine",
+          "weeks_plural": "{{count}} semaines",
+          "days": "{{count}} jour",
+          "days_plural": "{{count}} jours",
+          "hours": "{{count}} heure",
+          "hours_plural": "{{count}} heures",
+          "minutes": "{{count}} minute",
+          "minutes_plural": "{{count}} minutes",
+          "seconds": "{{count}} seconde",
+          "seconds_plural": "{{count}} secondes"
         }
       },
       "minutes": "{{count}} minute",

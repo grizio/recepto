@@ -6,6 +6,6 @@
   export let preservation
 </script>
 
-<h3>{preservation.name} ({ preservation.duration })</h3>
+<h3>{preservation.name} ({ $i18n.t("common.duration.long.text", {duration: preservation.duration}) })</h3>
 
 <MarkdownText value={preservation.description}/>

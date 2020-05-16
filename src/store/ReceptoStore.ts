@@ -1,6 +1,6 @@
 import { Readable, Writable } from "svelte/store"
 import writableLocalStorage from "./writableLocalStorage"
-import { removeAt, replaceAt, replaceWhere } from "~/utils/arrays"
+import { removeAt, removeWhere, replaceAt, replaceWhere } from "~/utils/arrays"
 import { buildInitialReceptoValue, Recepto } from "~/models/Recepto"
 import { Food, FoodId, Section } from "~/models/Food"
 import { Category } from "~/models/Category"
@@ -81,18 +81,24 @@ class ReceptoStore implements Readable<Recepto> {
     }))
   }
 
-  updateCategories = (categories: Array<Category>) => {
-    const categoryIds = categories.map(_ => _.id)
+  addCategory = (category: Category) => {
     this.internal.update(recepto => ({
       ...recepto,
-      categories: categories,
-      ingredients: recepto.foods.map(food => {
-        if (food.category === undefined || categoryIds.includes(food.category)) {
-          return food
-        } else {
-          return { ...food, category: undefined }
-        }
-      })
+      categories: [...recepto.categories, category]
+    }))
+  }
+
+  updateCategory = (category: Category) => {
+    this.internal.update(recepto => ({
+      ...recepto,
+      categories: replaceWhere(recepto.categories, _ => _.id === category.id, () => category)
+    }))
+  }
+
+  deleteCategory = (id: string) => {
+    this.internal.update(recepto => ({
+      ...recepto,
+      categories: removeWhere(recepto.categories, _ => _.id === id)
     }))
   }
 

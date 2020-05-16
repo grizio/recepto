@@ -49,19 +49,25 @@
       "foods": "Ingrédients",
       "newFood": "Nouvel ingrédient",
       "otherCategoryName": "Divers",
-      "categories": "Catégories",
       "units": "Unités",
-      "searches": "Recherches sur des sites externes"
+      "searches": "Recherches sur des sites externes",
+      "categories": {
+        "add": "Ajouter",
+        "name": "Nom",
+        "save": "Valider",
+        "cancel": "Annuler"
+      }
     },
     "pages": {
-      "categories": {
+      "category": {
         "page": {
-          "title": "Catégories",
-          "submit": "Sauvegarder",
-          "add": "Nouvelle catégorie",
-          "remove": "Supprimer la catégorie",
-          "groupTitle": "Liste des catégories",
-          "name": "Nom"
+          "edit": {
+            "name": "Nom"
+          },
+          "actions": {
+            "delete": "Supprimer",
+            "confirmDelete": "Voulez-vous vraiment supprimer cette catégorie ?"
+          }
         }
       },
       "units": {

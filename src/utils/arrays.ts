@@ -8,16 +8,24 @@ export function replaceWhere<T>(array: Array<T>, where: (value: T) => boolean, b
   })
 }
 
+export function removeWhere<T>(array: Array<T>, where: (value: T) => boolean): Array<T> {
+  return array.filter(value => !where(value))
+}
+
 export function sortBy<T>(array: Array<T>, by: (value: T) => string | number): Array<T> {
   return array.sort((item1, item2) => {
     const by1 = by(item1)
     const by2 = by(item2)
-    if (by1 < by2) {
-      return -1
-    } else if (by1 > by2) {
-      return 1
+    if (typeof by1 === "string" && typeof by2 === "string") {
+      return by1.localeCompare(by2)
     } else {
-      return 0
+      if (by1 < by2) {
+        return -1
+      } else if (by1 > by2) {
+        return 1
+      } else {
+        return 0
+      }
     }
   })
 }

@@ -49,19 +49,25 @@
       "foods": "Foods",
       "newFood": "New food",
       "otherCategoryName": "Others",
-      "categories": "Categories",
       "units": "Units",
-      "searches": "External website searches"
+      "searches": "External website searches",
+      "categories": {
+        "add": "Add",
+        "name": "Name",
+        "save": "Save",
+        "cancel": "Cancel"
+      }
     },
     "pages": {
-      "categories": {
+      "category": {
         "page": {
-          "title": "Categories",
-          "submit": "Submit",
-          "add": "New category",
-          "remove": "Remove category",
-          "groupTitle": "Category list",
-          "name": "Name"
+          "edit": {
+            "name": "Name"
+          },
+          "actions": {
+            "delete": "Delete",
+            "confirmDelete": "Do you really want to delete this category?"
+          }
         }
       },
       "searches": {

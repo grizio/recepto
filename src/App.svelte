@@ -1,12 +1,12 @@
 <script>
-  import Menu from "~/Menu.svelte"
+  import Menu from "~/components/menu/Menu.svelte"
   import { Router, Route, links } from "svelte-routing"
-
-  import CategoriesPage from "~/pages/categories/CategoriesPage.svelte"
 
   import UnitsPage from "~/pages/units/UnitsPage.svelte"
 
   import SearchesPage from "~/pages/searches/SearchesPage.svelte"
+
+  import CategoryPage from "~/pages/category/CategoryPage.svelte"
 
   import FoodPage from "~/pages/food/FoodPage.svelte"
   import CreateFoodPage from "~/pages/food/CreateFoodPage.svelte"
@@ -31,15 +31,15 @@
 
 <div use:links>
   <Router url={url}>
-    <TwoColumns columns="300px auto">
+    <TwoColumns columns="500px auto">
       <Menu/>
 
       <main>
-        <Route path="/categories" component={CategoriesPage}/>
-
         <Route path="/units" component={UnitsPage}/>
 
         <Route path="/searches" component={SearchesPage}/>
+
+        <Route path="/category/:id" component={CategoryPage}/>
 
         <Route path="/food/:id" component={FoodPage}/>
         <Route path="/food" component={CreateFoodPage}/>

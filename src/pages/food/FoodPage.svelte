@@ -20,7 +20,6 @@
   import Button from "~/components/buttons/Button.svelte"
   import Grid from "~/components/layout/Grid.svelte"
   import RecipeCard from "~/components/card/RecipeCard.svelte"
-  import Page from "~/components/Page.svelte"
   import Collapsable from "~/components/collapsable/Collapsable.svelte"
   import SectionView from "./section/SectionView.svelte"
   import UpdatableSection from "~/components/updatable/UpdatableSection.svelte"
@@ -99,79 +98,78 @@
   }
 </style>
 
-<Page>
-  {#if food}
-    <UpdatableSection on:save={savePrimaryInformation} on:cancel={cancelPrimaryInformation}>
-      <div slot="view">
-        <PrimaryInformationSection food={food}/>
-      </div>
+{#if food}
+  <UpdatableSection on:save={savePrimaryInformation} on:cancel={cancelPrimaryInformation}>
+    <div slot="view">
+      <PrimaryInformationSection food={food}/>
+    </div>
 
-      <div slot="edit">
-        <PrimaryInformationForm bind:primaryInformation={primaryInformation}/>
-      </div>
-    </UpdatableSection>
+    <div slot="edit">
+      <PrimaryInformationForm bind:primaryInformation={primaryInformation}/>
+    </div>
+  </UpdatableSection>
 
-    {#each sections as section, index}
-      <section>
-        <UpdatableSection
-          initialState={section.initial === undefined ? "edit" : "view"}
-          on:save={() => saveSection(index)}
-          on:cancel={() => cancelSection(index)}
-        >
-          <div slot="view">
-            <SectionView section={section.initial}/>
-          </div>
+  {#each sections as section, index}
+    <section>
+      <UpdatableSection
+        initialState={section.initial === undefined ? "edit" : "view"}
+        on:save={() => saveSection(index)}
+        on:cancel={() => cancelSection(index)}
+      >
+        <div slot="view">
+          <SectionView section={section.initial}/>
+        </div>
 
-          <div slot="edit">
-            <SectionForm
-              bind:section={sections[index].editing}
-              id={`food-section-${index}`}
-              name={`section[${index}]`}
-            />
-          </div>
+        <div slot="edit">
+          <SectionForm
+            bind:section={sections[index].editing}
+            id={`food-section-${index}`}
+            name={`section[${index}]`}
+          />
+        </div>
 
-          <span slot="actions">
+        <span slot="actions">
             <Button danger on:click={() => removeSection(index)}>
               &#x1F5D1 {$i18n.t("pages.food.page.actions.removeSection")}
             </Button>
           </span>
-        </UpdatableSection>
-      </section>
-    {/each}
+      </UpdatableSection>
+    </section>
+  {/each}
 
-    {#if !hasUnsavedAddedSection}
-      <div class="actions">
-        <Button type="primary" on:click={addSection}>{$i18n.t("pages.food.page.actions.addSection")}</Button>
-      </div>
-    {/if}
-
-    {#if nonEmpty(usedFor)}
-      <section>
-        <h2>{$i18n.t("pages.food.page.usedFor")}</h2>
-
-        <Grid>
-          {#each usedFor as info}
-            <RecipeCard recipe={info.recipe} food={info.food}/>
-          {/each}
-        </Grid>
-      </section>
-    {/if}
-
-    <aside>
-      {#each $receptoStore.searches as search}
-        <Collapsable summary={$i18n.t("pages.food.page.asideSearch", { sitename: search.sitename })}>
-          <iframe src={search.url.replace("{s}", food.name)}
-                  title={$i18n.t("pages.food.page.asideSearch", { sitename: search.sitename })}
-                  width="100%"
-                  height="500px"></iframe>
-        </Collapsable>
-      {/each}
-    </aside>
-
+  {#if !hasUnsavedAddedSection}
     <div class="actions">
-      <Button danger on:click={() => deleteFood(categoryId, foodId, $i18n)}>{$i18n.t("pages.food.page.actions.delete")}</Button>
+      <Button type="primary" on:click={addSection}>{$i18n.t("pages.food.page.actions.addSection")}</Button>
     </div>
-  {:else}
-    <h1>{$i18n.t("common.notFound")}</h1>
   {/if}
-</Page>
+
+  {#if nonEmpty(usedFor)}
+    <section>
+      <h2>{$i18n.t("pages.food.page.usedFor")}</h2>
+
+      <Grid>
+        {#each usedFor as info}
+          <RecipeCard recipe={info.recipe} food={info.food}/>
+        {/each}
+      </Grid>
+    </section>
+  {/if}
+
+  <aside>
+    {#each $receptoStore.searches as search}
+      <Collapsable summary={$i18n.t("pages.food.page.asideSearch", { sitename: search.sitename })}>
+        <iframe src={search.url.replace("{s}", food.name)}
+                title={$i18n.t("pages.food.page.asideSearch", { sitename: search.sitename })}
+                width="100%"
+                height="500px"></iframe>
+      </Collapsable>
+    {/each}
+  </aside>
+
+  <div class="actions">
+    <Button danger
+            on:click={() => deleteFood(categoryId, foodId, $i18n)}>{$i18n.t("pages.food.page.actions.delete")}</Button>
+  </div>
+{:else}
+  <h1>{$i18n.t("common.notFound")}</h1>
+{/if}

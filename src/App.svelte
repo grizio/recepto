@@ -13,6 +13,7 @@
 
   import HomePage from "~/pages/home/HomePage.svelte"
   import TwoColumns from "~/components/layout/TwoColumns.svelte"
+  import PageRoute from "~/components/page/PageRoute.svelte"
 
   export let url = ""
 </script>
@@ -35,16 +36,16 @@
       <Menu/>
 
       <main>
-        <Route path="/units" component={UnitsPage}/>
+        <PageRoute path="/units" component={UnitsPage}/>
 
-        <Route path="/searches" component={SearchesPage}/>
+        <PageRoute path="/searches" component={SearchesPage}/>
 
 
-        <Route path="/category/:categoryId/food/:foodId" component={FoodPage}/>
-        <Route path="/category/:categoryId/food" component={CreateFoodPage}/>
-        <Route path="/category/:categoryId" component={CategoryPage}/>
+        <PageRoute path="/category/:categoryId/food/:foodId" component={FoodPage}/>
+        <PageRoute path="/category/:categoryId/food" component={CreateFoodPage}/>
+        <PageRoute path="/category/:categoryId" component={CategoryPage}/>
 
-        <Route path="/" component={HomePage}/>
+        <PageRoute path="/" component={HomePage}/>
 
         <div class="space"></div>
       </main>

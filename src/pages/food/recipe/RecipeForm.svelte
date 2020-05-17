@@ -7,6 +7,7 @@
   import InputNumber from "~/components/fields/InputNumber.svelte"
   import InputDuration from "~/components/fields/InputDuration.svelte"
   import InputCollection from "~/components/fields/InputCollection.svelte"
+  import InputRadio from "~/components/fields/InputRadio.svelte"
 
   /** @type {Recipe} */
   export let recipe
@@ -69,7 +70,7 @@
     bind:value={recipe.ingredients[index].quantity}
   />
 
-  <InputSelect
+  <InputRadio
     id={`${idPrefix}ingredients-${index}-unit`}
     name={`${namePrefix}ingredients[${index}].unit`}
     label="pages.food.form.recipe.ingredient.unit"

@@ -6,7 +6,10 @@
   import Button from "~/components/buttons/Button.svelte"
   import PrimaryInformationForm from "./primaryInformation/PrimaryInformationForm.svelte"
 
-  let primaryInformation = buildPrimaryInformation()
+  /** @type {string} */
+  export let categoryId
+
+  let primaryInformation = buildPrimaryInformation(categoryId)
 </script>
 
 <Page>

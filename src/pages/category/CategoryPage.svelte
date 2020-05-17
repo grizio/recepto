@@ -9,20 +9,20 @@
   import Button from "../../components/buttons/Button.svelte"
 
   /** @type {string} */
-  export let id = undefined
+  export let categoryId = undefined
 
   /** @type {string} */
   let name = ""
 
   let category
-  $: category = findCategory($receptoStore, id)
+  $: category = findCategory($receptoStore, categoryId)
 
   onMount(() => {
     name = category.name
   })
 
   function saveName() {
-    saveCategory(id, name)
+    saveCategory(categoryId, name)
   }
 
   function cancelName() {
@@ -43,7 +43,7 @@
     </UpdatableSection>
 
     <div class="actions">
-      <Button danger on:click={() => deleteCategory(id, $i18n)}>{$i18n.t("pages.category.page.actions.delete")}</Button>
+      <Button danger on:click={() => deleteCategory(categoryId, $i18n)}>{$i18n.t("pages.category.page.actions.delete")}</Button>
     </div>
   {:else}
     <h1>{$i18n.t("common.notFound")}</h1>

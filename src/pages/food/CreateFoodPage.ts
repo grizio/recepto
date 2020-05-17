@@ -2,11 +2,12 @@ import { navigate } from "svelte-routing"
 import receptoStore from "~/store/ReceptoStore"
 import { canonicalize } from "~/utils/strings"
 import { PrimaryInformation } from "~/pages/food/primaryInformation/PrimaryInformationForm"
+import { CategoryId } from "~/models/Category"
 
-export function buildPrimaryInformation(): PrimaryInformation {
+export function buildPrimaryInformation(categoryId: CategoryId): PrimaryInformation {
   return {
     name: "",
-    category: undefined
+    category: categoryId
   }
 }
 
@@ -18,5 +19,5 @@ export function addFood(primaryInformation: PrimaryInformation): void {
     category: primaryInformation.category,
     sections: []
   })
-  navigate(`/food/${id}`)
+  navigate(`/category/${primaryInformation.category}/food/${id}`)
 }

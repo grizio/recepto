@@ -1,17 +1,15 @@
-import { i18n } from "i18next"
 import { Recepto } from "~/models/Recepto"
-import { NullableOption } from "~/models/common"
+import { Option } from "~/models/common"
 import { sortBy } from "~/utils/arrays"
+import { CategoryId } from "~/models/Category"
 
 export type PrimaryInformation = {
   name: string
-  category?: string
+  category: CategoryId
 }
 
-export function getCategoryOptions(recepto: Recepto, i18n: i18n): Array<NullableOption> {
+export function getCategoryOptions(recepto: Recepto): Array<Option> {
   return [
-    { label: i18n.t("pages.food.form.category.none"), value: undefined },
-
     ...sortBy(recepto.categories, _ => _.name)
       .map(recipe => ({ label: recipe.name, value: recipe.id }))
   ]

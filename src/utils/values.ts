@@ -1,4 +1,6 @@
-export function onDefined<T, U>(value: T | undefined, op: (value: T) => U): U | undefined {
+export type Nullable<T> = T | undefined | null
+
+export function onDefined<T, U>(value: Nullable<T>, op: (value: T) => U): U | undefined {
   if (value !== undefined && value !== null) {
     return op(value)
   } else {

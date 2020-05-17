@@ -1,26 +1,20 @@
 <script>
+  import { getContext } from "svelte"
+  import { ROUTER } from "svelte-routing/src/contexts"
   import i18n from "~/i18n"
   import receptoStore from "~/store/ReceptoStore"
   import TwoColumns from "../layout/TwoColumns.svelte"
-  import { getCategories, getFoodsFromCategory } from "./Menu"
-  import { onMount } from "svelte"
+  import { getActiveCategoryId, getActiveFoodId, getCategories, getFoodsFromCategory } from "./Menu"
   import Button from "../buttons/Button.svelte"
-  import UpdatableSection from "../updatable/UpdatableSection.svelte"
   import AddCategory from "./AddCategory.svelte"
 
-  let activeCategory
+  const { activeRoute } = getContext(ROUTER)
 
-  let categories, foods
+  let activeCategoryId, activeFoodId, categories, foods
+  $: activeCategoryId = getActiveCategoryId($activeRoute)
+  $: activeFoodId = getActiveFoodId($activeRoute)
   $: categories = getCategories($receptoStore)
-  $: foods = getFoodsFromCategory($receptoStore, activeCategory)
-
-  onMount(() => {
-    selectCategory(categories[0])
-  })
-
-  function selectCategory(category) {
-    activeCategory = category
-  }
+  $: foods = getFoodsFromCategory($receptoStore, activeCategoryId)
 </script>
 
 <style>
@@ -103,8 +97,7 @@
       <div class="menu-column">
         <ul>
           {#each categories as category}
-            <li on:click={() => selectCategory(category)}
-                aria-current={activeCategory === category}>
+            <li aria-current={activeCategoryId === category.id}>
               <a href={`/category/${category.id}`}>
                 {category.name}
               </a>
@@ -112,21 +105,23 @@
           {/each}
         </ul>
 
-        <AddCategory />
+        <AddCategory/>
       </div>
 
       <div class="menu-column">
         <ul>
           {#each foods as food}
-            <li>
-              <a href={`/food/${food.id}`}>
+            <li aria-current={activeFoodId === food.id}>
+              <a href={`/category/${activeCategoryId}/food/${food.id}`}>
                 {food.name}
               </a>
             </li>
           {/each}
         </ul>
 
-        <a href="/food" class="add-button">{$i18n.t("menu.newFood")}</a>
+        {#if activeCategoryId !== undefined}
+          <a href={`/category/${activeCategoryId}/food`} class="add-button">{$i18n.t("menu.newFood")}</a>
+        {/if}
       </div>
     </TwoColumns>
   </div>

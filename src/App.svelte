@@ -39,10 +39,10 @@
 
         <Route path="/searches" component={SearchesPage}/>
 
-        <Route path="/category/:id" component={CategoryPage}/>
 
-        <Route path="/food/:id" component={FoodPage}/>
-        <Route path="/food" component={CreateFoodPage}/>
+        <Route path="/category/:categoryId/food/:foodId" component={FoodPage}/>
+        <Route path="/category/:categoryId/food" component={CreateFoodPage}/>
+        <Route path="/category/:categoryId" component={CategoryPage}/>
 
         <Route path="/" component={HomePage}/>
 

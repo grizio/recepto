@@ -3,8 +3,10 @@ import { Food } from "./Food"
 import { Recepto } from "./Recepto"
 import { nonEmpty, sortBy } from "~/utils/arrays"
 
+export type CategoryId = string
+
 export type Category = {
-  id: string
+  id: CategoryId
   name: string
 }
 

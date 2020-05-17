@@ -1,9 +1,11 @@
+import { CategoryId } from "~/models/Category"
+
 export type FoodId = string
 
 export type Food = {
   id: FoodId
   name: string
-  category?: string
+  category: CategoryId
   sections: Array<Section>
 }
 

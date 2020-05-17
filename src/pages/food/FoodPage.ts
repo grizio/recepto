@@ -3,10 +3,10 @@ import { i18n } from "i18next"
 import cloneDeep from "lodash/cloneDeep"
 import { Food, FoodId, isRecipe, Recipe, Section } from "~/models/Food"
 import { Recepto } from "~/models/Recepto"
-import { onDefined } from "~/utils/values"
 import receptoStore from "~/store/ReceptoStore"
 import { removeAt, replaceAt } from "~/utils/arrays"
 import { PrimaryInformation } from "~/pages/food/primaryInformation/PrimaryInformationForm"
+import { CategoryId } from "~/models/Category"
 
 export type SectionInfo = {
   initial: Section | undefined
@@ -18,8 +18,8 @@ export type RecipeIngredientInfo = {
   food: Food
 }
 
-export function getFood(recepto: Recepto, id: FoodId): Food | undefined {
-  return recepto.foods.find(food => food.id === id)
+export function getFood(recepto: Recepto, categoryId: CategoryId, id: FoodId): Food | undefined {
+  return recepto.foods.find(food => food.id === id && food.category === categoryId)
 }
 
 export function getPrimaryInformation(food: Food): PrimaryInformation {
@@ -97,12 +97,10 @@ export function getUsedFor(recepto: Recepto, id: FoodId): Array<RecipeIngredient
     })
 }
 
-export function deleteFood(id: string | undefined, i18n: i18n): void {
-  onDefined(id, id => {
-    const confirmed = confirm(i18n.t("pages.food.page.actions.confirmDelete"))
-    if (confirmed) {
-      navigate(`/`)
-      receptoStore.deleteFood(id)
-    }
-  })
+export function deleteFood(categoryId: CategoryId, foodId: FoodId, i18n: i18n): void {
+  const confirmed = confirm(i18n.t("pages.food.page.actions.confirmDelete"))
+  if (confirmed) {
+    navigate(`/category/${categoryId}`)
+    receptoStore.deleteFood(foodId)
+  }
 }

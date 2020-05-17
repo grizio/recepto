@@ -9,9 +9,9 @@
   /** @type {PrimaryInformation} */
   export let primaryInformation
 
-  /** @type {Array<NullableOption>} */
+  /** @type {Array<Option>} */
   let categoryOptions
-  $: categoryOptions = getCategoryOptions($receptoStore, $i18n)
+  $: categoryOptions = getCategoryOptions($receptoStore)
 </script>
 
 <InputText

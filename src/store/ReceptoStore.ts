@@ -102,10 +102,17 @@ class ReceptoStore implements Readable<Recepto> {
     }))
   }
 
-  updateSearches = (searches: Array<Search>) => {
+  addSearch = (search: Search) => {
     this.internal.update(recepto => ({
       ...recepto,
-      searches,
+      searches: [...recepto.searches, search]
+    }))
+  }
+
+  removeSearch = (index: number) => {
+    this.internal.update(recepto => ({
+      ...recepto,
+      searches: removeAt(recepto.searches, index)
     }))
   }
 

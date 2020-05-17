@@ -96,7 +96,6 @@
 
   <div class="section">
     <a href="/units" class="button">{$i18n.t("menu.units")}</a>
-    <a href="/searches" class="button">{$i18n.t("menu.searches")}</a>
   </div>
 
   <div class="menu">

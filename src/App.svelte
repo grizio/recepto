@@ -4,8 +4,6 @@
 
   import UnitsPage from "~/pages/units/UnitsPage.svelte"
 
-  import SearchesPage from "~/pages/searches/SearchesPage.svelte"
-
   import CategoryPage from "~/pages/category/CategoryPage.svelte"
 
   import FoodPage from "~/pages/food/FoodPage.svelte"
@@ -31,14 +29,11 @@
 
 <div use:links>
   <Router url={url}>
-    <TwoColumns columns="500px auto">
+    <TwoColumns columns="400px auto">
       <Menu/>
 
       <main>
         <PageRoute path="/units" component={UnitsPage}/>
-
-        <PageRoute path="/searches" component={SearchesPage}/>
-
 
         <PageRoute path="/category/:categoryId/food/:foodId" component={FoodPage}/>
         <PageRoute path="/category/:categoryId" component={CategoryPage}/>

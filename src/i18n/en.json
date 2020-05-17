@@ -47,7 +47,6 @@
     "menu": {
       "appName": "Recepto",
       "units": "Units",
-      "searches": "External website searches",
       "categories": {
         "add": "Add",
         "name": "Name",
@@ -71,17 +70,6 @@
             "delete": "Delete",
             "confirmDelete": "Do you really want to delete this category?"
           }
-        }
-      },
-      "searches": {
-        "page": {
-          "title": "External website searches",
-          "submit": "Submit",
-          "add": "New website",
-          "remove": "Remove website",
-          "groupTitle": "Website searches",
-          "sitename": "Site name",
-          "url": "URL ({s} will be replaced by the concrete search, ex: my.website.com?search={s})"
         }
       },
       "food": {
@@ -166,6 +154,15 @@
             "confirmDelete": "Do you really want to delete this ingredient?"
           },
           "asideSearch": "Search on {{ sitename }}"
+        },
+        "searches": {
+          "add": "Add",
+          "sitename": "Site name",
+          "url": "URL ({s} will be replaced by the concrete search, ex: my.website.com?search={s})",
+          "save": "Save",
+          "remove": "Remove",
+          "confirmRemove": "Do you really want to remove this search?",
+          "cancel": "Cancel"
         }
       },
       "home": {

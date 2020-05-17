@@ -46,12 +46,15 @@
     },
     "menu": {
       "appName": "Recepto",
-      "foods": "Ingrédients",
-      "newFood": "Nouvel ingrédient",
-      "otherCategoryName": "Divers",
       "units": "Unités",
       "searches": "Recherches sur des sites externes",
       "categories": {
+        "add": "Ajouter",
+        "name": "Nom",
+        "save": "Valider",
+        "cancel": "Annuler"
+      },
+      "foods": {
         "add": "Ajouter",
         "name": "Nom",
         "save": "Valider",
@@ -175,12 +178,6 @@
             "confirmDelete": "Confirmez-vous la suppression de cet ingrédient ?"
           },
           "asideSearch": "Chercher sur {{ sitename }}"
-        },
-        "create": {
-          "title": "Nouvel ingrédient"
-        },
-        "update": {
-          "title": "Modifier {{ingredient}}"
         }
       },
       "home": {

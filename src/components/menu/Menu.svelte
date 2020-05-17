@@ -7,6 +7,7 @@
   import { getActiveCategoryId, getActiveFoodId, getCategories, getFoodsFromCategory } from "./Menu"
   import Button from "../buttons/Button.svelte"
   import AddCategory from "./AddCategory.svelte"
+  import AddFood from "./AddFood.svelte"
 
   const { activeRoute } = getContext(ROUTER)
 
@@ -44,6 +45,12 @@
   .menu {
     border-top: 1px solid var(--gray-6);
     border-bottom: 1px solid var(--gray-6);
+  }
+
+  .menu-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .menu-column:first-of-type {
@@ -120,7 +127,7 @@
         </ul>
 
         {#if activeCategoryId !== undefined}
-          <a href={`/category/${activeCategoryId}/food`} class="add-button">{$i18n.t("menu.newFood")}</a>
+          <AddFood categoryId={activeCategoryId}/>
         {/if}
       </div>
     </TwoColumns>

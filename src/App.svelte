@@ -9,7 +9,6 @@
   import CategoryPage from "~/pages/category/CategoryPage.svelte"
 
   import FoodPage from "~/pages/food/FoodPage.svelte"
-  import CreateFoodPage from "~/pages/food/CreateFoodPage.svelte"
 
   import HomePage from "~/pages/home/HomePage.svelte"
   import TwoColumns from "~/components/layout/TwoColumns.svelte"
@@ -42,7 +41,6 @@
 
 
         <PageRoute path="/category/:categoryId/food/:foodId" component={FoodPage}/>
-        <PageRoute path="/category/:categoryId/food" component={CreateFoodPage}/>
         <PageRoute path="/category/:categoryId" component={CategoryPage}/>
 
         <PageRoute path="/" component={HomePage}/>

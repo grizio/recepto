@@ -3,7 +3,10 @@
   import Button from "~/components/buttons/Button.svelte"
   import InputText from "~/components/fields/InputText.svelte"
   import TwoColumns from "../layout/TwoColumns.svelte"
-  import { addCategory } from "./Menu"
+  import { addFood } from "./Menu"
+
+  /** @type {string} */
+  export let categoryId
 
   let state = "view"
   let name = ""
@@ -13,7 +16,7 @@
   }
 
   function save() {
-    addCategory(name)
+    addFood(categoryId, name)
     state = "view"
     name = ""
   }
@@ -39,21 +42,21 @@
 {#if state === "view"}
   <div class="view">
     <Button on:click={edit}>
-      {$i18n.t("menu.categories.add")}
+      {$i18n.t("menu.foods.add")}
     </Button>
   </div>
 {:else}
   <div class="edit">
     <form on:submit={save}>
-      <InputText id="category-name" name="name" label="menu.categories.name" bind:value={name}/>
+      <InputText id="food-name" name="name" label="menu.foods.name" bind:value={name}/>
 
       <TwoColumns>
         <Button type="primary" submit>
-          {$i18n.t("menu.categories.save")}
+          {$i18n.t("menu.foods.save")}
         </Button>
 
         <Button on:click={cancel}>
-          {$i18n.t("menu.categories.cancel")}
+          {$i18n.t("menu.foods.cancel")}
         </Button>
       </TwoColumns>
     </form>

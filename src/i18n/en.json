@@ -46,12 +46,15 @@
     },
     "menu": {
       "appName": "Recepto",
-      "foods": "Foods",
-      "newFood": "New food",
-      "otherCategoryName": "Others",
       "units": "Units",
       "searches": "External website searches",
       "categories": {
+        "add": "Add",
+        "name": "Name",
+        "save": "Save",
+        "cancel": "Cancel"
+      },
+      "foods": {
         "add": "Add",
         "name": "Name",
         "save": "Save",
@@ -163,12 +166,6 @@
             "confirmDelete": "Do you really want to delete this ingredient?"
           },
           "asideSearch": "Search on {{ sitename }}"
-        },
-        "create": {
-          "title": "New ingredient"
-        },
-        "update": {
-          "title": "Update {{ingredient}}"
         }
       },
       "home": {

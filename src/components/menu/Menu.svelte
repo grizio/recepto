@@ -5,7 +5,6 @@
   import receptoStore from "~/store/ReceptoStore"
   import TwoColumns from "../layout/TwoColumns.svelte"
   import { getActiveCategoryId, getActiveFoodId, getCategories, getFoodsFromCategory } from "./Menu"
-  import Button from "../buttons/Button.svelte"
   import AddCategory from "./AddCategory.svelte"
   import AddFood from "./AddFood.svelte"
 
@@ -37,17 +36,15 @@
     border-bottom: 1px solid #adb5bd;
   }
 
-  .section {
-    padding: 8px;
-    margin-top: 20px;
-  }
-
   .menu {
-    border-top: 1px solid var(--gray-6);
-    border-bottom: 1px solid var(--gray-6);
+    height: calc(100vh - 46px);
+    display: flex;
+    align-items: stretch;
   }
 
   .menu-column {
+    height: calc(100vh - 46px);
+    overflow: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -79,24 +76,10 @@
     background-color: var(--gray-9);
     color: var(--gray-1);
   }
-
-  .button, .add-button {
-    display: block;
-    margin-top: 8px;
-    color: #f9c851;
-  }
-
-  .add-button:before {
-    content: "+ ";
-  }
 </style>
 
 <nav>
   <a href="/" class="sitename">{$i18n.t("menu.appName")}</a>
-
-  <div class="section">
-    <a href="/units" class="button">{$i18n.t("menu.units")}</a>
-  </div>
 
   <div class="menu">
     <TwoColumns columns="1fr 1fr">

@@ -116,10 +116,10 @@ class ReceptoStore implements Readable<Recepto> {
     }))
   }
 
-  updateUnits = (units: Array<Unit>) => {
+  addUnit = (unit: Unit) => {
     this.internal.update(recepto => ({
       ...recepto,
-      units
+      units: [...recepto.units, unit]
     }))
   }
 

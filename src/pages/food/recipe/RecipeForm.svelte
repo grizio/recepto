@@ -8,6 +8,7 @@
   import InputDuration from "~/components/fields/InputDuration.svelte"
   import InputCollection from "~/components/fields/InputCollection.svelte"
   import InputRadio from "~/components/fields/InputRadio.svelte"
+  import AddUnit from "./AddUnit.svelte"
 
   /** @type {Recipe} */
   export let recipe
@@ -23,6 +24,13 @@
   $: namePrefix = name !== undefined ? `${name}.` : ""
   $: unitOptions = getUnitOptions($receptoStore)
 </script>
+
+<style>
+  .units {
+    display: flex;
+    align-items: end;
+  }
+</style>
 
 <InputText
   id={`${idPrefix}name`}
@@ -70,13 +78,17 @@
     bind:value={recipe.ingredients[index].quantity}
   />
 
-  <InputRadio
-    id={`${idPrefix}ingredients-${index}-unit`}
-    name={`${namePrefix}ingredients[${index}].unit`}
-    label="pages.food.form.recipe.ingredient.unit"
-    options={unitOptions}
-    bind:value={recipe.ingredients[index].unit}
-  />
+  <div class="units">
+    <InputRadio
+      id={`${idPrefix}ingredients-${index}-unit`}
+      name={`${namePrefix}ingredients[${index}].unit`}
+      label="pages.food.form.recipe.ingredient.unit"
+      options={unitOptions}
+      bind:value={recipe.ingredients[index].unit}
+    />
+
+    <AddUnit />
+  </div>
 </InputCollection>
 
 <InputTextarea

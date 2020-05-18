@@ -46,7 +46,6 @@
     },
     "menu": {
       "appName": "Recepto",
-      "units": "Units",
       "categories": {
         "add": "Add",
         "name": "Name",
@@ -163,6 +162,10 @@
           "remove": "Remove",
           "confirmRemove": "Do you really want to remove this search?",
           "cancel": "Cancel"
+        },
+        "units": {
+          "code": "Code (ex : cl)",
+          "label": "Label (ex: centiliter)"
         }
       },
       "home": {

@@ -2,10 +2,7 @@
   import Menu from "~/components/menu/Menu.svelte"
   import { Router, Route, links } from "svelte-routing"
 
-  import UnitsPage from "~/pages/units/UnitsPage.svelte"
-
   import CategoryPage from "~/pages/category/CategoryPage.svelte"
-
   import FoodPage from "~/pages/food/FoodPage.svelte"
 
   import HomePage from "~/pages/home/HomePage.svelte"
@@ -33,8 +30,6 @@
       <Menu/>
 
       <main>
-        <PageRoute path="/units" component={UnitsPage}/>
-
         <PageRoute path="/category/:categoryId/food/:foodId" component={FoodPage}/>
         <PageRoute path="/category/:categoryId" component={CategoryPage}/>
 

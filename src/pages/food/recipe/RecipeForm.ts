@@ -2,6 +2,7 @@ import { Option } from "~/models/common"
 import { Ingredient } from "~/models/Food"
 import { Recepto } from "~/models/Recepto"
 import { fillBy } from "~/utils/arrays"
+import receptoStore from "~/store/ReceptoStore"
 
 export const durations: Array<string> = fillBy(6 * 60 / 5 + 1, durationMinutes => {
   const hours = Math.floor(durationMinutes * 5 / 60)
@@ -22,4 +23,8 @@ export function getUnitOptions(recepto: Recepto): Array<Option> {
     value: unit.code,
     label: unit.label
   }))
+}
+
+export function addUnit(code: string, label: string): void {
+  receptoStore.addUnit({ code, label })
 }

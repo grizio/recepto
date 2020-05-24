@@ -58,7 +58,8 @@
         "name": "Nom",
         "save": "Valider",
         "cancel": "Annuler"
-      }
+      },
+      "search": "Rechercher"
     },
     "pages": {
       "category": {

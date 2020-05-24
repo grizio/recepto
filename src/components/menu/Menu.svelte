@@ -1,20 +1,10 @@
 <script>
-  import { getContext } from "svelte"
-  import { ROUTER } from "svelte-routing/src/contexts"
   import i18n from "~/i18n"
-  import receptoStore from "~/store/ReceptoStore"
-  import TwoColumns from "../layout/TwoColumns.svelte"
-  import { getActiveCategoryId, getActiveFoodId, getCategories, getFoodsFromCategory } from "./Menu"
-  import AddCategory from "./AddCategory.svelte"
-  import AddFood from "./AddFood.svelte"
+  import FullMenu from "./FullMenu.svelte"
+  import SearchMenu from "./SearchMenu.svelte"
 
-  const { activeRoute } = getContext(ROUTER)
-
-  let activeCategoryId, activeFoodId, categories, foods
-  $: activeCategoryId = getActiveCategoryId($activeRoute)
-  $: activeFoodId = getActiveFoodId($activeRoute)
-  $: categories = getCategories($receptoStore)
-  $: foods = getFoodsFromCategory($receptoStore, activeCategoryId)
+  /** @type {string} */
+  let search = ""
 </script>
 
 <style>
@@ -37,81 +27,33 @@
   }
 
   .menu {
-    height: calc(100vh - 46px);
+    --menu-height: calc(100vh - 46px - 34px);
+    height: var(--menu-height);
     display: flex;
     align-items: stretch;
   }
 
-  .menu-column {
-    height: calc(100vh - 46px);
-    overflow: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-
-  .menu-column:first-of-type {
-    border-right: 1px solid var(--gray-6);
-  }
-
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  ul > li > a {
-    padding: 8px 16px;
-    cursor: pointer;
-    display: block;
-    text-decoration: none;
-    color: var(--gray-9);
-  }
-
-  ul > li:hover {
-    background-color: var(--gray-5);
-  }
-
-  ul > li[aria-current=true], ul > li[aria-current=true] > a {
-    background-color: var(--gray-9);
-    color: var(--gray-1);
+  input[name=search] {
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1px solid var(--gray-6);
+    padding: 8px;
   }
 </style>
 
 <nav>
   <a href="/" class="sitename">{$i18n.t("menu.appName")}</a>
 
+  <label>
+    <input type="search" name="search" bind:value={search} placeholder={$i18n.t("menu.search")} autocomplete="off"/>
+  </label>
+
   <div class="menu">
-    <TwoColumns columns="1fr 1fr">
-      <div class="menu-column">
-        <ul>
-          {#each categories as category}
-            <li aria-current={activeCategoryId === category.id}>
-              <a href={`/category/${category.id}`}>
-                {category.name}
-              </a>
-            </li>
-          {/each}
-        </ul>
-
-        <AddCategory/>
-      </div>
-
-      <div class="menu-column">
-        <ul>
-          {#each foods as food}
-            <li aria-current={activeFoodId === food.id}>
-              <a href={`/category/${activeCategoryId}/food/${food.id}`}>
-                {food.name}
-              </a>
-            </li>
-          {/each}
-        </ul>
-
-        {#if activeCategoryId !== undefined}
-          <AddFood categoryId={activeCategoryId}/>
-        {/if}
-      </div>
-    </TwoColumns>
+    {#if search === ""}
+      <FullMenu />
+    {:else}
+      <SearchMenu search={search} />
+    {/if}
   </div>
 </nav>

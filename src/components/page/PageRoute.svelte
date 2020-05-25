@@ -1,5 +1,5 @@
 <script>
-  import { Router, Route, links } from "svelte-routing"
+  import { Route } from "svelte-routing"
   import Page from "./Page.svelte"
 
   /** @type {string} */

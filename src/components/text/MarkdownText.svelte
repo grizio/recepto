@@ -1,6 +1,12 @@
 <script>
   import showdown from "showdown"
-  const converter = new showdown.Converter()
+  const converter = new showdown.Converter({
+    simplifiedAutoLink: true,
+    strikethrough: true,
+    tables: true,
+    openLinksInNewWindow: true,
+    emoji: true
+  })
 
   export let value
   $: html = converter.makeHtml(value)

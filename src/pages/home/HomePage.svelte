@@ -30,19 +30,19 @@
   }
 </script>
 
-<h1>Recepto</h1>
+<h1>{$i18n.t("appName")}</h1>
 
-<h2>Load</h2>
+<h2>{$i18n.t("pages.home.load.title")}</h2>
 
 <InputFile
   id="input-load"
   name="load"
-  label={$i18n.t("home")}
+  label="pages.home.load.inputLabel"
   on:change={handleLoadFiles}
 />
 
-<h2>Save</h2>
+<h2>{$i18n.t("pages.home.save.title")}</h2>
 
 <Button type="primary" on:click={handleSaveClick}>
-  &#x1F4BE Save current data on disk
+  &#x1F4BE {$i18n.t("pages.home.save.inputLabel")}
 </Button>

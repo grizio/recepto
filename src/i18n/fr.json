@@ -1,5 +1,6 @@
 {
   "translation": {
+    "appName": "Recepto",
     "common": {
       "notFound": "Non trouvé",
       "duration": {
@@ -45,7 +46,6 @@
       }
     },
     "menu": {
-      "appName": "Recepto",
       "units": "Unités",
       "categories": {
         "add": "Ajouter",
@@ -172,7 +172,6 @@
         }
       },
       "home": {
-        "title": "Recepto",
         "load": {
           "title": "Charger",
           "inputLabel": "Charger un fichier précédemment enregistré"

@@ -2,9 +2,14 @@
   import i18n from "~/i18n"
   import FullMenu from "./FullMenu.svelte"
   import SearchMenu from "./SearchMenu.svelte"
+  import Button from "../buttons/Button.svelte"
 
   /** @type {string} */
   let search = ""
+
+  let isEN, isFR
+  $: isEN = $i18n.language !== undefined && $i18n.language.startsWith("en")
+  $: isFR = $i18n.language !== undefined && $i18n.language.startsWith("fr")
 </script>
 
 <style>
@@ -16,14 +21,20 @@
   }
 
   .sitename {
+    display: flex;
+    align-items: center;
+    padding-right: 8px;
     background-color: #282e38;
+    border-bottom: 1px solid #adb5bd;
+  }
+
+  .sitename a {
     padding: 8px;
-    display: block;
+    flex-grow: 1;
     font-size: 1.5rem;
     color: #f7f7f7;
     font-weight: 700;
     text-decoration: none;
-    border-bottom: 1px solid #adb5bd;
   }
 
   .menu {
@@ -43,7 +54,22 @@
 </style>
 
 <nav>
-  <a href="/" class="sitename">{$i18n.t("menu.appName")}</a>
+  <div class="sitename">
+    <a href="/">{$i18n.t("appName")}</a>
+    <Button
+      type={isEN ? "primary" : "default"}
+      on:click={() => i18n.changeLanguage("en")}
+    >
+      &#x1F1EC&#x1F1E7
+    </Button>
+    <Button
+      type={isFR ? "primary" : "default"}
+      on:click={() => i18n.changeLanguage("fr")}
+    >
+      &#x1F1EB&#x1F1F7
+    </Button>
+  </div>
+
 
   <label>
     <input type="search" name="search" bind:value={search} placeholder={$i18n.t("menu.search")} autocomplete="off"/>
@@ -51,9 +77,9 @@
 
   <div class="menu">
     {#if search === ""}
-      <FullMenu />
+      <FullMenu/>
     {:else}
-      <SearchMenu search={search} />
+      <SearchMenu search={search}/>
     {/if}
   </div>
 </nav>

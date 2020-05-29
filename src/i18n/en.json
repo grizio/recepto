@@ -1,5 +1,6 @@
 {
   "translation": {
+    "appName": "Recepto",
     "common": {
       "notFound": "Not found",
       "duration": {
@@ -45,7 +46,6 @@
       }
     },
     "menu": {
-      "appName": "Recepto",
       "categories": {
         "add": "Add",
         "name": "Name",
@@ -170,7 +170,6 @@
         }
       },
       "home": {
-        "title": "Recepto",
         "load": {
           "title": "Load",
           "inputLabel": "Load previous saved file"

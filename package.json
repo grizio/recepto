@@ -35,7 +35,7 @@
   "dependencies": {
     "i18next": "19.4.4",
     "i18next-browser-languagedetector": "4.1.1",
-    "lodash": "4.17.19",
+    "lodash": "4.17.21",
     "showdown": "1.9.1",
     "sirv-cli": "0.4.5",
     "svelte-routing": "1.4.2"
